@@ -1,0 +1,9 @@
+*.o
+*.so
+*.dll
+*.a
+*.txt
+*.pdf
+.Rproj.user
+.Rhistory
+inst
