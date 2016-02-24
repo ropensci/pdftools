@@ -2,11 +2,14 @@
 % Please edit documentation in R/bindings.R
 \name{pdf_info}
 \alias{pdf_info}
+\alias{pdf_text}
 \alias{poppler}
 \alias{poppler_version}
 \title{Bindings to poppler}
 \usage{
 pdf_info(pdf, owner_password = "", user_password = "")
+
+pdf_text(pdf, owner_password = "", user_password = "")
 }
 \arguments{
 \item{pdf}{file path or raw vector with pdf data}
@@ -22,5 +25,6 @@ Extract text or data from PDF files.
 pdffile <- "https://cran.r-project.org/doc/manuals/r-release/R-exts.pdf"
 download.file(pdffile, "R-exts.pdf", mode = "wb")
 pdf_info("R-exts.pdf")
+pdf_text("R-exts.pdf")
 }
 
