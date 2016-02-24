@@ -2,6 +2,7 @@
 #include <poppler-page.h>
 #include <poppler-font.h>
 #include <poppler-version.h>
+#include <poppler-embedded-file.h>
 #include <Rcpp.h>
 using namespace Rcpp;
 using namespace poppler;
@@ -54,6 +55,7 @@ List poppler_pdf_info (RawVector x, std::string owner_password, std::string user
     _["modified"] = Datetime(doc->info_date("ModDate")),
     _["metadata"] = doc->metadata().to_latin1(),
     _["locked"] = doc->is_locked(),
+    _["attachments"] = doc->has_embedded_files(),
     _["layout"] = layout_string(doc->page_layout())
   );
   return out;
@@ -111,3 +113,27 @@ List poppler_pdf_fonts (RawVector x, std::string owner_password, std::string use
     _["embedded"] = fonts_embedded
   );
 }
+
+// [[Rcpp::export]]
+List poppler_pdf_files (RawVector x, std::string owner_password, std::string user_password) {
+  document *doc = document::load_from_raw_data(	(const char*) RAW(x), x.length(), owner_password, user_password);
+  List out = List::create();
+  if(doc->has_embedded_files()){
+    std::vector<embedded_file*> files = doc->embedded_files();
+    for (std::vector<embedded_file*>::iterator file = files.begin(); file != files.end(); ++file){
+      byte_array data = (*file)->data();
+      RawVector res(data.size());
+      std::copy(data.begin(), data.end(), res.begin());
+      out.push_back(List::create(
+        _["name"] = (*file)->name(),
+        _["mime"] = (*file)->mime_type(),
+        _["created"] = Datetime((*file)->creation_date()),
+        _["modified"] = Datetime((*file)->modification_date()),
+        _["description"] = (*file)->description().to_latin1(),
+        _["data"] = res
+      ));
+    }
+  }
+  return out;
+}
+
