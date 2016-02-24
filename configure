@@ -1,4 +1,3 @@
-#!/bin/bash
 # Anticonf (tm) script by Jeroen Ooms (2016)
 # This script will query 'pkg-config' for the required cflags and ldflags.
 # If pkg-config is unavailable or does not find the library, try setting
