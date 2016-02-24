@@ -22,7 +22,7 @@ pdf_text(pdf, owner_password = "", user_password = "")
 Extract text or data from PDF files.
 }
 \examples{
-pdffile <- "https://cran.r-project.org/doc/manuals/r-release/R-exts.pdf"
+pdffile <- "http://cran.r-project.org/doc/manuals/r-release/R-exts.pdf"
 download.file(pdffile, "R-exts.pdf", mode = "wb")
 pdf_info("R-exts.pdf")
 pdf_text("R-exts.pdf")
