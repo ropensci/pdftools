@@ -1,6 +1,5 @@
 PKG_CXXFLAGS=-Dpoppler_cpp_EXPORTS
-PKG_CPPFLAGS=-I../windows/poppler-0.41.0/include/poppler \
-	-I../windows/poppler-0.41.0/include/poppler/cpp
+PKG_CPPFLAGS=-I../windows/poppler-0.41.0/include/poppler/cpp
 
 PKG_LIBS=-L../windows/poppler-0.41.0/lib${R_ARCH} \
 	-lpoppler-cpp -lpoppler -lgdi32 -liconv

@@ -8,6 +8,7 @@ Description: Port of the 'xpdf' tools for parsing PDF files.
 License: MIT + file LICENSE
 URL: https://github.com/jeroenooms/poppler
 BugReports: https://github.com/jeroenooms/poppler/issues
+SystemRequirements: poppler-cpp library and headers
 Imports:
     Rcpp (>= 0.11.5)
 LinkingTo:
