@@ -3,11 +3,24 @@
 \name{pdf_info}
 \alias{pdf_info}
 \alias{poppler}
+\alias{poppler_version}
 \title{Bindings to poppler}
 \usage{
 pdf_info(pdf, owner_password = "", user_password = "")
 }
+\arguments{
+\item{pdf}{file path or raw vector with pdf data}
+
+\item{owner_password}{string with owner password to open pdf}
+
+\item{user_password}{string with user password to open pdf}
+}
 \description{
-Bla bal
+Extract text or data from PDF files.
+}
+\examples{
+pdffile <- "https://cran.r-project.org/doc/manuals/r-release/R-exts.pdf"
+download.file(pdffile, "R-exts.pdf", mode = "wb")
+pdf_info("R-exts.pdf")
 }
 

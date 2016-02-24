@@ -1,13 +1,15 @@
 Package: poppler
 Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1.0
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
-LazyData: TRUE
+Title: Extract Text and Data from PDF Documents
+Version: 0.1
+Author: Jeroen Ooms
+Maintainer: Jeroen Ooms <jeroen.ooms@stat.ucla.edu>
+Description: Port of the 'xpdf' tools for parsing PDF files.
+License: MIT + file LICENSE
+URL: https://github.com/jeroenooms/poppler
+BugReports: https://github.com/jeroenooms/poppler/issues
 Imports:
+    Rcpp (>= 0.11.5)
+LinkingTo:
     Rcpp
-LinkingTo: Rcpp
 RoxygenNote: 5.0.1
