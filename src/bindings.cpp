@@ -15,7 +15,7 @@ List poppler_pdf_info (RawVector x, std::string owner_password, std::string user
   int major = 0, minor = 0;
   doc->get_pdf_version(&major, &minor);
   List out = List::create(
-    Named("version") = std::to_string(major) + "." + std::to_string(minor),
+    Named("version") = major + minor * 0.1,
     Named("encrypted") = doc->is_encrypted(),
     Named("linearized") = doc->is_linearized(),
     Named("keys") = doc->info_keys(),

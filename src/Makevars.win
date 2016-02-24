@@ -1,0 +1,14 @@
+#CXX_STD=CXX11
+PKG_CXXFLAGS="-Dpoppler_cpp_EXPORTS"
+PKG_CPPFLAGS= -I../windows/poppler-0.41.0/include
+
+PKG_LIBS= -L../windows/poppler-0.41.0/lib${R_ARCH} \
+	-lpoppler-cpp -lpoppler -lgdi32 -liconv
+
+all: clean winlibs
+
+clean:
+	rm -f *.o *.so *.dll
+
+winlibs:
+	"${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe" "../tools/winlibs.R"
