@@ -12,7 +12,7 @@ PKG_RPM_NAME="poppler-cpp-devel"
 PKG_CSW_NAME="poppler_dev"
 PKG_BREW_NAME="poppler"
 PKG_TEST_HEADER="<poppler-document.h>"
-PKG_LIBS="-lpoppler-cpp -lpoppler"
+PKG_LIBS="-lpoppler-cpp"
 PKG_CFLAGS=""
 
 # Use pkg-config if available
@@ -36,17 +36,22 @@ else
   brew --version 2>/dev/null
   if [ $? -eq 0 ]; then
     BREWDIR=`brew --prefix`
+    PKG_CFLAGS="-I$BREWDIR/opt/$PKG_BREW_NAME/include/cpp"
+    PKG_LIBS="-L$BREWDIR/opt/$PKG_BREW_NAME/lib $PKG_LIBS"
   else
     BREWDIR="/tmp/homebrew"
+    BREW="$BREWDIR/bin/brew"
     rm -Rf $BREWDIR
     mkdir -p $BREWDIR
     echo "Auto-brewing $PKG_BREW_NAME in $BREWDIR..."
     curl -fsSL https://github.com/Homebrew/homebrew/tarball/master | tar xz --strip 1 -C $BREWDIR
-    HOMEBREW_CACHE="/tmp" $BREWDIR/bin/brew install --force-bottle curl openssl fontconfig poppler 2>&1 | perl -pe 's/Warning/Note/gi'
-    rm -f $BREWDIR/opt/$PKG_BREW_NAME/lib/*.dylib
+    HOMEBREW_CACHE="/tmp" $BREW install pkg-config | perl -pe 's/Warning/Note/gi'
+    HOMEBREW_CACHE="/tmp" $BREW install --force-bottle `$BREW deps $PKG_BREW_NAME` | perl -pe 's/Warning/Note/gi'
+    HOMEBREW_CACHE="/tmp" $BREW install --force-bottle $PKG_BREW_NAME | perl -pe 's/Warning/Note/gi'
+    PKG_CFLAGS=`$BREWDIR/opt/pkg-config/bin/pkg-config --cflags ${PKG_CONFIG_NAME}`
+    PKG_LIBS=`$BREWDIR/opt/pkg-config/bin/pkg-config --libs --static ${PKG_CONFIG_NAME} $PKG_BREW_NAME`
+    rm -f $BREWDIR/Cellar/*/*/lib/*.dylib
   fi
-  PKG_CFLAGS="-I$BREWDIR/opt/$PKG_BREW_NAME/include"
-  PKG_LIBS="-L$BREWDIR/opt/$PKG_BREW_NAME/lib $PKG_LIBS"
   ;;
   esac
 fi
