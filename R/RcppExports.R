@@ -21,3 +21,7 @@ poppler_pdf_files <- function(x, owner_password, user_password) {
     .Call('pdftools_poppler_pdf_files', PACKAGE = 'pdftools', x, owner_password, user_password)
 }
 
+poppler_pdf_toc <- function(x, owner_password, user_password) {
+    .Call('pdftools_poppler_pdf_toc', PACKAGE = 'pdftools', x, owner_password, user_password)
+}
+

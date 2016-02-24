@@ -4,6 +4,7 @@
 #include <poppler-version.h>
 #include <poppler-embedded-file.h>
 #include <poppler-image.h>
+#include <poppler-toc.h>
 #include <Rcpp.h>
 using namespace Rcpp;
 using namespace poppler;
@@ -42,11 +43,12 @@ List poppler_pdf_info (RawVector x, std::string owner_password, std::string user
 
   List keys = List::create();
   std::vector<std::string> keystrings = doc->info_keys();
-  for (std::vector<std::string>::iterator keystr = keystrings.begin(); keystr != keystrings.end(); ++keystr) {
-    if(keystr->compare("CreationDate") == 0) continue;
-    if(keystr->compare("ModDate") == 0) continue;
-    std::string value(doc->info_key(*keystr).to_latin1());
-    keys.push_back(value, *keystr);
+  for (int i = 0; i < keystrings.size(); i++) {
+    std::string keystr = keystrings[i];
+    if(keystr.compare("CreationDate") == 0) continue;
+    if(keystr.compare("ModDate") == 0) continue;
+    std::string value(doc->info_key(keystr).to_latin1());
+    keys.push_back(value, keystr);
   }
 
   List out = List::create(
@@ -104,11 +106,12 @@ List poppler_pdf_fonts (RawVector x, std::string owner_password, std::string use
   CharacterVector fonts_type;
   CharacterVector fonts_file;
   LogicalVector fonts_embedded;
-  for (std::vector<font_info>::iterator font = fonts.begin(); font != fonts.end(); ++font){
-    fonts_name.push_back(font->name());
-    fonts_type.push_back(font_string(font->type()));
-    fonts_file.push_back(font->file());
-    fonts_embedded.push_back(font->is_embedded());
+  for (int i = 0; i < fonts.size(); i++) {
+    font_info font = fonts[i];
+    fonts_name.push_back(font.name());
+    fonts_type.push_back(font_string(font.type()));
+    fonts_file.push_back(font.file());
+    fonts_embedded.push_back(font.is_embedded());
   }
   return DataFrame::create(
     _["name"] = fonts_name,
@@ -124,16 +127,17 @@ List poppler_pdf_files (RawVector x, std::string owner_password, std::string use
   List out = List::create();
   if(doc->has_embedded_files()){
     std::vector<embedded_file*> files = doc->embedded_files();
-    for (std::vector<embedded_file*>::iterator file = files.begin(); file != files.end(); ++file){
-      byte_array data = (*file)->data();
+    for (int i = 0; i < files.size(); i++) {
+      embedded_file *file = files[i];
+      byte_array data = file->data();
       RawVector res(data.size());
       std::copy(data.begin(), data.end(), res.begin());
       out.push_back(List::create(
-        _["name"] = (*file)->name(),
-        _["mime"] = (*file)->mime_type(),
-        _["created"] = Datetime((*file)->creation_date()),
-        _["modified"] = Datetime((*file)->modification_date()),
-        _["description"] = (*file)->description().to_latin1(),
+        _["name"] = file->name(),
+        _["mime"] = file->mime_type(),
+        _["created"] = Datetime(file->creation_date()),
+        _["modified"] = Datetime(file->modification_date()),
+        _["description"] = file->description().to_latin1(),
         _["data"] = res
       ));
     }
@@ -141,3 +145,23 @@ List poppler_pdf_files (RawVector x, std::string owner_password, std::string use
   return out;
 }
 
+List item_to_list(toc_item *item){
+  List out = List::create();
+  std::vector <toc_item*> children = item->children();
+  for(int i = 0; i < children.size(); i++){
+    out.push_back(item_to_list(children[i]));
+  }
+  return List::create(
+    _["title"] = item->title().to_latin1(),
+    _["children"] = out
+  );
+}
+
+// [[Rcpp::export]]
+List poppler_pdf_toc(RawVector x, std::string owner_password, std::string user_password) {
+  document *doc = document::load_from_raw_data(	(const char*) RAW(x), x.length(), owner_password, user_password);
+  List out = List::create();
+  toc *contents = doc->create_toc();
+  toc_item *item = contents->root();
+  return item_to_list(item);
+}

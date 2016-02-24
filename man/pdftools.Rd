@@ -5,6 +5,7 @@
 \alias{pdf_fonts}
 \alias{pdf_info}
 \alias{pdf_text}
+\alias{pdf_toc}
 \alias{pdftools}
 \alias{poppler_info}
 \title{PDF tools}
@@ -16,6 +17,8 @@ pdf_text(pdf, owner_password = "", user_password = "")
 pdf_fonts(pdf, owner_password = "", user_password = "")
 
 pdf_attachments(pdf, owner_password = "", user_password = "")
+
+pdf_toc(pdf, owner_password = "", user_password = "")
 }
 \arguments{
 \item{pdf}{file path or raw vector with pdf data}

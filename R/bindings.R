@@ -40,6 +40,12 @@ pdf_attachments<- function(pdf, owner_password = "", user_password = "") {
   poppler_pdf_files(loadfile(pdf), owner_password, user_password)
 }
 
+#' @rdname pdftools
+#' @export
+pdf_toc<- function(pdf, owner_password = "", user_password = "") {
+  poppler_pdf_toc(loadfile(pdf), owner_password, user_password)
+}
+
 loadfile <- function(pdf){
   if(is.character(pdf)){
     if(grepl("^https?://", pdf[1])){
