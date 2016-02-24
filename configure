@@ -46,8 +46,8 @@ else
     echo "Auto-brewing $PKG_BREW_NAME in $BREWDIR..."
     curl -fsSL https://github.com/Homebrew/homebrew/tarball/master | tar xz --strip 1 -C $BREWDIR
     HOMEBREW_CACHE="/tmp" $BREW install pkg-config | perl -pe 's/Warning/Note/gi'
-    HOMEBREW_CACHE="/tmp" $BREW install --force-bottle `${BREW} deps --skip-build ${PKG_BREW_NAME}` | perl -pe 's/Warning/Note/gi'
-    HOMEBREW_CACHE="/tmp" $BREW install --force-bottle ${PKG_BREW_NAME} | perl -pe 's/Warning/Note/gi'
+    HOMEBREW_CACHE="/tmp" $BREW install --force-bottle openssl freetype fontconfig gettext \
+      ${PKG_BREW_NAME} | perl -pe 's/Warning/Note/gi'
     PKG_CFLAGS=`$BREWDIR/opt/pkg-config/bin/pkg-config --cflags ${PKG_CONFIG_NAME}`
     PKG_LIBS=`$BREWDIR/opt/pkg-config/bin/pkg-config --libs --static ${PKG_CONFIG_NAME} ${PKG_BREW_NAME}`
     rm -f $BREWDIR/Cellar/*/*/lib/*.dylib
