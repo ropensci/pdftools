@@ -5,13 +5,13 @@
 
 using namespace Rcpp;
 
-// poppler_version
-std::string poppler_version();
-RcppExport SEXP pdftools_poppler_version() {
+// poppler_info
+List poppler_info();
+RcppExport SEXP pdftools_poppler_info() {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
-    __result = Rcpp::wrap(poppler_version());
+    __result = Rcpp::wrap(poppler_info());
     return __result;
 END_RCPP
 }

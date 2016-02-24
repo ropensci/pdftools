@@ -3,13 +3,17 @@
 #include <poppler-font.h>
 #include <poppler-version.h>
 #include <poppler-embedded-file.h>
+#include <poppler-image.h>
 #include <Rcpp.h>
 using namespace Rcpp;
 using namespace poppler;
 
 // [[Rcpp::export]]
-std::string poppler_version(){
-  return poppler::version_string();
+List poppler_info(){
+  return List::create(
+    _["version"] = poppler::version_string(),
+    _["supported_image_formats"] = image::supported_image_formats()
+  );
 }
 
 std::string layout_string(document::page_layout_enum x) {

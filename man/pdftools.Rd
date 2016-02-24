@@ -6,7 +6,7 @@
 \alias{pdf_info}
 \alias{pdf_text}
 \alias{pdftools}
-\alias{poppler_version}
+\alias{poppler_info}
 \title{PDF tools}
 \usage{
 pdf_info(pdf, owner_password = "", user_password = "")
