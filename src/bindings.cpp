@@ -11,6 +11,19 @@ std::string poppler_version(){
   return poppler::version_string();
 }
 
+std::string layout_string(document::page_layout_enum x) {
+  switch(x){
+  case document::no_layout: return "no_layout";
+  case document::single_page: return "single_page";
+  case document::one_column: return "one_column";
+  case document::two_column_left: return "two_column_left";
+  case document::two_column_right: return "two_column_right";
+  case document::two_page_left: return "two_page_left";
+  case document::two_page_right: return "two_page_right";
+  default: return "";
+  }
+}
+
 // [[Rcpp::export]]
 List poppler_pdf_info (RawVector x, std::string owner_password, std::string user_password) {
   document *doc = document::load_from_raw_data(	(const char*) RAW(x), x.length(), owner_password, user_password);
@@ -21,16 +34,27 @@ List poppler_pdf_info (RawVector x, std::string owner_password, std::string user
   convert << major;
   convert << ".";
   convert << minor;
+
+  List keys = List::create();
+  std::vector<std::string> keystrings = doc->info_keys();
+  for (std::vector<std::string>::iterator keystr = keystrings.begin(); keystr != keystrings.end(); ++keystr) {
+    if(keystr->compare("CreationDate") == 0) continue;
+    if(keystr->compare("ModDate") == 0) continue;
+    std::string value(doc->info_key(*keystr).to_latin1());
+    keys.push_back(value, *keystr);
+  }
+
   List out = List::create(
     _["version"] = convert.str(),
     _["pages"] = doc->pages(),
     _["encrypted"] = doc->is_encrypted(),
     _["linearized"] = doc->is_linearized(),
-    _["keys"] = doc->info_keys(),
+    _["keys"] = keys,
     _["created"] = Datetime(doc->info_date("CreationDate")),
     _["modified"] = Datetime(doc->info_date("ModDate")),
-    _["producer"] = doc->info_key("Producer").to_latin1(),
-    _["metadata"] = doc->metadata().to_latin1()
+    _["metadata"] = doc->metadata().to_latin1(),
+    _["locked"] = doc->is_locked(),
+    _["layout"] = layout_string(doc->page_layout())
   );
   return out;
 }
