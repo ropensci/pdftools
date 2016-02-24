@@ -1,4 +1,5 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^src/Makevars$
 ^windows
 \.pdf$

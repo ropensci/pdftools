@@ -1,2 +1,0 @@
-PKG_LIBS=-lpoppler-cpp -lpoppler
-#CXX_STD=CXX11

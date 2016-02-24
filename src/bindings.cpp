@@ -1,5 +1,5 @@
-#include <poppler/cpp/poppler-document.h>
-#include <poppler/cpp/poppler-version.h>
+#include <poppler-document.h>
+#include <poppler-version.h>
 #include <Rcpp.h>
 using namespace Rcpp;
 using namespace poppler;
