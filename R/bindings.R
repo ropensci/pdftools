@@ -15,6 +15,7 @@
 #' download.file(pdffile, "R-exts.pdf", mode = "wb")
 #' pdf_info("R-exts.pdf")
 #' pdf_text("R-exts.pdf")
+#' pdf_fonts("R-exts.pdf")
 pdf_info <- function(pdf, owner_password = "", user_password = "") {
   poppler_pdf_info(loadfile(pdf), owner_password, user_password)
 }
