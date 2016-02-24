@@ -1,14 +1,15 @@
-#' Bindings to poppler
+#' PDF tools
 #'
-#' Extract text or data from PDF files.
+#' Utilities based on libpoppler for extracting text,
+#' fonts and metadata from a pdf file.
 #'
 #' @export
 #' @param pdf file path or raw vector with pdf data
 #' @param owner_password string with owner password to open pdf
 #' @param user_password string with user password to open pdf
-#' @useDynLib poppler
-#' @rdname poppler
-#' @aliases poppler poppler_version
+#' @useDynLib pdftools
+#' @rdname pdftools
+#' @aliases pdftools poppler_version
 #' @importFrom Rcpp sourceCpp
 #' @export poppler_version
 #' @examples pdffile <- "http://cran.r-project.org/doc/manuals/r-release/R-exts.pdf"
@@ -20,13 +21,13 @@ pdf_info <- function(pdf, owner_password = "", user_password = "") {
   poppler_pdf_info(loadfile(pdf), owner_password, user_password)
 }
 
-#' @rdname poppler
+#' @rdname pdftools
 #' @export
 pdf_text <- function(pdf, owner_password = "", user_password = "") {
   poppler_pdf_text(loadfile(pdf), owner_password, user_password)
 }
 
-#' @rdname poppler
+#' @rdname pdftools
 #' @export
 pdf_fonts<- function(pdf, owner_password = "", user_password = "") {
   poppler_pdf_fonts(loadfile(pdf), owner_password, user_password)

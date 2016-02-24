@@ -2,18 +2,18 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 poppler_version <- function() {
-    .Call('poppler_poppler_version', PACKAGE = 'poppler')
+    .Call('pdftools_poppler_version', PACKAGE = 'pdftools')
 }
 
 poppler_pdf_info <- function(x, owner_password, user_password) {
-    .Call('poppler_poppler_pdf_info', PACKAGE = 'poppler', x, owner_password, user_password)
+    .Call('pdftools_poppler_pdf_info', PACKAGE = 'pdftools', x, owner_password, user_password)
 }
 
 poppler_pdf_text <- function(x, owner_password, user_password) {
-    .Call('poppler_poppler_pdf_text', PACKAGE = 'poppler', x, owner_password, user_password)
+    .Call('pdftools_poppler_pdf_text', PACKAGE = 'pdftools', x, owner_password, user_password)
 }
 
 poppler_pdf_fonts <- function(x, owner_password, user_password) {
-    .Call('poppler_poppler_pdf_fonts', PACKAGE = 'poppler', x, owner_password, user_password)
+    .Call('pdftools_poppler_pdf_fonts', PACKAGE = 'pdftools', x, owner_password, user_password)
 }
 

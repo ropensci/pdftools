@@ -4,9 +4,9 @@
 \alias{pdf_fonts}
 \alias{pdf_info}
 \alias{pdf_text}
-\alias{poppler}
+\alias{pdftools}
 \alias{poppler_version}
-\title{Bindings to poppler}
+\title{PDF tools}
 \usage{
 pdf_info(pdf, owner_password = "", user_password = "")
 
@@ -22,7 +22,8 @@ pdf_fonts(pdf, owner_password = "", user_password = "")
 \item{user_password}{string with user password to open pdf}
 }
 \description{
-Extract text or data from PDF files.
+Utilities based on libpoppler for extracting text,
+fonts and metadata from a pdf file.
 }
 \examples{
 pdffile <- "http://cran.r-project.org/doc/manuals/r-release/R-exts.pdf"

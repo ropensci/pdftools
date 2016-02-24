@@ -1,13 +1,14 @@
-Package: poppler
+Package: pdftools
 Type: Package
 Title: Extract Text and Data from PDF Documents
 Version: 0.1
 Author: Jeroen Ooms
 Maintainer: Jeroen Ooms <jeroen.ooms@stat.ucla.edu>
-Description: Port of the 'xpdf' tools for parsing PDF files.
+Description: Utilities based on libpoppler for extracting text,
+    fonts and metadata from a pdf file.
 License: MIT + file LICENSE
-URL: https://github.com/jeroenooms/poppler
-BugReports: https://github.com/jeroenooms/poppler/issues
+URL: https://github.com/jeroenooms/pdftools
+BugReports: https://github.com/jeroenooms/pdftools/issues
 SystemRequirements: Poppler C++ interface library and headers
 Imports: Rcpp
 LinkingTo: Rcpp

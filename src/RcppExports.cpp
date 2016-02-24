@@ -7,7 +7,7 @@ using namespace Rcpp;
 
 // poppler_version
 std::string poppler_version();
-RcppExport SEXP poppler_poppler_version() {
+RcppExport SEXP pdftools_poppler_version() {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
@@ -17,7 +17,7 @@ END_RCPP
 }
 // poppler_pdf_info
 List poppler_pdf_info(RawVector x, std::string owner_password, std::string user_password);
-RcppExport SEXP poppler_poppler_pdf_info(SEXP xSEXP, SEXP owner_passwordSEXP, SEXP user_passwordSEXP) {
+RcppExport SEXP pdftools_poppler_pdf_info(SEXP xSEXP, SEXP owner_passwordSEXP, SEXP user_passwordSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
@@ -30,7 +30,7 @@ END_RCPP
 }
 // poppler_pdf_text
 std::vector<std::string> poppler_pdf_text(RawVector x, std::string owner_password, std::string user_password);
-RcppExport SEXP poppler_poppler_pdf_text(SEXP xSEXP, SEXP owner_passwordSEXP, SEXP user_passwordSEXP) {
+RcppExport SEXP pdftools_poppler_pdf_text(SEXP xSEXP, SEXP owner_passwordSEXP, SEXP user_passwordSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
@@ -43,7 +43,7 @@ END_RCPP
 }
 // poppler_pdf_fonts
 List poppler_pdf_fonts(RawVector x, std::string owner_password, std::string user_password);
-RcppExport SEXP poppler_poppler_pdf_fonts(SEXP xSEXP, SEXP owner_passwordSEXP, SEXP user_passwordSEXP) {
+RcppExport SEXP pdftools_poppler_pdf_fonts(SEXP xSEXP, SEXP owner_passwordSEXP, SEXP user_passwordSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
