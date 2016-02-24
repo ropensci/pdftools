@@ -46,10 +46,12 @@ else
     echo "Auto-brewing $PKG_BREW_NAME in $BREWDIR..."
     curl -fsSL https://github.com/Homebrew/homebrew/tarball/master | tar xz --strip 1 -C $BREWDIR
     HOMEBREW_CACHE="/tmp" $BREW install pkg-config | perl -pe 's/Warning/Note/gi'
-    HOMEBREW_CACHE="/tmp" $BREW install --force-bottle openssl freetype fontconfig gettext \
-      ${PKG_BREW_NAME} | perl -pe 's/Warning/Note/gi'
+    HOMEBREW_CACHE="/tmp" $BREW install --force-bottle openssl freetype fontconfig gettext glib
+      cairo python gobject-introspection ${PKG_BREW_NAME} | perl -pe 's/Warning/Note/gi'
     PKG_CFLAGS=`$BREWDIR/opt/pkg-config/bin/pkg-config --cflags ${PKG_CONFIG_NAME}`
-    PKG_LIBS=`$BREWDIR/opt/pkg-config/bin/pkg-config --libs --static ${PKG_CONFIG_NAME} ${PKG_BREW_NAME}`
+    PKG_LIBS=`$BREWDIR/opt/pkg-config/bin/pkg-config --libs --static ${PKG_CONFIG_NAME} cairo lcms2 libopenjpeg`
+    PKG_LIBS="${PKG_LIBS} -L${BREWDIR}/lib -ljpeg"
+    rm -f $BREWDIR/lib/*.dylib
     rm -f $BREWDIR/Cellar/*/*/lib/*.dylib
   fi
   ;;
