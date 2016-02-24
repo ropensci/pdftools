@@ -113,8 +113,8 @@ List poppler_pdf_fonts (RawVector x, std::string owner_password, std::string use
   return DataFrame::create(
     _["name"] = fonts_name,
     _["type"] = fonts_type,
-    _["file"] = fonts_file,
-    _["embedded"] = fonts_embedded
+    _["embedded"] = fonts_embedded,
+    _["file"] = fonts_file
   );
 }
 
