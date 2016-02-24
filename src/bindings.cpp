@@ -43,7 +43,7 @@ List poppler_pdf_info (RawVector x, std::string owner_password, std::string user
 
   List keys = List::create();
   std::vector<std::string> keystrings = doc->info_keys();
-  for (int i = 0; i < keystrings.size(); i++) {
+  for (size_t i = 0; i < keystrings.size(); i++) {
     std::string keystr = keystrings[i];
     if(keystr.compare("CreationDate") == 0) continue;
     if(keystr.compare("ModDate") == 0) continue;
@@ -106,7 +106,7 @@ List poppler_pdf_fonts (RawVector x, std::string owner_password, std::string use
   CharacterVector fonts_type;
   CharacterVector fonts_file;
   LogicalVector fonts_embedded;
-  for (int i = 0; i < fonts.size(); i++) {
+  for (size_t i = 0; i < fonts.size(); i++) {
     font_info font = fonts[i];
     fonts_name.push_back(font.name());
     fonts_type.push_back(font_string(font.type()));
@@ -127,7 +127,7 @@ List poppler_pdf_files (RawVector x, std::string owner_password, std::string use
   List out = List::create();
   if(doc->has_embedded_files()){
     std::vector<embedded_file*> files = doc->embedded_files();
-    for (int i = 0; i < files.size(); i++) {
+    for (size_t i = 0; i < files.size(); i++) {
       embedded_file *file = files[i];
       byte_array data = file->data();
       RawVector res(data.size());
@@ -148,7 +148,7 @@ List poppler_pdf_files (RawVector x, std::string owner_password, std::string use
 List item_to_list(toc_item *item){
   List out = List::create();
   std::vector <toc_item*> children = item->children();
-  for(int i = 0; i < children.size(); i++){
+  for(size_t i = 0; i < children.size(); i++){
     out.push_back(item_to_list(children[i]));
   }
   return List::create(
