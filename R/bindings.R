@@ -14,10 +14,10 @@
 #' @export poppler_info
 #' @examples download.file("http://cran.r-project.org/doc/manuals/r-release/R-exts.pdf",
 #'  "R-exts.pdf", mode = "wb")
-#' pdf_info("R-exts.pdf")
-#' pdf_text("R-exts.pdf")
-#' pdf_fonts("R-exts.pdf")
-#' pdf_files("R-exts.pdf")
+#' info <- pdf_info("R-exts.pdf")
+#' text <- pdf_text("R-exts.pdf")
+#' fonts <- pdf_fonts("R-exts.pdf")
+#' files <- pdf_attachments("R-exts.pdf")
 pdf_info <- function(pdf, owner_password = "", user_password = "") {
   poppler_pdf_info(loadfile(pdf), owner_password, user_password)
 }
