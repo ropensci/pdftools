@@ -80,3 +80,17 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// poppler_render_page
+RawVector poppler_render_page(RawVector x, std::string owner_password, std::string user_password, int i);
+RcppExport SEXP pdftools_poppler_render_page(SEXP xSEXP, SEXP owner_passwordSEXP, SEXP user_passwordSEXP, SEXP iSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< RawVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< std::string >::type owner_password(owner_passwordSEXP);
+    Rcpp::traits::input_parameter< std::string >::type user_password(user_passwordSEXP);
+    Rcpp::traits::input_parameter< int >::type i(iSEXP);
+    __result = Rcpp::wrap(poppler_render_page(x, owner_password, user_password, i));
+    return __result;
+END_RCPP
+}

@@ -5,6 +5,7 @@
 #include <poppler-embedded-file.h>
 #include <poppler-image.h>
 #include <poppler-toc.h>
+#include <poppler-page-renderer.h>
 #include <Rcpp.h>
 using namespace Rcpp;
 using namespace poppler;
@@ -13,6 +14,7 @@ using namespace poppler;
 List poppler_info(){
   return List::create(
     _["version"] = poppler::version_string(),
+    _["can_render"] = page_renderer::can_render(),
     _["supported_image_formats"] = image::supported_image_formats()
   );
 }
@@ -164,4 +166,11 @@ List poppler_pdf_toc(RawVector x, std::string owner_password, std::string user_p
   toc *contents = doc->create_toc();
   toc_item *item = contents->root();
   return item_to_list(item);
+}
+
+// [[Rcpp::export]]
+RawVector poppler_render_page(RawVector x, std::string owner_password, std::string user_password, int i) {
+  document *doc = document::load_from_raw_data(	(const char*) RAW(x), x.length(), owner_password, user_password);
+  page *p(doc->create_page(i));
+  return RawVector::create();
 }
