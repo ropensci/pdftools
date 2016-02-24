@@ -9,8 +9,6 @@ License: MIT + file LICENSE
 URL: https://github.com/jeroenooms/poppler
 BugReports: https://github.com/jeroenooms/poppler/issues
 SystemRequirements: poppler-cpp library and headers
-Imports:
-    Rcpp (>= 0.11.5)
-LinkingTo:
-    Rcpp
+Imports: Rcpp
+LinkingTo: Rcpp
 RoxygenNote: 5.0.1
