@@ -41,3 +41,16 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// poppler_pdf_fonts
+List poppler_pdf_fonts(RawVector x, std::string owner_password, std::string user_password);
+RcppExport SEXP poppler_poppler_pdf_fonts(SEXP xSEXP, SEXP owner_passwordSEXP, SEXP user_passwordSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< RawVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< std::string >::type owner_password(owner_passwordSEXP);
+    Rcpp::traits::input_parameter< std::string >::type user_password(user_passwordSEXP);
+    __result = Rcpp::wrap(poppler_pdf_fonts(x, owner_password, user_password));
+    return __result;
+END_RCPP
+}

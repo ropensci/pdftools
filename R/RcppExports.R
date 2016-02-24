@@ -13,3 +13,7 @@ poppler_pdf_text <- function(x, owner_password, user_password) {
     .Call('poppler_poppler_pdf_text', PACKAGE = 'poppler', x, owner_password, user_password)
 }
 
+poppler_pdf_fonts <- function(x, owner_password, user_password) {
+    .Call('poppler_poppler_pdf_fonts', PACKAGE = 'poppler', x, owner_password, user_password)
+}
+
