@@ -180,7 +180,7 @@ List poppler_pdf_toc(RawVector x, std::string opw, std::string upw) {
 }
 
 // [[Rcpp::export]]
-RawVector poppler_render_page(RawVector x, int pagenum, std::string opw, std::string upw) {
+RawVector poppler_render_page(RawVector x, int pagenum, double dpi, std::string opw, std::string upw) {
   if(!page_renderer::can_render())
     throw std::runtime_error("Rendering not supported on this platform!");
   document *doc = document::load_from_raw_data(	(const char*) x.begin(), x.length(), opw, upw);
@@ -192,7 +192,7 @@ RawVector poppler_render_page(RawVector x, int pagenum, std::string opw, std::st
   page_renderer pr;
   pr.set_render_hint(page_renderer::antialiasing, true);
   pr.set_render_hint(page_renderer::text_antialiasing, true);
-  image img = pr.render_page(p);
+  image img = pr.render_page(p, dpi, dpi);
   if(!img.is_valid())
     throw std::runtime_error("PDF rendering failure.");
   size_t len = img.bytes_per_row() * img.height();

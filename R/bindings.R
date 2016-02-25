@@ -63,18 +63,21 @@ pdf_toc<- function(pdf, owner_password = "", user_password = "") {
 #' download.file("http://arxiv.org/pdf/1403.2805.pdf", "1403.2805.pdf")
 #' bitmap <- pdf_render_page("1403.2805.pdf")
 #'
-#' library(png)
-#' library(jpeg)
-#' library(webp)
+#' # save to bitmap formats
 #' png::writePNG(bitmap, "page.png")
 #' jpeg::writeJPEG(bitmap, "page.jpeg")
 #' webp::write_webp(bitmap, "page.webp")
 #'
+#' # Higher quality
+#' bitmap <- pdf_render_page("1403.2805.pdf", dpi = 300)
+#' png::writePNG(bitmap, "page.png")
+#'
+#' # slightly more efficient
 #' bitmap_raw <- pdf_render_page("1403.2805.pdf", numeric = FALSE)
 #' webp::write_webp(bitmap_raw, "page.webp")
 #' }
-pdf_render_page<- function(pdf, pages = 0, numeric = TRUE, opw = "", upw = "") {
-  out <- poppler_render_page(loadfile(pdf), pages, opw, upw)
+pdf_render_page<- function(pdf, pages = 0, dpi = 72, numeric = TRUE, opw = "", upw = "") {
+  out <- poppler_render_page(loadfile(pdf), pages, dpi, opw, upw)
   if(identical(dim(out)[1], 4)){
     out <- out[c(3,2,1,4),,] ## convert ARGB to RGBA
   }

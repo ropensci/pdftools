@@ -25,7 +25,7 @@ poppler_pdf_toc <- function(x, opw, upw) {
     .Call('pdftools_poppler_pdf_toc', PACKAGE = 'pdftools', x, opw, upw)
 }
 
-poppler_render_page <- function(x, pagenum, opw, upw) {
-    .Call('pdftools_poppler_render_page', PACKAGE = 'pdftools', x, pagenum, opw, upw)
+poppler_render_page <- function(x, pagenum, dpi, opw, upw) {
+    .Call('pdftools_poppler_render_page', PACKAGE = 'pdftools', x, pagenum, dpi, opw, upw)
 }
 

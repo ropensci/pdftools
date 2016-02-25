@@ -3,3 +3,6 @@
 ^src/Makevars$
 ^windows
 \.pdf$
+\.png$
+\.webp$
+\.jpeg$

@@ -81,16 +81,17 @@ BEGIN_RCPP
 END_RCPP
 }
 // poppler_render_page
-RawVector poppler_render_page(RawVector x, int pagenum, std::string opw, std::string upw);
-RcppExport SEXP pdftools_poppler_render_page(SEXP xSEXP, SEXP pagenumSEXP, SEXP opwSEXP, SEXP upwSEXP) {
+RawVector poppler_render_page(RawVector x, int pagenum, double dpi, std::string opw, std::string upw);
+RcppExport SEXP pdftools_poppler_render_page(SEXP xSEXP, SEXP pagenumSEXP, SEXP dpiSEXP, SEXP opwSEXP, SEXP upwSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
     Rcpp::traits::input_parameter< RawVector >::type x(xSEXP);
     Rcpp::traits::input_parameter< int >::type pagenum(pagenumSEXP);
+    Rcpp::traits::input_parameter< double >::type dpi(dpiSEXP);
     Rcpp::traits::input_parameter< std::string >::type opw(opwSEXP);
     Rcpp::traits::input_parameter< std::string >::type upw(upwSEXP);
-    __result = Rcpp::wrap(poppler_render_page(x, pagenum, opw, upw));
+    __result = Rcpp::wrap(poppler_render_page(x, pagenum, dpi, opw, upw));
     return __result;
 END_RCPP
 }

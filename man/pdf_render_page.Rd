@@ -5,7 +5,8 @@
 \alias{render}
 \title{Render PDF to bitmap}
 \usage{
-pdf_render_page(pdf, pages = 0, numeric = TRUE, opw = "", upw = "")
+pdf_render_page(pdf, pages = 0, dpi = 72, numeric = TRUE, opw = "",
+  upw = "")
 }
 \arguments{
 \item{pdf}{file path or raw vector with pdf data}
@@ -28,13 +29,16 @@ available if libpoppler was compiled with cairo support.
 download.file("http://arxiv.org/pdf/1403.2805.pdf", "1403.2805.pdf")
 bitmap <- pdf_render_page("1403.2805.pdf")
 
-library(png)
-library(jpeg)
-library(webp)
+# save to bitmap formats
 png::writePNG(bitmap, "page.png")
 jpeg::writeJPEG(bitmap, "page.jpeg")
 webp::write_webp(bitmap, "page.webp")
 
+# Higher quality
+bitmap <- pdf_render_page("1403.2805.pdf", dpi = 300)
+png::writePNG(bitmap, "page.png")
+
+# slightly more efficient
 bitmap_raw <- pdf_render_page("1403.2805.pdf", numeric = FALSE)
 webp::write_webp(bitmap_raw, "page.webp")
 }
