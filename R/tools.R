@@ -12,12 +12,11 @@
 #' @aliases pdftools
 #' @importFrom Rcpp sourceCpp
 #' @family pdftools
-#' @examples download.file("http://cran.r-project.org/doc/manuals/r-release/R-exts.pdf",
-#'  "R-exts.pdf", mode = "wb")
-#' info <- pdf_info("R-exts.pdf")
-#' text <- pdf_text("R-exts.pdf")
-#' fonts <- pdf_fonts("R-exts.pdf")
-#' files <- pdf_attachments("R-exts.pdf")
+#' @examples download.file("http://arxiv.org/pdf/1403.2805.pdf", "1403.2805.pdf", mode = "wb")
+#' info <- pdf_info("1403.2805.pdf")
+#' text <- pdf_text("1403.2805.pdf")
+#' fonts <- pdf_fonts("1403.2805.pdf")
+#' files <- pdf_attachments("1403.2805.pdf")
 pdf_info <- function(pdf, opw = "", upw = "") {
   poppler_pdf_info(loadfile(pdf), opw, upw)
 }

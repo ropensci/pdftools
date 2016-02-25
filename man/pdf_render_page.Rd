@@ -31,7 +31,7 @@ available if libpoppler was compiled with cairo support.
 }
 \examples{
 \dontrun{
-download.file("http://arxiv.org/pdf/1403.2805.pdf", "1403.2805.pdf")
+download.file("http://arxiv.org/pdf/1403.2805.pdf", "1403.2805.pdf", mode = "wb")
 bitmap <- pdf_render_page("1403.2805.pdf")
 
 # save to bitmap formats
