@@ -7,7 +7,6 @@
 \alias{pdf_text}
 \alias{pdf_toc}
 \alias{pdftools}
-\alias{poppler_config}
 \title{PDF utilities}
 \usage{
 pdf_info(pdf, opw = "", upw = "")

@@ -5,6 +5,7 @@
 #' available if libpoppler was compiled with cairo support.
 #'
 #' @export
+#' @rdname pdf_render_page
 #' @param pdf file path or raw vector with pdf data
 #' @param page which page to render
 #' @param numeric convert raw output to (0-1) real values
@@ -42,4 +43,10 @@ pdf_render_page<- function(pdf, page = 0, dpi = 72, numeric = TRUE, opw = "", up
     class(out) <- c("rawimg", class(out))
   }
   return(out)
+}
+
+#' @export
+#' @rdname pdf_render_page
+poppler_config <- function(){
+  get_poppler_config()
 }

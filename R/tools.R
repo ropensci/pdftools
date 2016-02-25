@@ -9,9 +9,8 @@
 #' @param upw string with user password to open pdf
 #' @useDynLib pdftools
 #' @rdname pdftools
-#' @aliases pdftools poppler_config
+#' @aliases pdftools
 #' @importFrom Rcpp sourceCpp
-#' @export poppler_config
 #' @family pdftools
 #' @examples download.file("http://cran.r-project.org/doc/manuals/r-release/R-exts.pdf",
 #'  "R-exts.pdf", mode = "wb")

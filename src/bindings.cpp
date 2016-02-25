@@ -69,7 +69,7 @@ std::string font_string(font_info::type_enum x){
 }
 
 // [[Rcpp::export]]
-List poppler_config(){
+List get_poppler_config(){
   return List::create(
     _["version"] = poppler::version_string(),
     _["can_render"] = page_renderer::can_render(),

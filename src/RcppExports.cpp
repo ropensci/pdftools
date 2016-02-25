@@ -5,13 +5,13 @@
 
 using namespace Rcpp;
 
-// poppler_config
-List poppler_config();
-RcppExport SEXP pdftools_poppler_config() {
+// get_poppler_config
+List get_poppler_config();
+RcppExport SEXP pdftools_get_poppler_config() {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
-    __result = Rcpp::wrap(poppler_config());
+    __result = Rcpp::wrap(get_poppler_config());
     return __result;
 END_RCPP
 }

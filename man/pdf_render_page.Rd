@@ -2,11 +2,14 @@
 % Please edit documentation in R/render.R
 \name{pdf_render_page}
 \alias{pdf_render_page}
+\alias{poppler_config}
 \alias{render}
 \title{Render PDF to bitmap}
 \usage{
 pdf_render_page(pdf, page = 0, dpi = 72, numeric = TRUE, opw = "",
   upw = "")
+
+poppler_config()
 }
 \arguments{
 \item{pdf}{file path or raw vector with pdf data}
