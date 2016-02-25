@@ -150,7 +150,8 @@ List poppler_pdf_fonts (RawVector x, std::string opw, std::string upw) {
     _["name"] = fonts_name,
     _["type"] = fonts_type,
     _["embedded"] = fonts_embedded,
-    _["file"] = fonts_file
+    _["file"] = fonts_file,
+    _["stringsAsFactors"] = false
   );
 }
 
