@@ -29,7 +29,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // poppler_pdf_text
-std::vector<std::string> poppler_pdf_text(RawVector x, std::string opw, std::string upw);
+CharacterVector poppler_pdf_text(RawVector x, std::string opw, std::string upw);
 RcppExport SEXP pdftools_poppler_pdf_text(SEXP xSEXP, SEXP opwSEXP, SEXP upwSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;

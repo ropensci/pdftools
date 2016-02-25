@@ -12,6 +12,12 @@
 using namespace Rcpp;
 using namespace poppler;
 
+std::string layout_string(document::page_layout_enum x);
+std::string font_string(font_info::type_enum x);
+std::string layout_string(document::page_layout_enum x);
+String ustring_to_rstring(ustring x);
+List item_to_list(toc_item *item);
+
 // [[Rcpp::export]]
 List poppler_config(){
   return List::create(
@@ -21,24 +27,9 @@ List poppler_config(){
   );
 }
 
-std::string layout_string(document::page_layout_enum x) {
-  switch(x){
-    case document::no_layout: return "no_layout";
-    case document::single_page: return "single_page";
-    case document::one_column: return "one_column";
-    case document::two_column_left: return "two_column_left";
-    case document::two_column_right: return "two_column_right";
-    case document::two_page_left: return "two_page_left";
-    case document::two_page_right: return "two_page_right";
-    default: return "";
-  }
-}
-
-String ustring_to_string(ustring x){
+std::string ustring_to_string(ustring x){
   byte_array str = x.to_utf8();
-  String y(std::string(x.begin(), x.end()));
-  y.set_encoding("UTF-8");
-  return y;
+  return std::string(x.begin(), x.end());
 }
 
 // [[Rcpp::export]]
@@ -60,7 +51,7 @@ List poppler_pdf_info (RawVector x, std::string opw, std::string upw) {
     std::string keystr = keystrings[i];
     if(keystr.compare("CreationDate") == 0) continue;
     if(keystr.compare("ModDate") == 0) continue;
-    keys.push_back(ustring_to_string(doc->info_key(keystr)), keystr);
+    keys.push_back(ustring_to_rstring(doc->info_key(keystr)), keystr);
   }
 
   List out = List::create(
@@ -71,7 +62,7 @@ List poppler_pdf_info (RawVector x, std::string opw, std::string upw) {
     _["keys"] = keys,
     _["created"] = Datetime(doc->info_date("CreationDate")),
     _["modified"] = Datetime(doc->info_date("ModDate")),
-    _["metadata"] = ustring_to_string(doc->metadata()),
+    _["metadata"] = ustring_to_rstring(doc->metadata()),
     _["locked"] = doc->is_locked(),
     _["attachments"] = doc->has_embedded_files(),
     _["layout"] = layout_string(doc->page_layout())
@@ -80,35 +71,17 @@ List poppler_pdf_info (RawVector x, std::string opw, std::string upw) {
 }
 
 // [[Rcpp::export]]
-std::vector<std::string> poppler_pdf_text (RawVector x, std::string opw, std::string upw) {
+CharacterVector poppler_pdf_text (RawVector x, std::string opw, std::string upw) {
   document *doc = document::load_from_raw_data(	(const char*) x.begin(), x.length(), opw, upw);
   if(!doc) throw std::runtime_error("PDF parsing failure.");
-  std::vector<std::string> out;
+  CharacterVector out;
   for(int i = 0; i < doc->pages(); i++){
     page *p(doc->create_page(i));
     page::text_layout_enum show_text_layout = page::physical_layout;
     ustring str = p->text(p->page_rect(), show_text_layout);
-    out.push_back(ustring_to_string(str));
+    out.push_back(ustring_to_rstring(str));
   }
   return out;
-}
-
-std::string font_string(font_info::type_enum x){
-  switch(x) {
-    case font_info::unknown: return "unknown";
-    case font_info::type1: return "type1";
-    case font_info::type1c: return "type1c";
-    case font_info::type1c_ot: return "type1c_ot";
-    case font_info::type3: return "type3";
-    case font_info::truetype: return "truetype";
-    case font_info::truetype_ot: return "truetype_ot";
-    case font_info::cid_type0: return "cid_type0";
-    case font_info::cid_type0c: return "cid_type0c";
-    case font_info::cid_type0c_ot: return "cid_type0c_ot";
-    case font_info::cid_truetype: return "cid_truetype";
-    case font_info::cid_truetype_ot: return "cid_truetype_ot";
-    default: return "";
-  }
 }
 
 // [[Rcpp::export]]
@@ -154,24 +127,12 @@ List poppler_pdf_files (RawVector x, std::string opw, std::string upw) {
         _["mime"] = file->mime_type(),
         _["created"] = Datetime(file->creation_date()),
         _["modified"] = Datetime(file->modification_date()),
-        _["description"] = ustring_to_string(file->description()),
+        _["description"] = ustring_to_rstring(file->description()),
         _["data"] = res
       ));
     }
   }
   return out;
-}
-
-List item_to_list(toc_item *item){
-  List out = List();
-  std::vector <toc_item*> children = item->children();
-  for(size_t i = 0; i < children.size(); i++){
-    out.push_back(item_to_list(children[i]));
-  }
-  return List::create(
-    _["title"] = ustring_to_string(item->title()),
-    _["children"] = out
-  );
 }
 
 // [[Rcpp::export]]
@@ -214,4 +175,54 @@ RawVector poppler_render_page(RawVector x, int pagenum, double dpi, std::string 
   }
   res.attr("dim") = NumericVector::create(channels, img.width(), img.height());
   return res;
+}
+
+List item_to_list(toc_item *item){
+  List out = List();
+  std::vector <toc_item*> children = item->children();
+  for(size_t i = 0; i < children.size(); i++){
+    out.push_back(item_to_list(children[i]));
+  }
+  return List::create(
+    _["title"] = ustring_to_rstring(item->title()),
+    _["children"] = out
+  );
+}
+
+String ustring_to_rstring(ustring x){
+  byte_array str = x.to_utf8();
+  String y(std::string(x.begin(), x.end()));
+  y.set_encoding(CE_UTF8);
+  return y;
+}
+
+std::string layout_string(document::page_layout_enum x) {
+  switch(x){
+    case document::no_layout: return "no_layout";
+    case document::single_page: return "single_page";
+    case document::one_column: return "one_column";
+    case document::two_column_left: return "two_column_left";
+    case document::two_column_right: return "two_column_right";
+    case document::two_page_left: return "two_page_left";
+    case document::two_page_right: return "two_page_right";
+    default: return "";
+  }
+}
+
+std::string font_string(font_info::type_enum x){
+  switch(x) {
+    case font_info::unknown: return "unknown";
+    case font_info::type1: return "type1";
+    case font_info::type1c: return "type1c";
+    case font_info::type1c_ot: return "type1c_ot";
+    case font_info::type3: return "type3";
+    case font_info::truetype: return "truetype";
+    case font_info::truetype_ot: return "truetype_ot";
+    case font_info::cid_type0: return "cid_type0";
+    case font_info::cid_type0c: return "cid_type0c";
+    case font_info::cid_type0c_ot: return "cid_type0c_ot";
+    case font_info::cid_truetype: return "cid_truetype";
+    case font_info::cid_truetype_ot: return "cid_truetype_ot";
+    default: return "";
+  }
 }

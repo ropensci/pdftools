@@ -11,6 +11,6 @@ License: MIT + file LICENSE
 URL: https://github.com/jeroenooms/pdftools
 BugReports: https://github.com/jeroenooms/pdftools/issues
 SystemRequirements: Poppler C++ interface library and headers
-Imports: Rcpp
+Imports: Rcpp (>= 0.12.0)
 LinkingTo: Rcpp
 RoxygenNote: 5.0.1
