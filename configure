@@ -47,6 +47,7 @@ else
     HOMEBREW_CACHE="/tmp" $BREW install pkg-config | perl -pe 's/Warning/Note/gi'
     HOMEBREW_CACHE="/tmp" $BREW install --force-bottle openssl freetype fontconfig gettext glib \
       cairo python gobject-introspection ${PKG_BREW_NAME} | perl -pe 's/Warning/Note/gi'
+    HOMEBREW_CACHE="/tmp" $BREW reinstall openjpeg --with-static | perl -pe 's/Warning/Note/gi'
     PKG_CFLAGS=`$BREWDIR/opt/pkg-config/bin/pkg-config --cflags ${PKG_CONFIG_NAME}`
     PKG_LIBS=`$BREWDIR/opt/pkg-config/bin/pkg-config --libs --static ${PKG_CONFIG_NAME} cairo lcms2 libopenjpeg`
     PKG_LIBS="${PKG_LIBS} -L${BREWDIR}/lib -ljpeg"
