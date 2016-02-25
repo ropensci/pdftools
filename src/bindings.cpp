@@ -34,6 +34,11 @@ std::string layout_string(document::page_layout_enum x) {
   }
 }
 
+std::string ustring_to_string(ustring x){
+  byte_array str = x.to_utf8();
+  return std::string(x.begin(), x.end());
+}
+
 // [[Rcpp::export]]
 List poppler_pdf_info (RawVector x, std::string opw, std::string upw) {
   document *doc = document::load_from_raw_data(	(const char*) x.begin(), x.length(), opw, upw);
@@ -53,7 +58,7 @@ List poppler_pdf_info (RawVector x, std::string opw, std::string upw) {
     std::string keystr = keystrings[i];
     if(keystr.compare("CreationDate") == 0) continue;
     if(keystr.compare("ModDate") == 0) continue;
-    std::string value(doc->info_key(keystr).to_latin1());
+    std::string value(ustring_to_string(doc->info_key(keystr)));
     keys.push_back(value, keystr);
   }
 
@@ -65,7 +70,7 @@ List poppler_pdf_info (RawVector x, std::string opw, std::string upw) {
     _["keys"] = keys,
     _["created"] = Datetime(doc->info_date("CreationDate")),
     _["modified"] = Datetime(doc->info_date("ModDate")),
-    _["metadata"] = doc->metadata().to_latin1(),
+    _["metadata"] = ustring_to_string(doc->metadata()),
     _["locked"] = doc->is_locked(),
     _["attachments"] = doc->has_embedded_files(),
     _["layout"] = layout_string(doc->page_layout())
@@ -81,8 +86,8 @@ std::vector<std::string> poppler_pdf_text (RawVector x, std::string opw, std::st
   for(int i = 0; i < doc->pages(); i++){
     page *p(doc->create_page(i));
     page::text_layout_enum show_text_layout = page::physical_layout;
-    byte_array str = p->text(p->page_rect(), show_text_layout).to_utf8();
-    out.push_back(std::string(str.begin(), str.end()));
+    ustring str = p->text(p->page_rect(), show_text_layout);
+    out.push_back(ustring_to_string(str));
   }
   return out;
 }
@@ -148,7 +153,7 @@ List poppler_pdf_files (RawVector x, std::string opw, std::string upw) {
         _["mime"] = file->mime_type(),
         _["created"] = Datetime(file->creation_date()),
         _["modified"] = Datetime(file->modification_date()),
-        _["description"] = file->description().to_latin1(),
+        _["description"] = ustring_to_string(file->description()),
         _["data"] = res
       ));
     }
@@ -163,7 +168,7 @@ List item_to_list(toc_item *item){
     out.push_back(item_to_list(children[i]));
   }
   return List::create(
-    _["title"] = item->title().to_latin1(),
+    _["title"] = ustring_to_string(item->title()),
     _["children"] = out
   );
 }
