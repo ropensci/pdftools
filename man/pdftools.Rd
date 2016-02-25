@@ -7,8 +7,8 @@
 \alias{pdf_text}
 \alias{pdf_toc}
 \alias{pdftools}
-\alias{poppler_info}
-\title{PDF tools}
+\alias{poppler_config}
+\title{PDF utilities}
 \usage{
 pdf_info(pdf, opw = "", upw = "")
 
@@ -28,8 +28,8 @@ pdf_toc(pdf, opw = "", upw = "")
 \item{upw}{string with user password to open pdf}
 }
 \description{
-Utilities based on libpoppler for extracting text,
-fonts and metadata from a pdf file.
+Utilities based on libpoppler for extracting text, fonts,
+attachements and metadata from a pdf file.
 }
 \examples{
 download.file("http://cran.r-project.org/doc/manuals/r-release/R-exts.pdf",
@@ -38,5 +38,8 @@ info <- pdf_info("R-exts.pdf")
 text <- pdf_text("R-exts.pdf")
 fonts <- pdf_fonts("R-exts.pdf")
 files <- pdf_attachments("R-exts.pdf")
+}
+\seealso{
+Other pdftools: \code{\link{pdf_render_page}}
 }
 

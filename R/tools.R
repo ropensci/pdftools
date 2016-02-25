@@ -1,7 +1,7 @@
-#' PDF tools
+#' PDF utilities
 #'
-#' Utilities based on libpoppler for extracting text,
-#' fonts and metadata from a pdf file.
+#' Utilities based on libpoppler for extracting text, fonts,
+#' attachements and metadata from a pdf file.
 #'
 #' @export
 #' @param pdf file path or raw vector with pdf data
@@ -9,9 +9,10 @@
 #' @param upw string with user password to open pdf
 #' @useDynLib pdftools
 #' @rdname pdftools
-#' @aliases pdftools poppler_info
+#' @aliases pdftools poppler_config
 #' @importFrom Rcpp sourceCpp
-#' @export poppler_info
+#' @export poppler_config
+#' @family pdftools
 #' @examples download.file("http://cran.r-project.org/doc/manuals/r-release/R-exts.pdf",
 #'  "R-exts.pdf", mode = "wb")
 #' info <- pdf_info("R-exts.pdf")

@@ -45,4 +45,7 @@ bitmap_raw <- pdf_render_page("1403.2805.pdf", numeric = FALSE)
 webp::write_webp(bitmap_raw, "page.webp")
 }
 }
+\seealso{
+Other pdftools: \code{\link{pdf_info}}
+}
 

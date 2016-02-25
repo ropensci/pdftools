@@ -13,7 +13,7 @@ using namespace Rcpp;
 using namespace poppler;
 
 // [[Rcpp::export]]
-List poppler_info(){
+List poppler_config(){
   return List::create(
     _["version"] = poppler::version_string(),
     _["can_render"] = page_renderer::can_render(),
