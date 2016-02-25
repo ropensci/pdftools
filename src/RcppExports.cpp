@@ -16,81 +16,81 @@ BEGIN_RCPP
 END_RCPP
 }
 // poppler_pdf_info
-List poppler_pdf_info(RawVector x, std::string owner_password, std::string user_password);
-RcppExport SEXP pdftools_poppler_pdf_info(SEXP xSEXP, SEXP owner_passwordSEXP, SEXP user_passwordSEXP) {
+List poppler_pdf_info(RawVector x, std::string opw, std::string upw);
+RcppExport SEXP pdftools_poppler_pdf_info(SEXP xSEXP, SEXP opwSEXP, SEXP upwSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
     Rcpp::traits::input_parameter< RawVector >::type x(xSEXP);
-    Rcpp::traits::input_parameter< std::string >::type owner_password(owner_passwordSEXP);
-    Rcpp::traits::input_parameter< std::string >::type user_password(user_passwordSEXP);
-    __result = Rcpp::wrap(poppler_pdf_info(x, owner_password, user_password));
+    Rcpp::traits::input_parameter< std::string >::type opw(opwSEXP);
+    Rcpp::traits::input_parameter< std::string >::type upw(upwSEXP);
+    __result = Rcpp::wrap(poppler_pdf_info(x, opw, upw));
     return __result;
 END_RCPP
 }
 // poppler_pdf_text
-std::vector<std::string> poppler_pdf_text(RawVector x, std::string owner_password, std::string user_password);
-RcppExport SEXP pdftools_poppler_pdf_text(SEXP xSEXP, SEXP owner_passwordSEXP, SEXP user_passwordSEXP) {
+std::vector<std::string> poppler_pdf_text(RawVector x, std::string opw, std::string upw);
+RcppExport SEXP pdftools_poppler_pdf_text(SEXP xSEXP, SEXP opwSEXP, SEXP upwSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
     Rcpp::traits::input_parameter< RawVector >::type x(xSEXP);
-    Rcpp::traits::input_parameter< std::string >::type owner_password(owner_passwordSEXP);
-    Rcpp::traits::input_parameter< std::string >::type user_password(user_passwordSEXP);
-    __result = Rcpp::wrap(poppler_pdf_text(x, owner_password, user_password));
+    Rcpp::traits::input_parameter< std::string >::type opw(opwSEXP);
+    Rcpp::traits::input_parameter< std::string >::type upw(upwSEXP);
+    __result = Rcpp::wrap(poppler_pdf_text(x, opw, upw));
     return __result;
 END_RCPP
 }
 // poppler_pdf_fonts
-List poppler_pdf_fonts(RawVector x, std::string owner_password, std::string user_password);
-RcppExport SEXP pdftools_poppler_pdf_fonts(SEXP xSEXP, SEXP owner_passwordSEXP, SEXP user_passwordSEXP) {
+List poppler_pdf_fonts(RawVector x, std::string opw, std::string upw);
+RcppExport SEXP pdftools_poppler_pdf_fonts(SEXP xSEXP, SEXP opwSEXP, SEXP upwSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
     Rcpp::traits::input_parameter< RawVector >::type x(xSEXP);
-    Rcpp::traits::input_parameter< std::string >::type owner_password(owner_passwordSEXP);
-    Rcpp::traits::input_parameter< std::string >::type user_password(user_passwordSEXP);
-    __result = Rcpp::wrap(poppler_pdf_fonts(x, owner_password, user_password));
+    Rcpp::traits::input_parameter< std::string >::type opw(opwSEXP);
+    Rcpp::traits::input_parameter< std::string >::type upw(upwSEXP);
+    __result = Rcpp::wrap(poppler_pdf_fonts(x, opw, upw));
     return __result;
 END_RCPP
 }
 // poppler_pdf_files
-List poppler_pdf_files(RawVector x, std::string owner_password, std::string user_password);
-RcppExport SEXP pdftools_poppler_pdf_files(SEXP xSEXP, SEXP owner_passwordSEXP, SEXP user_passwordSEXP) {
+List poppler_pdf_files(RawVector x, std::string opw, std::string upw);
+RcppExport SEXP pdftools_poppler_pdf_files(SEXP xSEXP, SEXP opwSEXP, SEXP upwSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
     Rcpp::traits::input_parameter< RawVector >::type x(xSEXP);
-    Rcpp::traits::input_parameter< std::string >::type owner_password(owner_passwordSEXP);
-    Rcpp::traits::input_parameter< std::string >::type user_password(user_passwordSEXP);
-    __result = Rcpp::wrap(poppler_pdf_files(x, owner_password, user_password));
+    Rcpp::traits::input_parameter< std::string >::type opw(opwSEXP);
+    Rcpp::traits::input_parameter< std::string >::type upw(upwSEXP);
+    __result = Rcpp::wrap(poppler_pdf_files(x, opw, upw));
     return __result;
 END_RCPP
 }
 // poppler_pdf_toc
-List poppler_pdf_toc(RawVector x, std::string owner_password, std::string user_password);
-RcppExport SEXP pdftools_poppler_pdf_toc(SEXP xSEXP, SEXP owner_passwordSEXP, SEXP user_passwordSEXP) {
+List poppler_pdf_toc(RawVector x, std::string opw, std::string upw);
+RcppExport SEXP pdftools_poppler_pdf_toc(SEXP xSEXP, SEXP opwSEXP, SEXP upwSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
     Rcpp::traits::input_parameter< RawVector >::type x(xSEXP);
-    Rcpp::traits::input_parameter< std::string >::type owner_password(owner_passwordSEXP);
-    Rcpp::traits::input_parameter< std::string >::type user_password(user_passwordSEXP);
-    __result = Rcpp::wrap(poppler_pdf_toc(x, owner_password, user_password));
+    Rcpp::traits::input_parameter< std::string >::type opw(opwSEXP);
+    Rcpp::traits::input_parameter< std::string >::type upw(upwSEXP);
+    __result = Rcpp::wrap(poppler_pdf_toc(x, opw, upw));
     return __result;
 END_RCPP
 }
 // poppler_render_page
-RawVector poppler_render_page(RawVector x, std::string owner_password, std::string user_password, int i);
-RcppExport SEXP pdftools_poppler_render_page(SEXP xSEXP, SEXP owner_passwordSEXP, SEXP user_passwordSEXP, SEXP iSEXP) {
+RawVector poppler_render_page(RawVector x, int pagenum, std::string opw, std::string upw);
+RcppExport SEXP pdftools_poppler_render_page(SEXP xSEXP, SEXP pagenumSEXP, SEXP opwSEXP, SEXP upwSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
     Rcpp::traits::input_parameter< RawVector >::type x(xSEXP);
-    Rcpp::traits::input_parameter< std::string >::type owner_password(owner_passwordSEXP);
-    Rcpp::traits::input_parameter< std::string >::type user_password(user_passwordSEXP);
-    Rcpp::traits::input_parameter< int >::type i(iSEXP);
-    __result = Rcpp::wrap(poppler_render_page(x, owner_password, user_password, i));
+    Rcpp::traits::input_parameter< int >::type pagenum(pagenumSEXP);
+    Rcpp::traits::input_parameter< std::string >::type opw(opwSEXP);
+    Rcpp::traits::input_parameter< std::string >::type upw(upwSEXP);
+    __result = Rcpp::wrap(poppler_render_page(x, pagenum, opw, upw));
     return __result;
 END_RCPP
 }

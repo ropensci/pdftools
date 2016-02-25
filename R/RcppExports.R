@@ -5,27 +5,27 @@ poppler_info <- function() {
     .Call('pdftools_poppler_info', PACKAGE = 'pdftools')
 }
 
-poppler_pdf_info <- function(x, owner_password, user_password) {
-    .Call('pdftools_poppler_pdf_info', PACKAGE = 'pdftools', x, owner_password, user_password)
+poppler_pdf_info <- function(x, opw, upw) {
+    .Call('pdftools_poppler_pdf_info', PACKAGE = 'pdftools', x, opw, upw)
 }
 
-poppler_pdf_text <- function(x, owner_password, user_password) {
-    .Call('pdftools_poppler_pdf_text', PACKAGE = 'pdftools', x, owner_password, user_password)
+poppler_pdf_text <- function(x, opw, upw) {
+    .Call('pdftools_poppler_pdf_text', PACKAGE = 'pdftools', x, opw, upw)
 }
 
-poppler_pdf_fonts <- function(x, owner_password, user_password) {
-    .Call('pdftools_poppler_pdf_fonts', PACKAGE = 'pdftools', x, owner_password, user_password)
+poppler_pdf_fonts <- function(x, opw, upw) {
+    .Call('pdftools_poppler_pdf_fonts', PACKAGE = 'pdftools', x, opw, upw)
 }
 
-poppler_pdf_files <- function(x, owner_password, user_password) {
-    .Call('pdftools_poppler_pdf_files', PACKAGE = 'pdftools', x, owner_password, user_password)
+poppler_pdf_files <- function(x, opw, upw) {
+    .Call('pdftools_poppler_pdf_files', PACKAGE = 'pdftools', x, opw, upw)
 }
 
-poppler_pdf_toc <- function(x, owner_password, user_password) {
-    .Call('pdftools_poppler_pdf_toc', PACKAGE = 'pdftools', x, owner_password, user_password)
+poppler_pdf_toc <- function(x, opw, upw) {
+    .Call('pdftools_poppler_pdf_toc', PACKAGE = 'pdftools', x, opw, upw)
 }
 
-poppler_render_page <- function(x, owner_password, user_password, i) {
-    .Call('pdftools_poppler_render_page', PACKAGE = 'pdftools', x, owner_password, user_password, i)
+poppler_render_page <- function(x, pagenum, opw, upw) {
+    .Call('pdftools_poppler_render_page', PACKAGE = 'pdftools', x, pagenum, opw, upw)
 }
 

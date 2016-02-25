@@ -7,6 +7,7 @@
 #include <poppler-toc.h>
 #include <poppler-page-renderer.h>
 #include <Rcpp.h>
+
 using namespace Rcpp;
 using namespace poppler;
 
@@ -21,20 +22,22 @@ List poppler_info(){
 
 std::string layout_string(document::page_layout_enum x) {
   switch(x){
-  case document::no_layout: return "no_layout";
-  case document::single_page: return "single_page";
-  case document::one_column: return "one_column";
-  case document::two_column_left: return "two_column_left";
-  case document::two_column_right: return "two_column_right";
-  case document::two_page_left: return "two_page_left";
-  case document::two_page_right: return "two_page_right";
-  default: return "";
+    case document::no_layout: return "no_layout";
+    case document::single_page: return "single_page";
+    case document::one_column: return "one_column";
+    case document::two_column_left: return "two_column_left";
+    case document::two_column_right: return "two_column_right";
+    case document::two_page_left: return "two_page_left";
+    case document::two_page_right: return "two_page_right";
+    default: return "";
   }
 }
 
 // [[Rcpp::export]]
-List poppler_pdf_info (RawVector x, std::string owner_password, std::string user_password) {
-  document *doc = document::load_from_raw_data(	(const char*) RAW(x), x.length(), owner_password, user_password);
+List poppler_pdf_info (RawVector x, std::string opw, std::string upw) {
+  document *doc = document::load_from_raw_data(	(const char*) x.begin(), x.length(), opw, upw);
+  if(!doc)
+    throw std::runtime_error("PDF parsing failure.");
   int major = 0, minor = 0;
   doc->get_pdf_version(&major, &minor);
   std::string version_str;
@@ -43,7 +46,7 @@ List poppler_pdf_info (RawVector x, std::string owner_password, std::string user
   convert << ".";
   convert << minor;
 
-  List keys = List::create();
+  List keys = List();
   std::vector<std::string> keystrings = doc->info_keys();
   for (size_t i = 0; i < keystrings.size(); i++) {
     std::string keystr = keystrings[i];
@@ -70,8 +73,9 @@ List poppler_pdf_info (RawVector x, std::string owner_password, std::string user
 }
 
 // [[Rcpp::export]]
-std::vector<std::string> poppler_pdf_text (RawVector x, std::string owner_password, std::string user_password) {
-  document *doc = document::load_from_raw_data(	(const char*) RAW(x), x.length(), owner_password, user_password);
+std::vector<std::string> poppler_pdf_text (RawVector x, std::string opw, std::string upw) {
+  document *doc = document::load_from_raw_data(	(const char*) x.begin(), x.length(), opw, upw);
+  if(!doc) throw std::runtime_error("PDF parsing failure.");
   std::vector<std::string> out;
   for(int i = 0; i < doc->pages(); i++){
     page *p(doc->create_page(i));
@@ -101,8 +105,10 @@ std::string font_string(font_info::type_enum x){
 }
 
 // [[Rcpp::export]]
-List poppler_pdf_fonts (RawVector x, std::string owner_password, std::string user_password) {
-  document *doc = document::load_from_raw_data(	(const char*) RAW(x), x.length(), owner_password, user_password);
+List poppler_pdf_fonts (RawVector x, std::string opw, std::string upw) {
+  document *doc = document::load_from_raw_data(	(const char*) x.begin(), x.length(), opw, upw);
+  if(!doc)
+    throw std::runtime_error("PDF parsing failure.");
   std::vector<font_info> fonts = doc->fonts();
   CharacterVector fonts_name;
   CharacterVector fonts_type;
@@ -124,9 +130,11 @@ List poppler_pdf_fonts (RawVector x, std::string owner_password, std::string use
 }
 
 // [[Rcpp::export]]
-List poppler_pdf_files (RawVector x, std::string owner_password, std::string user_password) {
-  document *doc = document::load_from_raw_data(	(const char*) RAW(x), x.length(), owner_password, user_password);
-  List out = List::create();
+List poppler_pdf_files (RawVector x, std::string opw, std::string upw) {
+  document *doc = document::load_from_raw_data(	(const char*) x.begin(), x.length(), opw, upw);
+  if(!doc)
+    throw std::runtime_error("PDF parsing failure.");
+  List out = List();
   if(doc->has_embedded_files()){
     std::vector<embedded_file*> files = doc->embedded_files();
     for (size_t i = 0; i < files.size(); i++) {
@@ -148,7 +156,7 @@ List poppler_pdf_files (RawVector x, std::string owner_password, std::string use
 }
 
 List item_to_list(toc_item *item){
-  List out = List::create();
+  List out = List();
   std::vector <toc_item*> children = item->children();
   for(size_t i = 0; i < children.size(); i++){
     out.push_back(item_to_list(children[i]));
@@ -160,17 +168,43 @@ List item_to_list(toc_item *item){
 }
 
 // [[Rcpp::export]]
-List poppler_pdf_toc(RawVector x, std::string owner_password, std::string user_password) {
-  document *doc = document::load_from_raw_data(	(const char*) RAW(x), x.length(), owner_password, user_password);
-  List out = List::create();
+List poppler_pdf_toc(RawVector x, std::string opw, std::string upw) {
+  document *doc = document::load_from_raw_data(	(const char*) x.begin(), x.length(), opw, upw);
+  if(!doc)
+    throw std::runtime_error("PDF parsing failure.");
+  List out = List();
   toc *contents = doc->create_toc();
-  toc_item *item = contents->root();
-  return item_to_list(item);
+  if(!contents)
+    return List();
+  return item_to_list(contents->root());
 }
 
 // [[Rcpp::export]]
-RawVector poppler_render_page(RawVector x, std::string owner_password, std::string user_password, int i) {
-  document *doc = document::load_from_raw_data(	(const char*) RAW(x), x.length(), owner_password, user_password);
-  page *p(doc->create_page(i));
-  return RawVector::create();
+RawVector poppler_render_page(RawVector x, int pagenum, std::string opw, std::string upw) {
+  if(!page_renderer::can_render())
+    throw std::runtime_error("Rendering not supported on this platform!");
+  document *doc = document::load_from_raw_data(	(const char*) x.begin(), x.length(), opw, upw);
+  if(!doc)
+    throw std::runtime_error("PDF parsing failure.");
+  page *p(doc->create_page(pagenum));
+  if(!p)
+    throw std::runtime_error("Invalid page.");
+  page_renderer pr;
+  pr.set_render_hint(page_renderer::antialiasing, true);
+  pr.set_render_hint(page_renderer::text_antialiasing, true);
+  image img = pr.render_page(p);
+  if(!img.is_valid())
+    throw std::runtime_error("PDF rendering failure.");
+  size_t len = img.bytes_per_row() * img.height();
+  RawVector res(len);
+  std::memcpy(res.begin(), img.data(), len);
+  int channels = 0;
+  switch(img.format()){
+    case image::format_mono: channels = 1; break;
+    case image::format_rgb24: channels = 3; break;
+    case image::format_argb32: channels = 4; break;
+    default : std::runtime_error("Invalid image format");
+  }
+  res.attr("dim") = NumericVector::create(channels, img.width(), img.height());
+  return res;
 }

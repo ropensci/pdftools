@@ -46,6 +46,47 @@ pdf_toc<- function(pdf, owner_password = "", user_password = "") {
   poppler_pdf_toc(loadfile(pdf), owner_password, user_password)
 }
 
+#' Render PDF to bitmap
+#'
+#' Renders a PDF page to a bitmap array which can be written to e.g.
+#' png, jpeg or webp using the respective R packages. This function is only
+#' available if libpoppler was compiled with cairo support.
+#'
+#' @export
+#' @param pdf file path or raw vector with pdf data
+#' @param page which page to render
+#' @param numeric convert raw output to (0-1) real values
+#' @param opw owner password
+#' @param upw user password
+#' @aliases render
+#' @examples \dontrun{
+#' download.file("http://arxiv.org/pdf/1403.2805.pdf", "1403.2805.pdf")
+#' bitmap <- pdf_render_page("1403.2805.pdf")
+#'
+#' library(png)
+#' library(jpeg)
+#' library(webp)
+#' png::writePNG(bitmap, "page.png")
+#' jpeg::writeJPEG(bitmap, "page.jpeg")
+#' webp::write_webp(bitmap, "page.webp")
+#'
+#' bitmap_raw <- pdf_render_page("1403.2805.pdf", numeric = FALSE)
+#' webp::write_webp(bitmap_raw, "page.webp")
+#' }
+pdf_render_page<- function(pdf, pages = 0, numeric = TRUE, opw = "", upw = "") {
+  out <- poppler_render_page(loadfile(pdf), pages, opw, upw)
+  if(identical(dim(out)[1], 4)){
+    out <- out[c(3,2,1,4),,] ## convert ARGB to RGBA
+  }
+  if(isTRUE(numeric)){
+    out <- structure(as.numeric(out)/255, dim = dim(out))
+    out <- aperm(out)
+  } else {
+    class(out) <- c("rawimg", class(out))
+  }
+  return(out)
+}
+
 loadfile <- function(pdf){
   if(is.character(pdf)){
     if(grepl("^https?://", pdf[1])){
