@@ -26,9 +26,7 @@ pdf_info <- function(pdf, opw = "", upw = "") {
 #' @rdname pdftools
 #' @export
 pdf_text <- function(pdf, opw = "", upw = "") {
-  text <- poppler_pdf_text(loadfile(pdf), opw, upw)
-  Encoding(text) <- "UTF-8"
-  text
+  poppler_pdf_text(loadfile(pdf), opw, upw)
 }
 
 #' @rdname pdftools

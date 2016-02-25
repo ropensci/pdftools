@@ -34,9 +34,11 @@ std::string layout_string(document::page_layout_enum x) {
   }
 }
 
-std::string ustring_to_string(ustring x){
+String ustring_to_string(ustring x){
   byte_array str = x.to_utf8();
-  return std::string(x.begin(), x.end());
+  String y(std::string(x.begin(), x.end()));
+  y.set_encoding("UTF-8");
+  return y;
 }
 
 // [[Rcpp::export]]
