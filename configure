@@ -49,8 +49,8 @@ else
       cairo python gobject-introspection ${PKG_BREW_NAME} | perl -pe 's/Warning/Note/gi'
     HOMEBREW_CACHE="/tmp" $BREW reinstall openjpeg --with-static | perl -pe 's/Warning/Note/gi'
     PKG_CFLAGS=`$BREWDIR/opt/pkg-config/bin/pkg-config --cflags ${PKG_CONFIG_NAME}`
-    PKG_LIBS=`$BREWDIR/opt/pkg-config/bin/pkg-config --libs --static ${PKG_CONFIG_NAME} cairo lcms2 libopenjpeg`
-    PKG_LIBS="${PKG_LIBS} -L${BREWDIR}/lib -ljpeg"
+    PKG_LIBS=`$BREWDIR/opt/pkg-config/bin/pkg-config --libs --static ${PKG_CONFIG_NAME} cairo lcms2 libopenjpeg libtiff-4`
+    PKG_LIBS="-L${BREWDIR}/lib ${PKG_LIBS}"
 
     # Prevent CRAN builder from linking against old libs in /usr/local/lib
     for FILE in $BREWDIR/Cellar/*/*/lib/*.a; do
