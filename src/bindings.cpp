@@ -58,8 +58,7 @@ List poppler_pdf_info (RawVector x, std::string opw, std::string upw) {
     std::string keystr = keystrings[i];
     if(keystr.compare("CreationDate") == 0) continue;
     if(keystr.compare("ModDate") == 0) continue;
-    std::string value(ustring_to_string(doc->info_key(keystr)));
-    keys.push_back(value, keystr);
+    keys.push_back(ustring_to_string(doc->info_key(keystr)), keystr);
   }
 
   List out = List::create(
