@@ -7,6 +7,7 @@
 #include <poppler-toc.h>
 #include <poppler-page-renderer.h>
 #include <Rcpp.h>
+#include <cstring>
 
 using namespace Rcpp;
 using namespace poppler;
