@@ -6,7 +6,7 @@
 \alias{render}
 \title{Render PDF to bitmap}
 \usage{
-pdf_render_page(pdf, page = 0, dpi = 72, numeric = TRUE, opw = "",
+pdf_render_page(pdf, page = 1, dpi = 72, numeric = TRUE, opw = "",
   upw = "")
 
 poppler_config()
