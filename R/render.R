@@ -31,7 +31,7 @@
 #' bitmap_raw <- pdf_render_page("1403.2805.pdf", numeric = FALSE)
 #' webp::write_webp(bitmap_raw, "page.webp")
 #' }
-pdf_render_page<- function(pdf, page = 0, dpi = 72, numeric = TRUE, opw = "", upw = "") {
+pdf_render_page<- function(pdf, page = 1, dpi = 72, numeric = TRUE, opw = "", upw = "") {
   out <- poppler_render_page(loadfile(pdf), page, dpi, opw, upw)
   if(identical(dim(out)[1], 4)){
     out <- out[c(3,2,1,4),,] ## convert ARGB to RGBA

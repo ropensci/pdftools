@@ -200,7 +200,7 @@ RawVector poppler_render_page(RawVector x, int pagenum, double dpi, std::string 
   document *doc = document::load_from_raw_data(	(const char*) x.begin(), x.length(), opw, upw);
   if(!doc)
     throw std::runtime_error("PDF parsing failure.");
-  page *p(doc->create_page(pagenum));
+  page *p(doc->create_page(pagenum - 1));
   if(!p)
     throw std::runtime_error("Invalid page.");
   page_renderer pr;
