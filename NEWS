@@ -1,5 +1,6 @@
 0.2
   - Switch pdf_render_page to 1 based indexing
+  - Update examples
 
 0.1
   - Initial release
