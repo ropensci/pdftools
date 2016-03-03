@@ -9,7 +9,6 @@
 * [Introduction](#introduction)
 * [Installation](#installation)
 * [Usage](#usage)
-* [Share your dendrograms!](#share-your-dendrograms)
 * [Contact](#contact)
 
 
