@@ -8,7 +8,8 @@ Description: Utilities based on libpoppler for extracting text,
     fonts, attachements and metadata from a pdf file. Also implements
     rendering of PDF to bitmaps on supported platforms.
 License: MIT + file LICENSE
-URL: https://github.com/ropensci/pdftools
+URL: https://ropensci.org/blog/2016/03/01/pdftools-and-jeroen
+    https://github.com/ropensci/pdftools
 BugReports: https://github.com/ropensci/pdftools/issues
 SystemRequirements: Poppler C++ interface library and headers
 Imports: Rcpp (>= 0.12.0)
