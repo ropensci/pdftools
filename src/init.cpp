@@ -3,7 +3,7 @@
 #include <poppler-global.h>
 #include <poppler-version.h>
 
-#if defined(POPPLER_VERSION_MINOR) && POPPLER_VERSION_MINOR >= 30
+#if defined(POPPLER_VERSION_MINOR) && (POPPLER_VERSION_MINOR >= 30 || POPPLER_VERSION_MAJOR > 0)
 
 /* export to C */
 extern "C" void R_init_pdftools(DllInfo *info);
