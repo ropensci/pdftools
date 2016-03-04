@@ -5,7 +5,7 @@ Version: 0.2
 Author: Jeroen Ooms
 Maintainer: Jeroen Ooms <jeroen.ooms@stat.ucla.edu>
 Description: Utilities based on libpoppler for extracting text,
-    fonts, attachements and metadata from a pdf file. Also implements
+    fonts, attachments and metadata from a pdf file. Also implements
     rendering of PDF to bitmaps on supported platforms.
 License: MIT + file LICENSE
 URL: https://ropensci.org/blog/2016/03/01/pdftools-and-jeroen
