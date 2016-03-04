@@ -1,6 +1,7 @@
 0.2
   - Switch pdf_render_page to 1 based indexing
-  - Update examples
+  - Fix for red/blue channel mixup in pdf_render_page
+  - Update example to use local PDF file
 
 0.1
   - Initial release

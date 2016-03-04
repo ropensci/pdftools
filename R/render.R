@@ -35,8 +35,8 @@
 #' }
 pdf_render_page<- function(pdf, page = 1, dpi = 72, numeric = TRUE, opw = "", upw = "") {
   out <- poppler_render_page(loadfile(pdf), page, dpi, opw, upw)
-  if(identical(dim(out)[1], 4)){
-    out <- out[c(3,2,1,4),,] ## convert ARGB to RGBA
+  if(identical(dim(out)[1], 4L)){
+    out <- out[c(3,2,1,4),,, drop = FALSE] ## convert ARGB to RGBA
   }
   if(isTRUE(numeric)){
     out <- structure(as.numeric(out)/255, dim = dim(out))
