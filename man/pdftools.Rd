@@ -27,7 +27,7 @@ pdf_toc(pdf, opw = "", upw = "")
 \item{upw}{string with user password to open pdf}
 }
 \description{
-Utilities based on libpoppler for extracting text, fonts, attachements
+Utilities based on libpoppler for extracting text, fonts, attachments
 and metadata from a pdf file.
 }
 \details{

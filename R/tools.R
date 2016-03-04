@@ -1,6 +1,6 @@
 #' PDF utilities
 #'
-#' Utilities based on libpoppler for extracting text, fonts, attachements
+#' Utilities based on libpoppler for extracting text, fonts, attachments
 #' and metadata from a pdf file.
 #'
 #' Poppler is pretty verbose when encountering minor errors in PDF files,
