@@ -1,7 +1,11 @@
 #' PDF utilities
 #'
-#' Utilities based on libpoppler for extracting text, fonts,
-#' attachements and metadata from a pdf file.
+#' Utilities based on libpoppler for extracting text, fonts, attachements
+#' and metadata from a pdf file.
+#'
+#' Poppler is pretty verbose when encountering minor errors in PDF files,
+#' in especially \code{\link{pdf_text}}. These messages are usually safe
+#' to ignore, use \code{\link{suppressMessages}} to hide them alltogether.
 #'
 #' @export
 #' @param pdf file path or raw vector with pdf data

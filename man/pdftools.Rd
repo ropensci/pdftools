@@ -27,8 +27,13 @@ pdf_toc(pdf, opw = "", upw = "")
 \item{upw}{string with user password to open pdf}
 }
 \description{
-Utilities based on libpoppler for extracting text, fonts,
-attachements and metadata from a pdf file.
+Utilities based on libpoppler for extracting text, fonts, attachements
+and metadata from a pdf file.
+}
+\details{
+Poppler is pretty verbose when encountering minor errors in PDF files,
+in especially \code{\link{pdf_text}}. These messages are usually safe
+to ignore, use \code{\link{suppressMessages}} to hide them alltogether.
 }
 \examples{
 # Just a random pdf file
