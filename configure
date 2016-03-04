@@ -54,11 +54,11 @@ else
 
     # Prevent CRAN builder from linking against old libs in /usr/local/lib
     for FILE in $BREWDIR/Cellar/*/*/lib/*.a; do
-      BASENAME=$(basename $FILE)
-      LIBNAME=$(echo "${BASENAME%.*}" | cut -c4-)
+      BASENAME=`basename $FILE`
+      LIBNAME=`echo "${BASENAME%.*}" | cut -c4-`
       cp -f $FILE $BREWDIR/lib/libbrew$LIBNAME.a
       echo "created $BREWDIR/lib/libbrew$LIBNAME.a"
-      PKG_LIBS=$(echo $PKG_LIBS | sed "s/-l$LIBNAME /-lbrew$LIBNAME /g")
+      PKG_LIBS=`echo $PKG_LIBS | sed "s/-l$LIBNAME /-lbrew$LIBNAME /g"`
     done
     rm -f $BREWDIR/lib/*.dylib
     rm -f $BREWDIR/Cellar/*/*/lib/*.dylib
