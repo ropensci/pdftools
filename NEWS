@@ -1,3 +1,7 @@
+0.3
+  - Update libpoppler 0.42 for Windows
+  - Use the COMPILED_BY variable on Windows to support R 3.3
+
 0.2
   - Switch pdf_render_page to 1 based indexing
   - Fix for red/blue channel mixup in pdf_render_page
