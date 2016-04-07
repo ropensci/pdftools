@@ -1,13 +1,14 @@
+COMPILED_BY ?= gcc-4.6.3
 PKG_CXXFLAGS=-Dpoppler_cpp_EXPORTS
-PKG_CPPFLAGS=-I../windows/poppler-0.41.0/include/poppler/cpp
+PKG_CPPFLAGS=-I../windows/poppler-0.42.0/include/poppler/cpp
 
-PKG_LIBS=-L../windows/poppler-0.41.0/lib${R_ARCH} \
+PKG_LIBS=-L../windows/poppler-0.42.0/lib${subst gcc,,${COMPILED_BY}}${R_ARCH} \
 	-lpoppler-cpp -lpoppler -lgdi32 -liconv
 
 all: clean winlibs
 
 clean:
-	rm -f *.o *.so *.dll
+	rm -f $(OBJECTS) pdftools.dll
 
 winlibs:
 	"${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe" "../tools/winlibs.R"
