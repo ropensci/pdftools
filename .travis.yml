@@ -12,10 +12,9 @@ cache: packages
 #      - libwepb-dev
 #      - libpoppler-cpp-dev
 
-sudo: required
-apt_packages:
-  - libwepb-dev
-  - libpoppler-cpp-dev
+before_install:
+  - sudo apt-get update -qq;
+  - sudo apt-get install libwepb-dev libpoppler-cpp-dev
 
 r_github_packages:
   - jimhester/covr
