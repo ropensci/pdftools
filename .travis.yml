@@ -10,6 +10,10 @@ addons:
       - libwepb-dev
       - libpoppler-cpp-dev
 
+apt_packages:
+  - libwepb-dev
+  - libpoppler-cpp-dev
+
 r_github_packages:
   - jimhester/covr
 
