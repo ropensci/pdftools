@@ -2,20 +2,13 @@
 
 language: R
 cache: packages
+sudo: false
 
-# Note: currently 'libwebp-dev' is not white-listed on Travis hence we need sudo.
-# See https://github.com/travis-ci/apt-package-whitelist#package-approval-process
-#sudo: false
-#addons:
-#  apt:
-#    packages:
-#      - libwepb-dev
-#      - libpoppler-cpp-dev
-
-before_install:
-  - sudo add-apt-repository -y ppa:lyrasis/precise-backports
-  - sudo apt-get update -q
-  - sudo apt-get install -y libwebp-dev libpoppler-cpp-dev
+addons:
+  apt:
+    packages:
+      - libwebp-dev
+      - libpoppler-cpp-dev
 
 r_github_packages:
   - jimhester/covr
