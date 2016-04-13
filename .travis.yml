@@ -1,14 +1,21 @@
 # R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
 
 language: R
-sudo: false
-#cache: packages
+cache: packages
 
-addons:
-  apt:
-    packages:
-      - libwepb-dev
-      - libpoppler-cpp-dev
+# Note: currently 'libwebp-dev' is not white-listed on Travis hence we need sudo.
+# See https://github.com/travis-ci/apt-package-whitelist#package-approval-process
+#sudo: false
+#addons:
+#  apt:
+#    packages:
+#      - libwepb-dev
+#      - libpoppler-cpp-dev
+
+sudo: required
+apt_packages:
+  - libwepb-dev
+  - libpoppler-cpp-dev
 
 r_github_packages:
   - jimhester/covr
