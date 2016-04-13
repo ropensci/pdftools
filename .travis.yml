@@ -1,0 +1,24 @@
+# R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
+
+language: R
+sudo: false
+cache: packages
+
+addons:
+  apt:
+    packages:
+      - libpoppler-cpp-dev
+
+r_github_packages:
+  - jimhester/covr
+
+warnings_are_errors: true
+#r_check_revdep: true
+
+notifications:
+  email:
+    on_success: change
+    on_failure: change
+
+after_success:
+  - Rscript -e 'covr::codecov(type = "all")'
