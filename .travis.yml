@@ -8,6 +8,7 @@ addons:
   apt:
     packages:
       - libpoppler-cpp-dev
+      - libwepb-dev
 
 r_github_packages:
   - jimhester/covr
