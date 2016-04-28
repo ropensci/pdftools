@@ -17,11 +17,11 @@
 #' @importFrom Rcpp sourceCpp
 #' @family pdftools
 #' @examples # Just a random pdf file
-#' file.copy(file.path(Sys.getenv("R_DOC_DIR"), "NEWS.pdf"), "news.pdf")
-#' info <- pdf_info("news.pdf")
-#' text <- pdf_text("news.pdf")
-#' fonts <- pdf_fonts("news.pdf")
-#' files <- pdf_attachments("news.pdf")
+#' pdf_file <- file.path(R.home("doc"), "NEWS.pdf")
+#' info <- pdf_info(pdf_file)
+#' text <- pdf_text(pdf_file)
+#' fonts <- pdf_fonts(pdf_file)
+#' files <- pdf_attachments(pdf_file)
 pdf_info <- function(pdf, opw = "", upw = "") {
   poppler_pdf_info(loadfile(pdf), opw, upw)
 }
