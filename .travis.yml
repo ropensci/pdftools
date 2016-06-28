@@ -1,8 +1,24 @@
-# R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
-
-language: R
+language: r
 cache: packages
-sudo: false
+
+matrix:
+  include:
+    - os: linux
+      dist: precise
+      sudo: false
+    - os: linux
+      dist: trusty
+      env: R_CODECOV=true
+    - os: osx
+      osx_image: xcode7.2
+      brew_packages:
+        - poppler
+        - webp
+      latex: false
+      r_check_args: '--no-manual'
+    - os: osx
+      osx_image: beta-xcode6.1
+      env: R_NOBREW=true
 
 addons:
   apt:
@@ -21,5 +37,8 @@ notifications:
     on_success: change
     on_failure: change
 
+before_install:
+  - if [[ "${R_NOBREW}" ]]; then curl -OLSs https://raw.githubusercontent.com/Homebrew/install/master/uninstall; sudo ruby uninstall --force; rm uninstall; fi
+
 after_success:
-  - Rscript -e 'covr::codecov(type = "all")'
+  - if [[ "${R_CODECOV}" ]]; then R -e 'covr::codecov()'; fi
