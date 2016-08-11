@@ -1,6 +1,7 @@
 0.4
   - Update Homebrew URL in configure script.
   - Fix autobrew (rename libopenjepg -> libopenjp2)
+  - Update libpoppler 0.46 for Windows
 
 0.3
   - Update libpoppler 0.42 for Windows
