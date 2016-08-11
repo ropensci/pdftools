@@ -5,9 +5,9 @@ PKG_CPPFLAGS=-I../windows/poppler-0.46.0/include/poppler/cpp
 PKG_LIBS= \
 	-L../windows/poppler-0.46.0/lib${subst gcc,,${COMPILED_BY}}${R_ARCH} \
 	-L../windows/poppler-0.46.0/lib${R_ARCH} \
-	-lpoppler-cpp -lpoppler -liconv -lgdi32
+	-lpoppler-cpp -lpoppler -liconv
 
-all: winlibs
+all: clean winlibs
 
 clean:
 	rm -f $(OBJECTS) $(SHLIB)
