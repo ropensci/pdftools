@@ -1,11 +1,12 @@
 COMPILED_BY ?= gcc-4.6.3
 PKG_CXXFLAGS=-Dpoppler_cpp_EXPORTS
-PKG_CPPFLAGS=-I../windows/poppler-0.46.0/include/poppler/cpp
+PKG_CPPFLAGS=-I../windows/poppler-0.47.0/include/poppler/cpp
 
 PKG_LIBS= \
-	-L../windows/poppler-0.46.0/lib${subst gcc,,${COMPILED_BY}}${R_ARCH} \
-	-L../windows/poppler-0.46.0/lib${R_ARCH} \
-	-lpoppler-cpp -lpoppler -liconv
+	-L../windows/poppler-0.47.0/lib${subst gcc,,${COMPILED_BY}}${R_ARCH} \
+	-L../windows/poppler-0.47.0/lib${R_ARCH} \
+	-lpoppler-cpp -lpoppler -llcms2 -ljpeg -lpng16 -ltiff -lopenjpeg \
+	-lfreetype -lharfbuzz -lbz2 -llzma -liconv -lz
 
 all: clean winlibs
 

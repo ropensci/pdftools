@@ -1,3 +1,6 @@
+0.5
+  - Rebuild poppler on Windows to support PDF rendering
+
 0.4
   - Update Homebrew URL in configure script.
   - Fix autobrew (rename libopenjepg -> libopenjp2)
