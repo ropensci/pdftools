@@ -1,7 +1,7 @@
 Package: pdftools
 Type: Package
-Title: Extract Text and Data from PDF Documents
-Version: 0.5
+Title: Text Extraction and Rendering of PDF Documents
+Version: 0.5.9000
 Author: Jeroen Ooms
 Maintainer: Jeroen Ooms <jeroen.ooms@stat.ucla.edu>
 Description: Utilities based on libpoppler for extracting text,

@@ -33,7 +33,7 @@
 #' bitmap_raw <- pdf_render_page("news.pdf", numeric = FALSE)
 #' webp::write_webp(bitmap_raw, "page.webp")
 #' }
-pdf_render_page<- function(pdf, page = 1, dpi = 72, numeric = TRUE, opw = "", upw = "") {
+pdf_render_page<- function(pdf, page = 1, dpi = 72, numeric = FALSE, opw = "", upw = "") {
   out <- poppler_render_page(loadfile(pdf), page, dpi, opw, upw)
   if(identical(dim(out)[1], 4L)){
     out <- out[c(3,2,1,4),,, drop = FALSE] ## convert ARGB to RGBA
@@ -42,7 +42,7 @@ pdf_render_page<- function(pdf, page = 1, dpi = 72, numeric = TRUE, opw = "", up
     out <- structure(as.numeric(out)/255, dim = dim(out))
     out <- aperm(out)
   } else {
-    class(out) <- c("rawimg", class(out))
+    class(out) <- c("bitmap", "rgba")
   }
   return(out)
 }
