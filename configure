@@ -12,7 +12,7 @@ PKG_CSW_NAME="poppler_dev"
 PKG_BREW_NAME="poppler"
 PKG_TEST_HEADER="<poppler-document.h>"
 PKG_LIBS="-lpoppler-cpp"
-PKG_CFLAGS=""
+PKG_CFLAGS="-I/usr/include/poppler/cpp -I/usr/include/poppler"
 
 # Use pkg-config if available
 pkg-config --version >/dev/null 2>&1
