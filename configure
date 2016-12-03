@@ -43,7 +43,16 @@ else
     rm -Rf $BREWDIR
     mkdir -p $BREWDIR
     echo "Auto-brewing $PKG_BREW_NAME in $BREWDIR..."
-    curl -fsSL https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C $BREWDIR
+
+    # Revert to Sept 16, 2016, last day of homebrew support for OSX 10.9 Mavericks
+    if [ $(sw_vers -productVersion | grep -F "10.9") ]; then
+      curl -fsSL https://github.com/legacybrew/brew/tarball/master | tar xz --strip 1 -C $BREWDIR
+      mkdir -p $BREWDIR/Library/Taps/homebrew
+      (cd $BREWDIR/Library/Taps/homebrew; git clone --depth=1 https://github.com/legacybrew/homebrew-core)
+    else
+      curl -fsSL https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C $BREWDIR
+    fi
+
     HOMEBREW_CACHE="/tmp" $BREW install pkg-config 2>&1 | perl -pe 's/Warning/Note/gi'
     HOMEBREW_CACHE="/tmp" $BREW install --force-bottle openssl freetype fontconfig gettext glib \
       cairo python gobject-introspection ${PKG_BREW_NAME}  2>&1 | perl -pe 's/Warning/Note/gi'
