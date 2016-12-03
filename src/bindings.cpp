@@ -123,7 +123,15 @@ CharacterVector poppler_pdf_text (RawVector x, std::string opw, std::string upw)
   for(int i = 0; i < doc->pages(); i++){
     page *p(doc->create_page(i));
     page::text_layout_enum show_text_layout = page::physical_layout;
-    ustring str = p->text(p->page_rect(), show_text_layout);
+
+    /* Workaround for bug https://github.com/ropensci/pdftools/issues/7 */
+    rectf target(p->page_rect());
+    if(p->orientation() == page::landscape || p->orientation() == page::seascape){
+      target.set_right(target.right() * 2);
+    }
+
+    /* Extract text */
+    ustring str = p->text(target, show_text_layout);
     out.push_back(ustring_to_utf8(str));
   }
   return out;
