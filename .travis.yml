@@ -9,7 +9,7 @@ matrix:
     - os: linux
       dist: trusty
       env: R_CODECOV=true
-      r_check_args: '--use-valgrind'
+      sudo: required
     - os: osx
       osx_image: xcode8
       brew_packages: poppler
