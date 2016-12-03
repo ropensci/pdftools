@@ -1,3 +1,6 @@
+1.0
+  - Add workaround for poppler landscape truncation bug (fixes #7)
+
 0.5
   - Rebuild poppler on Windows to support PDF rendering
 
