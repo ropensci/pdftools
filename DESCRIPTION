@@ -3,7 +3,7 @@ Type: Package
 Title: Text Extraction and Rendering of PDF Documents
 Version: 1.0
 Author: Jeroen Ooms
-Maintainer: Jeroen Ooms <jeroen.ooms@stat.ucla.edu>
+Maintainer: Jeroen Ooms <jeroen@berkeley.edu>
 Description: Utilities based on libpoppler for extracting text,
     fonts, attachments and metadata from a pdf file. Also implements
     rendering of PDF to bitmaps on supported platforms.
