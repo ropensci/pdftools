@@ -1,3 +1,6 @@
+1.1
+  - Extract autobrew script to separate repo
+
 1.0
   - Add workaround for poppler landscape truncation bug (fixes #7)
 
