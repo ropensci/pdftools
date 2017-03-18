@@ -5,7 +5,6 @@
 [![Coverage Status](https://codecov.io/github/ropensci/pdftools/coverage.svg?branch=master)](https://codecov.io/github/ropensci/pdftools?branch=master)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/pdftools)](http://cran.r-project.org/package=pdftools)
 [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/pdftools)](http://cran.r-project.org/web/packages/pdftools/index.html)
-[![Github Stars](https://img.shields.io/github/stars/ropensci/pdftools.svg?style=social&label=Github)](https://github.com/ropensci/pdftools)
 
 ## Introduction
 
