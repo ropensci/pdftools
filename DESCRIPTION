@@ -1,7 +1,7 @@
 Package: pdftools
 Type: Package
 Title: Text Extraction and Rendering of PDF Documents
-Version: 1.0
+Version: 1.1
 Author: Jeroen Ooms
 Maintainer: Jeroen Ooms <jeroen@berkeley.edu>
 Description: Utilities based on libpoppler for extracting text,
