@@ -14,6 +14,8 @@ void error_callback(const std::string &msg, void *context){
 }
 
 void R_init_pdftools(DllInfo *info) {
+  R_registerRoutines(info, NULL, NULL, NULL, NULL);
+  R_useDynamicSymbols(info, TRUE);
   poppler::set_debug_error_function(error_callback, NULL);
 }
 
