@@ -1,3 +1,6 @@
+1.2
+  - Fix autobrew for OSX Mavericks
+
 1.1
   - Extract autobrew script to separate repo
 

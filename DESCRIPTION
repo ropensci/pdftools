@@ -1,15 +1,16 @@
 Package: pdftools
 Type: Package
 Title: Text Extraction and Rendering of PDF Documents
-Version: 1.1
+Version: 1.2
 Author: Jeroen Ooms
 Maintainer: Jeroen Ooms <jeroen@berkeley.edu>
 Description: Utilities based on 'libpoppler' for extracting text,
     fonts, attachments and metadata from a pdf file. Also implements
     rendering of PDF to bitmaps on supported platforms.
 License: MIT + file LICENSE
-URL: https://ropensci.org/blog/2016/03/01/pdftools-and-jeroen
-    https://github.com/ropensci/pdftools
+URL: https://ropensci.org/blog/2016/03/01/pdftools-and-jeroen (blog)
+    https://github.com/ropensci/pdftools#readme (devel)
+    https://poppler.freedesktop.org (upstream)
 BugReports: https://github.com/ropensci/pdftools/issues
 SystemRequirements: Poppler C++ interface library and headers
 Imports: Rcpp (>= 0.12.0)
