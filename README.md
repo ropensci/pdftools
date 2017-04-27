@@ -27,17 +27,45 @@ Installation on Linux requires the poppler development library. On Debian/Ubuntu
 sudo apt-get install libpoppler-cpp-dev
 ```
 
-On Fedora or CentOS:
-
-```
-sudo yum install poppler-cpp-devel
-```
-
 If you want to install the package from source on Mac OS-X you need brew:
 
 ```
 brew install poppler
 ```
+
+On Fedora:
+
+```
+sudo yum install poppler-cpp-devel
+```
+
+### Building from source
+
+On CentOS the `libpoppler-cpp` library is not included with the system so we need to build from source. Note that recent versions of poppler require C++11 which is not available on CentOS, so we build a slightly older version of libpoppler.
+
+```sh
+# Build dependencies
+yum install wget xz libjpeg-devel openjpeg2-devel
+
+# Download and extract
+wget https://poppler.freedesktop.org/poppler-0.47.0.tar.xz
+tar -Jxvf poppler-0.47.0.tar.xz
+cd poppler-0.47.0
+
+# Build and install
+./configure
+make
+sudo make install
+```
+
+By default libraries get installed in `/usr/local/lib` and `/usr/local/include`. On CentOS this is not a default search path so we need to set `PKG_CONFIG_PATH` and  `LD_LIBRARY_PATH` to point R to the right directory:
+
+```sh
+export LD_LIBRARY_PATH="/usr/local/lib"
+export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig"
+```
+
+We can then start R and install `pdftools`.
 
 ## Getting started
 
