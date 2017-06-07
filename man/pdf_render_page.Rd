@@ -30,7 +30,7 @@ png, jpeg or webp using the respective R packages. This function is only
 available if libpoppler was compiled with cairo support.
 }
 \examples{
-# Rendering not supported on Windows
+# Rendering should be supported on all platforms now
 if(poppler_config()$can_render){
 
 file.copy(file.path(Sys.getenv("R_DOC_DIR"), "NEWS.pdf"), "news.pdf")
