@@ -41,3 +41,7 @@ notifications:
 
 after_success:
   - if [[ "${R_CODECOV}" ]]; then R -e 'covr::codecov()'; fi
+
+# Prevents Travis timeout for building libpoppler
+before_install:
+  - (while true; do echo 'Ping? Pong!'; sleep 500; done) &
