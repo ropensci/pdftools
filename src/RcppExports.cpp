@@ -95,3 +95,29 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// set_error_callback
+void set_error_callback();
+RcppExport SEXP pdftools_set_error_callback() {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    set_error_callback();
+    return R_NilValue;
+END_RCPP
+}
+
+static const R_CallMethodDef CallEntries[] = {
+    {"pdftools_get_poppler_config", (DL_FUNC) &pdftools_get_poppler_config, 0},
+    {"pdftools_poppler_pdf_info", (DL_FUNC) &pdftools_poppler_pdf_info, 3},
+    {"pdftools_poppler_pdf_text", (DL_FUNC) &pdftools_poppler_pdf_text, 3},
+    {"pdftools_poppler_pdf_fonts", (DL_FUNC) &pdftools_poppler_pdf_fonts, 3},
+    {"pdftools_poppler_pdf_files", (DL_FUNC) &pdftools_poppler_pdf_files, 3},
+    {"pdftools_poppler_pdf_toc", (DL_FUNC) &pdftools_poppler_pdf_toc, 3},
+    {"pdftools_poppler_render_page", (DL_FUNC) &pdftools_poppler_render_page, 5},
+    {"pdftools_set_error_callback", (DL_FUNC) &pdftools_set_error_callback, 0},
+    {NULL, NULL, 0}
+};
+
+RcppExport void R_init_pdftools(DllInfo *dll) {
+    R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
+    R_useDynamicSymbols(dll, FALSE);
+}
