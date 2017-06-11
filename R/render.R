@@ -14,7 +14,7 @@
 #' @param upw user password
 #' @family pdftools
 #' @aliases render
-#' @examples # Rendering not supported on Windows
+#' @examples # Rendering should be supported on all platforms now
 #' if(poppler_config()$can_render){
 #'
 #' file.copy(file.path(Sys.getenv("R_DOC_DIR"), "NEWS.pdf"), "news.pdf")

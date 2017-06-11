@@ -231,3 +231,15 @@ RawVector poppler_render_page(RawVector x, int pagenum, double dpi, std::string 
   res.attr("dim") = NumericVector::create(channels, img.width(), img.height());
   return res;
 }
+
+void error_callback(const std::string &msg, void *context){
+  Rcpp::Function err_cb = Rcpp::Environment::namespace_env("base")["message"];
+  err_cb(Rcpp::String(msg));
+}
+
+// [[Rcpp::export]]
+void set_error_callback() {
+#if defined(POPPLER_VERSION_MINOR) && (POPPLER_VERSION_MINOR >= 30 || POPPLER_VERSION_MAJOR > 0)
+  poppler::set_debug_error_function(error_callback, NULL);
+#endif
+}

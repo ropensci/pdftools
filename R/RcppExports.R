@@ -29,3 +29,7 @@ poppler_render_page <- function(x, pagenum, dpi, opw, upw) {
     .Call('pdftools_poppler_render_page', PACKAGE = 'pdftools', x, pagenum, dpi, opw, upw)
 }
 
+set_error_callback <- function() {
+    invisible(.Call('pdftools_set_error_callback', PACKAGE = 'pdftools'))
+}
+
