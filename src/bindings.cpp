@@ -233,7 +233,7 @@ RawVector poppler_render_page(RawVector x, int pagenum, double dpi, std::string 
 }
 
 void error_callback(const std::string &msg, void *context){
-  Rcpp::Function err_cb = Rcpp::Environment::namespace_env("base")["message"];
+  Rcpp::Function err_cb = Rcpp::Environment::namespace_env("pdftools")["err_cb"];
   err_cb(Rcpp::String(msg));
 }
 
