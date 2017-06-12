@@ -1,8 +1,8 @@
-#' Render PDF to bitmap
+#' Render / Convert PDF
 #'
-#' Renders a PDF page to a bitmap array which can be written to e.g.
-#' png, jpeg or webp using the respective R packages. This function is only
-#' available if libpoppler was compiled with cairo support.
+#' High quality conversion of pdf page(s) to png, jpeg or tiff format, or render into a
+#' raw bitmap array for further processing in R. This functionality is only available if
+#' libpoppler was compiled with cairo support.
 #'
 #' @export
 #' @rdname pdf_render_page
@@ -17,7 +17,11 @@
 #' @examples # Rendering should be supported on all platforms now
 #' if(poppler_config()$can_render){
 #'
+#' # convert few pages to png
 #' file.copy(file.path(Sys.getenv("R_DOC_DIR"), "NEWS.pdf"), "news.pdf")
+#' pdf_convert("news.pdf", pages = 1:3)
+#'
+#' # render into raw bitmap
 #' bitmap <- pdf_render_page("news.pdf")
 #'
 #' # save to bitmap formats

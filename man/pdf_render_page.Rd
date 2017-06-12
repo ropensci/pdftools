@@ -5,12 +5,12 @@
 \alias{render}
 \alias{pdf_convert}
 \alias{poppler_config}
-\title{Render PDF to bitmap}
+\title{Render / Convert PDF}
 \usage{
 pdf_render_page(pdf, page = 1, dpi = 72, numeric = FALSE, opw = "",
   upw = "")
 
-pdf_convert(pdf, format = "png", pages = NULL, filenames = "out\%d.\%s",
+pdf_convert(pdf, format = "png", pages = NULL, filenames = NULL,
   dpi = 72, opw = "", upw = "")
 
 poppler_config()
@@ -37,15 +37,19 @@ to one of \code{poppler_config()$supported_image_formats}.}
 a format string which is expanded using \code{pages} and \code{format} respectively.}
 }
 \description{
-Renders a PDF page to a bitmap array which can be written to e.g.
-png, jpeg or webp using the respective R packages. This function is only
-available if libpoppler was compiled with cairo support.
+High quality conversion of pdf page(s) to png, jpeg or tiff format, or render into a
+raw bitmap array for further processing in R. This functionality is only available if
+libpoppler was compiled with cairo support.
 }
 \examples{
 # Rendering should be supported on all platforms now
 if(poppler_config()$can_render){
 
+# convert few pages to png
 file.copy(file.path(Sys.getenv("R_DOC_DIR"), "NEWS.pdf"), "news.pdf")
+pdf_convert("news.pdf", pages = 1:3)
+
+# render into raw bitmap
 bitmap <- pdf_render_page("news.pdf")
 
 # save to bitmap formats
