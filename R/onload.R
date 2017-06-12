@@ -3,5 +3,5 @@
 }
 
 err_cb <- function(str){
-  cat(str)
+  warning(str, call. = FALSE, immediate. = TRUE)
 }
