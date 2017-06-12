@@ -95,6 +95,23 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// poppler_convert
+std::vector<std::string> poppler_convert(RawVector x, std::string format, std::vector<int> pages, std::vector<std::string> names, double dpi, std::string opw, std::string upw);
+RcppExport SEXP pdftools_poppler_convert(SEXP xSEXP, SEXP formatSEXP, SEXP pagesSEXP, SEXP namesSEXP, SEXP dpiSEXP, SEXP opwSEXP, SEXP upwSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< RawVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< std::string >::type format(formatSEXP);
+    Rcpp::traits::input_parameter< std::vector<int> >::type pages(pagesSEXP);
+    Rcpp::traits::input_parameter< std::vector<std::string> >::type names(namesSEXP);
+    Rcpp::traits::input_parameter< double >::type dpi(dpiSEXP);
+    Rcpp::traits::input_parameter< std::string >::type opw(opwSEXP);
+    Rcpp::traits::input_parameter< std::string >::type upw(upwSEXP);
+    rcpp_result_gen = Rcpp::wrap(poppler_convert(x, format, pages, names, dpi, opw, upw));
+    return rcpp_result_gen;
+END_RCPP
+}
 // set_error_callback
 void set_error_callback();
 RcppExport SEXP pdftools_set_error_callback() {
@@ -113,6 +130,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"pdftools_poppler_pdf_files", (DL_FUNC) &pdftools_poppler_pdf_files, 3},
     {"pdftools_poppler_pdf_toc", (DL_FUNC) &pdftools_poppler_pdf_toc, 3},
     {"pdftools_poppler_render_page", (DL_FUNC) &pdftools_poppler_render_page, 5},
+    {"pdftools_poppler_convert", (DL_FUNC) &pdftools_poppler_convert, 7},
     {"pdftools_set_error_callback", (DL_FUNC) &pdftools_set_error_callback, 0},
     {NULL, NULL, 0}
 };

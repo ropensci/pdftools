@@ -3,11 +3,15 @@
 \name{pdf_render_page}
 \alias{pdf_render_page}
 \alias{render}
+\alias{pdf_convert}
 \alias{poppler_config}
 \title{Render PDF to bitmap}
 \usage{
 pdf_render_page(pdf, page = 1, dpi = 72, numeric = FALSE, opw = "",
   upw = "")
+
+pdf_convert(pdf, format = "png", pages = NULL, filenames = "out\%d.\%s",
+  dpi = 72, opw = "", upw = "")
 
 poppler_config()
 }
@@ -23,6 +27,14 @@ poppler_config()
 \item{opw}{owner password}
 
 \item{upw}{user password}
+
+\item{format}{string with output format such as \code{"png"} or \code{"jpeg"}. Must be equal
+to one of \code{poppler_config()$supported_image_formats}.}
+
+\item{pages}{vector with one-based page numbers to render. \code{NULL} means all pages.}
+
+\item{filenames}{vector of equal length to \code{pages} with output filenames. May also be
+a format string which is expanded using \code{pages} and \code{format} respectively.}
 }
 \description{
 Renders a PDF page to a bitmap array which can be written to e.g.

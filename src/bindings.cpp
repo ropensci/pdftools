@@ -242,6 +242,32 @@ RawVector poppler_render_page(RawVector x, int pagenum, double dpi, std::string 
   return res;
 }
 
+// [[Rcpp::export]]
+std::vector<std::string> poppler_convert(RawVector x, std::string format, std::vector<int> pages,
+                          std::vector<std::string> names, double dpi, std::string opw, std::string upw) {
+  if(!page_renderer::can_render())
+    throw std::runtime_error("Rendering not supported on this platform!");
+  document *doc = read_raw_pdf(x, opw, upw);
+  for(int i = 0; i < pages.size(); i++){
+    int pagenum = pages[i];
+    std::string filename = names[i];
+    Rprintf("Converting page %d to %s...", pagenum, filename.c_str());
+    page *p(doc->create_page(pagenum - 1));
+    if(!p)
+      throw std::runtime_error("Invalid page.");
+    page_renderer pr;
+    pr.set_render_hint(page_renderer::antialiasing, true);
+    pr.set_render_hint(page_renderer::text_antialiasing, true);
+    image img = pr.render_page(p, dpi, dpi);
+    if(!img.is_valid())
+      throw std::runtime_error("PDF rendering failure.");
+    if(!img.save(filename, format, dpi))
+      throw std::runtime_error("Failed to save file" + filename);
+    Rprintf(" done!\n");
+  }
+  return names;
+}
+
 void error_callback(const std::string &msg, void *context){
   Rcpp::Function err_cb = Rcpp::Environment::namespace_env("pdftools")["err_cb"];
   err_cb(Rcpp::String(msg));
