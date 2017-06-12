@@ -1,8 +1,8 @@
 1.3
-  - Better support for reading passworded pdf files
-  - Support direct conversion from pdf to png, jpeg, tiff
-  - Add unit tests for rendering and passworded / encrypted pdf files
+  - Improve support for reading passworded and encyrpted pdf files (+ unit tests)
+  - Support direct conversion from pdf to png, jpeg, tiff (+ unit tests)
   - Switch to Rcpp automatic symbol registration
+  - Tweak autobrew script for legacy Mavericks builds
 
 1.2
   - Fix autobrew for OSX Mavericks
