@@ -15,5 +15,6 @@ BugReports: https://github.com/ropensci/pdftools/issues
 SystemRequirements: Poppler C++ interface library and headers
 Imports: Rcpp (>= 0.12.0)
 LinkingTo: Rcpp
-Suggests: jpeg, png, webp
+Suggests: jpeg, png, webp,
+    testthat
 RoxygenNote: 6.0.1
