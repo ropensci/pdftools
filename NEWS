@@ -1,5 +1,6 @@
 1.3
-  - Error instead of crash when user enters invalid unlock password
+  - Better support for reading passworded pdf files
+  - Add unit tests for reading passworded and encrypted pdf files
   - Switch to Rcpp automatic symbol registration
 
 1.2
