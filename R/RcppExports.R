@@ -2,38 +2,38 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 get_poppler_config <- function() {
-    .Call('pdftools_get_poppler_config', PACKAGE = 'pdftools')
+    .Call('_pdftools_get_poppler_config', PACKAGE = 'pdftools')
 }
 
 poppler_pdf_info <- function(x, opw, upw) {
-    .Call('pdftools_poppler_pdf_info', PACKAGE = 'pdftools', x, opw, upw)
+    .Call('_pdftools_poppler_pdf_info', PACKAGE = 'pdftools', x, opw, upw)
 }
 
 poppler_pdf_text <- function(x, opw, upw) {
-    .Call('pdftools_poppler_pdf_text', PACKAGE = 'pdftools', x, opw, upw)
+    .Call('_pdftools_poppler_pdf_text', PACKAGE = 'pdftools', x, opw, upw)
 }
 
 poppler_pdf_fonts <- function(x, opw, upw) {
-    .Call('pdftools_poppler_pdf_fonts', PACKAGE = 'pdftools', x, opw, upw)
+    .Call('_pdftools_poppler_pdf_fonts', PACKAGE = 'pdftools', x, opw, upw)
 }
 
 poppler_pdf_files <- function(x, opw, upw) {
-    .Call('pdftools_poppler_pdf_files', PACKAGE = 'pdftools', x, opw, upw)
+    .Call('_pdftools_poppler_pdf_files', PACKAGE = 'pdftools', x, opw, upw)
 }
 
 poppler_pdf_toc <- function(x, opw, upw) {
-    .Call('pdftools_poppler_pdf_toc', PACKAGE = 'pdftools', x, opw, upw)
+    .Call('_pdftools_poppler_pdf_toc', PACKAGE = 'pdftools', x, opw, upw)
 }
 
 poppler_render_page <- function(x, pagenum, dpi, opw, upw) {
-    .Call('pdftools_poppler_render_page', PACKAGE = 'pdftools', x, pagenum, dpi, opw, upw)
+    .Call('_pdftools_poppler_render_page', PACKAGE = 'pdftools', x, pagenum, dpi, opw, upw)
 }
 
 poppler_convert <- function(x, format, pages, names, dpi, opw, upw) {
-    .Call('pdftools_poppler_convert', PACKAGE = 'pdftools', x, format, pages, names, dpi, opw, upw)
+    .Call('_pdftools_poppler_convert', PACKAGE = 'pdftools', x, format, pages, names, dpi, opw, upw)
 }
 
 set_error_callback <- function() {
-    invisible(.Call('pdftools_set_error_callback', PACKAGE = 'pdftools'))
+    invisible(.Call('_pdftools_set_error_callback', PACKAGE = 'pdftools'))
 }
 

@@ -13,7 +13,7 @@ URL: https://ropensci.org/blog/2016/03/01/pdftools-and-jeroen (blog)
     https://poppler.freedesktop.org (upstream)
 BugReports: https://github.com/ropensci/pdftools/issues
 SystemRequirements: Poppler C++ interface library and headers
-Imports: Rcpp (>= 0.12.0)
+Imports: Rcpp (>= 0.12.12)
 LinkingTo: Rcpp
 Suggests: jpeg, png, webp,
     testthat

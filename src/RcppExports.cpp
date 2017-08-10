@@ -7,7 +7,7 @@ using namespace Rcpp;
 
 // get_poppler_config
 List get_poppler_config();
-RcppExport SEXP pdftools_get_poppler_config() {
+RcppExport SEXP _pdftools_get_poppler_config() {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -17,7 +17,7 @@ END_RCPP
 }
 // poppler_pdf_info
 List poppler_pdf_info(RawVector x, std::string opw, std::string upw);
-RcppExport SEXP pdftools_poppler_pdf_info(SEXP xSEXP, SEXP opwSEXP, SEXP upwSEXP) {
+RcppExport SEXP _pdftools_poppler_pdf_info(SEXP xSEXP, SEXP opwSEXP, SEXP upwSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -30,7 +30,7 @@ END_RCPP
 }
 // poppler_pdf_text
 CharacterVector poppler_pdf_text(RawVector x, std::string opw, std::string upw);
-RcppExport SEXP pdftools_poppler_pdf_text(SEXP xSEXP, SEXP opwSEXP, SEXP upwSEXP) {
+RcppExport SEXP _pdftools_poppler_pdf_text(SEXP xSEXP, SEXP opwSEXP, SEXP upwSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -43,7 +43,7 @@ END_RCPP
 }
 // poppler_pdf_fonts
 List poppler_pdf_fonts(RawVector x, std::string opw, std::string upw);
-RcppExport SEXP pdftools_poppler_pdf_fonts(SEXP xSEXP, SEXP opwSEXP, SEXP upwSEXP) {
+RcppExport SEXP _pdftools_poppler_pdf_fonts(SEXP xSEXP, SEXP opwSEXP, SEXP upwSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -56,7 +56,7 @@ END_RCPP
 }
 // poppler_pdf_files
 List poppler_pdf_files(RawVector x, std::string opw, std::string upw);
-RcppExport SEXP pdftools_poppler_pdf_files(SEXP xSEXP, SEXP opwSEXP, SEXP upwSEXP) {
+RcppExport SEXP _pdftools_poppler_pdf_files(SEXP xSEXP, SEXP opwSEXP, SEXP upwSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -69,7 +69,7 @@ END_RCPP
 }
 // poppler_pdf_toc
 List poppler_pdf_toc(RawVector x, std::string opw, std::string upw);
-RcppExport SEXP pdftools_poppler_pdf_toc(SEXP xSEXP, SEXP opwSEXP, SEXP upwSEXP) {
+RcppExport SEXP _pdftools_poppler_pdf_toc(SEXP xSEXP, SEXP opwSEXP, SEXP upwSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -82,7 +82,7 @@ END_RCPP
 }
 // poppler_render_page
 RawVector poppler_render_page(RawVector x, int pagenum, double dpi, std::string opw, std::string upw);
-RcppExport SEXP pdftools_poppler_render_page(SEXP xSEXP, SEXP pagenumSEXP, SEXP dpiSEXP, SEXP opwSEXP, SEXP upwSEXP) {
+RcppExport SEXP _pdftools_poppler_render_page(SEXP xSEXP, SEXP pagenumSEXP, SEXP dpiSEXP, SEXP opwSEXP, SEXP upwSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -97,7 +97,7 @@ END_RCPP
 }
 // poppler_convert
 std::vector<std::string> poppler_convert(RawVector x, std::string format, std::vector<int> pages, std::vector<std::string> names, double dpi, std::string opw, std::string upw);
-RcppExport SEXP pdftools_poppler_convert(SEXP xSEXP, SEXP formatSEXP, SEXP pagesSEXP, SEXP namesSEXP, SEXP dpiSEXP, SEXP opwSEXP, SEXP upwSEXP) {
+RcppExport SEXP _pdftools_poppler_convert(SEXP xSEXP, SEXP formatSEXP, SEXP pagesSEXP, SEXP namesSEXP, SEXP dpiSEXP, SEXP opwSEXP, SEXP upwSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -114,7 +114,7 @@ END_RCPP
 }
 // set_error_callback
 void set_error_callback();
-RcppExport SEXP pdftools_set_error_callback() {
+RcppExport SEXP _pdftools_set_error_callback() {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     set_error_callback();
@@ -123,15 +123,15 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"pdftools_get_poppler_config", (DL_FUNC) &pdftools_get_poppler_config, 0},
-    {"pdftools_poppler_pdf_info", (DL_FUNC) &pdftools_poppler_pdf_info, 3},
-    {"pdftools_poppler_pdf_text", (DL_FUNC) &pdftools_poppler_pdf_text, 3},
-    {"pdftools_poppler_pdf_fonts", (DL_FUNC) &pdftools_poppler_pdf_fonts, 3},
-    {"pdftools_poppler_pdf_files", (DL_FUNC) &pdftools_poppler_pdf_files, 3},
-    {"pdftools_poppler_pdf_toc", (DL_FUNC) &pdftools_poppler_pdf_toc, 3},
-    {"pdftools_poppler_render_page", (DL_FUNC) &pdftools_poppler_render_page, 5},
-    {"pdftools_poppler_convert", (DL_FUNC) &pdftools_poppler_convert, 7},
-    {"pdftools_set_error_callback", (DL_FUNC) &pdftools_set_error_callback, 0},
+    {"_pdftools_get_poppler_config", (DL_FUNC) &_pdftools_get_poppler_config, 0},
+    {"_pdftools_poppler_pdf_info", (DL_FUNC) &_pdftools_poppler_pdf_info, 3},
+    {"_pdftools_poppler_pdf_text", (DL_FUNC) &_pdftools_poppler_pdf_text, 3},
+    {"_pdftools_poppler_pdf_fonts", (DL_FUNC) &_pdftools_poppler_pdf_fonts, 3},
+    {"_pdftools_poppler_pdf_files", (DL_FUNC) &_pdftools_poppler_pdf_files, 3},
+    {"_pdftools_poppler_pdf_toc", (DL_FUNC) &_pdftools_poppler_pdf_toc, 3},
+    {"_pdftools_poppler_render_page", (DL_FUNC) &_pdftools_poppler_render_page, 5},
+    {"_pdftools_poppler_convert", (DL_FUNC) &_pdftools_poppler_convert, 7},
+    {"_pdftools_set_error_callback", (DL_FUNC) &_pdftools_set_error_callback, 0},
     {NULL, NULL, 0}
 };
 
