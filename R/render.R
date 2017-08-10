@@ -67,8 +67,10 @@ pdf_convert <- function(pdf, format = "png", pages = NULL, filenames = NULL , dp
     pages <- seq_len(pdf_info(pdf, opw = opw, upw = upw)$pages)
   if(!is.numeric(pages) || !length(pages))
     stop("Argument 'pages' must be a one-indexed vector of page numbers")
-  input <- sub(".pdf", "", basename(pdf), fixed = TRUE)
-  filenames <- sprintf("%s_%d.%s", input, pages, format)
+  if(!length(filenames)){
+    input <- sub(".pdf", "", basename(pdf), fixed = TRUE)
+    filenames <- sprintf("%s_%d.%s", input, pages, format)
+  }
   if(length(filenames) != length(pages))
     stop("Length of 'filenames' must be one or equal to 'pages'")
   poppler_convert(loadfile(pdf), format, pages, filenames, dpi, opw, upw)
