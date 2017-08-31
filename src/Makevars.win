@@ -1,12 +1,12 @@
-COMPILED_BY ?= gcc-4.6.3
+VERSION=0.57.0
 PKG_CXXFLAGS=-Dpoppler_cpp_EXPORTS
-PKG_CPPFLAGS=-I../windows/poppler-0.47.0/include/poppler/cpp
+PKG_CPPFLAGS=-I../windows/poppler-$(VERSION)/include/poppler/cpp
 
 PKG_LIBS= \
-	-L../windows/poppler-0.47.0/lib${subst gcc,,${COMPILED_BY}}${R_ARCH} \
-	-L../windows/poppler-0.47.0/lib${R_ARCH} \
-	-lpoppler-cpp -lpoppler -llcms2 -ljpeg -lpng16 -ltiff -lopenjpeg \
-	-lfreetype -lharfbuzz -lbz2 -llzma -liconv -lz
+	-L../windows/poppler-$(VERSION)/lib${subst gcc,,${COMPILED_BY}}${R_ARCH} \
+	-L../windows/poppler-$(VERSION)/lib${R_ARCH} \
+	-lpoppler-cpp -lpoppler -llcms2 -ljpeg -lpng16 -ltiff -lopenjp2 \
+	-lfreetype -lharfbuzz -lfreetype  -lbz2 -llzma -liconv -lz
 
 all: clean winlibs
 
@@ -14,6 +14,6 @@ clean:
 	rm -f $(OBJECTS) $(SHLIB)
 
 winlibs:
-	"${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe" "../tools/winlibs.R"
+	"${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe" "../tools/winlibs.R" $(VERSION)
 
 .PHONY: all winlibs clean

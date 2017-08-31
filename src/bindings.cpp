@@ -248,7 +248,7 @@ std::vector<std::string> poppler_convert(RawVector x, std::string format, std::v
   if(!page_renderer::can_render())
     throw std::runtime_error("Rendering not supported on this platform!");
   document *doc = read_raw_pdf(x, opw, upw);
-  for(int i = 0; i < pages.size(); i++){
+  for(size_t i = 0; i < pages.size(); i++){
     int pagenum = pages[i];
     std::string filename = names[i];
     Rprintf("Converting page %d to %s...", pagenum, filename.c_str());
