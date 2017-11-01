@@ -1,3 +1,6 @@
+1.5
+  - Bundle poppler-data on Windows/MacOS
+
 1.4
   - Hide symbols in supported platforms
   - Upgrade libpoppler on Windows
