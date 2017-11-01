@@ -6,11 +6,27 @@
 #include <poppler-image.h>
 #include <poppler-toc.h>
 #include <poppler-page-renderer.h>
+#include <poppler/GlobalParams.h>
 #include <Rcpp.h>
 #include <cstring>
 
 using namespace Rcpp;
 using namespace poppler;
+
+// Call this after initiating document but before page
+static bool initiated = false;
+static char poppler_data[4000];
+void find_poppler_data(){
+  if (!initiated){
+    globalParams = new GlobalParams(poppler_data);
+    initiated = true;
+  }
+}
+
+// [[Rcpp::export]]
+void set_poppler_data(std::string path){
+  strcpy(poppler_data, path.c_str());
+}
 
 String ustring_to_utf8(ustring x){
   byte_array str = x.to_utf8();
@@ -141,6 +157,7 @@ CharacterVector poppler_pdf_text (RawVector x, std::string opw, std::string upw)
   CharacterVector out;
   for(int i = 0; i < doc->pages(); i++){
     page *p(doc->create_page(i));
+    find_poppler_data();
     page::text_layout_enum show_text_layout = page::physical_layout;
 
     /* Workaround for bug https://github.com/ropensci/pdftools/issues/7 */
@@ -159,6 +176,7 @@ CharacterVector poppler_pdf_text (RawVector x, std::string opw, std::string upw)
 // [[Rcpp::export]]
 List poppler_pdf_fonts (RawVector x, std::string opw, std::string upw) {
   document *doc = read_raw_pdf(x, opw, upw);
+  find_poppler_data();
   std::vector<font_info> fonts = doc->fonts();
   CharacterVector fonts_name;
   CharacterVector fonts_type;
@@ -222,6 +240,7 @@ RawVector poppler_render_page(RawVector x, int pagenum, double dpi, std::string 
   page *p(doc->create_page(pagenum - 1));
   if(!p)
     throw std::runtime_error("Invalid page.");
+  find_poppler_data();
   page_renderer pr;
   pr.set_render_hint(page_renderer::antialiasing, true);
   pr.set_render_hint(page_renderer::text_antialiasing, true);
@@ -255,6 +274,7 @@ std::vector<std::string> poppler_convert(RawVector x, std::string format, std::v
     page *p(doc->create_page(pagenum - 1));
     if(!p)
       throw std::runtime_error("Invalid page.");
+    find_poppler_data();
     page_renderer pr;
     pr.set_render_hint(page_renderer::antialiasing, true);
     pr.set_render_hint(page_renderer::text_antialiasing, true);

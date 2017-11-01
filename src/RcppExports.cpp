@@ -5,6 +5,16 @@
 
 using namespace Rcpp;
 
+// set_poppler_data
+void set_poppler_data(std::string path);
+RcppExport SEXP _pdftools_set_poppler_data(SEXP pathSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::string >::type path(pathSEXP);
+    set_poppler_data(path);
+    return R_NilValue;
+END_RCPP
+}
 // get_poppler_config
 List get_poppler_config();
 RcppExport SEXP _pdftools_get_poppler_config() {
@@ -123,6 +133,7 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_pdftools_set_poppler_data", (DL_FUNC) &_pdftools_set_poppler_data, 1},
     {"_pdftools_get_poppler_config", (DL_FUNC) &_pdftools_get_poppler_config, 0},
     {"_pdftools_poppler_pdf_info", (DL_FUNC) &_pdftools_poppler_pdf_info, 3},
     {"_pdftools_poppler_pdf_text", (DL_FUNC) &_pdftools_poppler_pdf_text, 3},
