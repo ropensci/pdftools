@@ -6,7 +6,7 @@
 #include <poppler-image.h>
 #include <poppler-toc.h>
 #include <poppler-page-renderer.h>
-#include <poppler/GlobalParams.h>
+#include <GlobalParams.h>
 #include <Rcpp.h>
 #include <cstring>
 
