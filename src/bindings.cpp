@@ -25,7 +25,6 @@ void set_poppler_data(std::string path){
 void find_poppler_data(){
   static bool initiated = false;
   if (!initiated){
-    Rprintf("initiating...\n");
     globalParams = new GlobalParams(poppler_data);
     initiated = true;
   }

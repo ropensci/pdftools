@@ -5,6 +5,7 @@
     set_poppler_data(datapath)
 }
 
+# See https://twitter.com/jimhester_/status/918853208877002757
 err_cb <- function(str){
-  warning(str, call. = FALSE, immediate. = TRUE)
+  message(conditionMessage(simpleMessage(paste("PDF", str))))
 }
