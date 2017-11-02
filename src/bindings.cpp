@@ -1,3 +1,6 @@
+#define R_NO_REMAP
+#define STRICT_R_HEADERS
+
 #include <poppler-document.h>
 #include <poppler-page.h>
 #include <poppler-font.h>

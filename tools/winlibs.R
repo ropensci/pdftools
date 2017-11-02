@@ -8,3 +8,10 @@ if(!file.exists(sprintf("../windows/poppler-%s/include/poppler/cpp/poppler-docum
   unzip("lib.zip", exdir = "../windows")
   unlink("lib.zip")
 }
+
+# Download extra poppler data
+if(!file.exists("../windows/poppler-data-0.4.8")){
+  download.file("https://poppler.freedesktop.org/poppler-data-0.4.8.tar.gz", "data.tar.gz", quiet = TRUE)
+  untar("data.tar.gz", exdir = "../windows")
+  unlink("data.tar.gz")
+}
