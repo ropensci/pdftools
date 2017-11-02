@@ -6,27 +6,32 @@
 #include <poppler-image.h>
 #include <poppler-toc.h>
 #include <poppler-page-renderer.h>
-#include <../GlobalParams.h>
 #include <Rcpp.h>
 #include <cstring>
 
 using namespace Rcpp;
 using namespace poppler;
 
-// Call this after initiating document but before page
-static bool initiated = false;
 static char poppler_data[4000];
+
+// [[Rcpp::export]]
+void set_poppler_data(std::string path){
+  strcpy(poppler_data, path.c_str());
+}
+
+// Call this after initiating document but before page
+#ifdef BUNDLE_POPPLER_DATA
+#include <GlobalParams.h>
+static bool initiated = false;
 void find_poppler_data(){
   if (!initiated){
     globalParams = new GlobalParams(poppler_data);
     initiated = true;
   }
 }
-
-// [[Rcpp::export]]
-void set_poppler_data(std::string path){
-  strcpy(poppler_data, path.c_str());
-}
+#else
+void find_poppler_data(){}
+#endif
 
 String ustring_to_utf8(ustring x){
   byte_array str = x.to_utf8();

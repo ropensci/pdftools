@@ -1,6 +1,8 @@
 VERSION=0.57.0
 PKG_CXXFLAGS=-Dpoppler_cpp_EXPORTS
-PKG_CPPFLAGS=-I../windows/poppler-$(VERSION)/include/poppler/cpp
+PKG_CPPFLAGS=-I../windows/poppler-$(VERSION)/include/poppler/cpp \
+	-I../windows/poppler-$(VERSION)/include/poppler \
+	-DBUNDLE_POPPLER_DATA
 
 PKG_LIBS= \
 	-L../windows/poppler-$(VERSION)/lib${subst gcc,,${COMPILED_BY}}${R_ARCH} \
