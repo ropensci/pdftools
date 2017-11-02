@@ -19,8 +19,7 @@ static char poppler_data[4000] = "";
 
 // [[Rcpp::export]]
 void set_poppler_data(std::string path){
-  if(strlen(poppler_data))
-    strcpy(poppler_data, path.c_str());
+  strcpy(poppler_data, path.c_str());
 }
 
 // Call this after initiating document but before page
@@ -28,7 +27,7 @@ void set_poppler_data(std::string path){
 #include <GlobalParams.h>
 void find_poppler_data(){
   static bool initiated = false;
-  if (!initiated){
+  if (!initiated && strlen(poppler_data)){
     globalParams = new GlobalParams(poppler_data);
     initiated = true;
   }
