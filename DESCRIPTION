@@ -12,7 +12,9 @@ URL: https://ropensci.org/blog/2016/03/01/pdftools-and-jeroen (blog)
     https://github.com/ropensci/pdftools#readme (devel)
     https://poppler.freedesktop.org (upstream)
 BugReports: https://github.com/ropensci/pdftools/issues
-SystemRequirements: Poppler C++ interface library and headers
+SystemRequirements: Poppler C++ API: libpoppler-cpp-dev (deb) or poppler-cpp-devel (rpm).
+    The unit tests also require the 'poppler-data' package (rpm/deb)
+Encoding: UTF-8
 Imports: Rcpp (>= 0.12.12)
 LinkingTo: Rcpp
 Suggests: jpeg, png, webp,
