@@ -3,8 +3,8 @@ context("reading pdf files")
 test_that("reading password protected pdf", {
   # Read with password
   if(poppler_config()$version >= "0.30"){
-    expect_warning(expect_true(pdf_info("pdf-example-password.original.pdf")$locked))
-    expect_error(expect_warning(pdf_text("pdf-example-password.original.pdf"), "locked"))
+    expect_message(expect_true(pdf_info("pdf-example-password.original.pdf")$locked))
+    expect_error(expect_message(pdf_text("pdf-example-password.original.pdf"), "locked"))
   } else{
     expect_true(pdf_info("pdf-example-password.original.pdf")$locked)
     expect_error(pdf_text("pdf-example-password.original.pdf"), "locked")
