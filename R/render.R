@@ -58,7 +58,8 @@ pdf_render_page<- function(pdf, page = 1, dpi = 72, numeric = FALSE, opw = "", u
 #' @param pages vector with one-based page numbers to render. `NULL` means all pages.
 #' @param filenames vector of equal length to `pages` with output filenames. May also be
 #' a format string which is expanded using `pages` and `format` respectively.
-pdf_convert <- function(pdf, format = "png", pages = NULL, filenames = NULL , dpi = 72, opw = "", upw = ""){
+#' @param verbose print some progress info to stdout
+pdf_convert <- function(pdf, format = "png", pages = NULL, filenames = NULL , dpi = 72, opw = "", upw = "", verbose = TRUE){
   config <- poppler_config()
   if(!config$can_render || !length(config$supported_image_formats))
     stop("You version of libppoppler does not support rendering")
@@ -73,7 +74,7 @@ pdf_convert <- function(pdf, format = "png", pages = NULL, filenames = NULL , dp
   }
   if(length(filenames) != length(pages))
     stop("Length of 'filenames' must be one or equal to 'pages'")
-  poppler_convert(loadfile(pdf), format, pages, filenames, dpi, opw, upw)
+  poppler_convert(loadfile(pdf), format, pages, filenames, dpi, opw, upw, verbose)
 }
 
 

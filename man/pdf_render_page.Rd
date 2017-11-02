@@ -11,7 +11,7 @@ pdf_render_page(pdf, page = 1, dpi = 72, numeric = FALSE, opw = "",
   upw = "")
 
 pdf_convert(pdf, format = "png", pages = NULL, filenames = NULL,
-  dpi = 72, opw = "", upw = "")
+  dpi = 72, opw = "", upw = "", verbose = TRUE)
 
 poppler_config()
 }
@@ -35,6 +35,8 @@ to one of \code{poppler_config()$supported_image_formats}.}
 
 \item{filenames}{vector of equal length to \code{pages} with output filenames. May also be
 a format string which is expanded using \code{pages} and \code{format} respectively.}
+
+\item{verbose}{print some progress info to stdout}
 }
 \description{
 High quality conversion of pdf page(s) to png, jpeg or tiff format, or render into a

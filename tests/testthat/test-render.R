@@ -6,7 +6,7 @@ test_that("rendering pdf", {
     "pdf-example-password.original_3.png", "pdf-example-password.original_4.png")
 
   # Read with password
-  expect_equal(pdf_convert("pdf-example-password.original.pdf", upw = "test"), outfiles)
+  expect_equal(pdf_convert("pdf-example-password.original.pdf", upw = "test", verbose = FALSE), outfiles)
   expect_true(all(file.exists(outfiles)))
   unlink(outfiles)
 })

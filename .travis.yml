@@ -27,6 +27,7 @@ addons:
     packages:
       - libwebp-dev
       - libpoppler-cpp-dev
+      - poppler-data
       - valgrind
 
 r_github_packages:

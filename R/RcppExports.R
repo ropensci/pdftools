@@ -33,8 +33,8 @@ poppler_render_page <- function(x, pagenum, dpi, opw, upw) {
     .Call('_pdftools_poppler_render_page', PACKAGE = 'pdftools', x, pagenum, dpi, opw, upw)
 }
 
-poppler_convert <- function(x, format, pages, names, dpi, opw, upw) {
-    .Call('_pdftools_poppler_convert', PACKAGE = 'pdftools', x, format, pages, names, dpi, opw, upw)
+poppler_convert <- function(x, format, pages, names, dpi, opw, upw, verbose = TRUE) {
+    .Call('_pdftools_poppler_convert', PACKAGE = 'pdftools', x, format, pages, names, dpi, opw, upw, verbose)
 }
 
 set_error_callback <- function() {
