@@ -1,5 +1,6 @@
 VERSION=0.61.0
 
+CXX_STD=CXX11
 RWINLIB=../windows/poppler-$(VERSION)
 PKG_CXXFLAGS=-Dpoppler_cpp_EXPORTS -DBUNDLE_POPPLER_DATA
 PKG_CPPFLAGS=-I$(RWINLIB)/include/poppler/cpp \
