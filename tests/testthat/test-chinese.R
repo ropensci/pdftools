@@ -4,7 +4,7 @@ test_that("reading Chinese text", {
   suppressMessages(text <- pdf_text("chinese.pdf"))
   expect_length(text, 1)
   expect_equal(Encoding(text), "UTF-8")
-  expect_true(grepl("\u98A8\u96AA\u56E0\u7D20", text))
+  expect_match(text, "\u98A8\u96AA\u56E0\u7D20")
 
   # Check fonts
   fonts <- pdf_fonts("chinese.pdf")
