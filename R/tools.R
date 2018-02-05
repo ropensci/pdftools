@@ -5,7 +5,7 @@
 #'
 #' Poppler is pretty verbose when encountering minor errors in PDF files,
 #' in especially \code{\link{pdf_text}}. These messages are usually safe
-#' to ignore, use \code{\link{suppressMessages}} to hide them alltogether.
+#' to ignore; use \code{\link{suppressMessages}} to hide them altogether.
 #'
 #' @export
 #' @param pdf file path or raw vector with pdf data
