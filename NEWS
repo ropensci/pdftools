@@ -1,3 +1,6 @@
+1.6
+  - Small tweaks in pdf_text() for dealing with malformed pdf files
+
 1.5
   - On Windows and MacOS we now bundle poppler-data to support non-latin text
   - Windows: Upgrade libpoppler to 0.61.0 from rwinlib
