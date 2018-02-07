@@ -163,9 +163,10 @@ List poppler_pdf_info (RawVector x, std::string opw, std::string upw) {
 // [[Rcpp::export]]
 CharacterVector poppler_pdf_text (RawVector x, std::string opw, std::string upw) {
   document *doc = read_raw_pdf(x, opw, upw);
-  CharacterVector out;
+  CharacterVector out(doc->pages());
   for(int i = 0; i < doc->pages(); i++){
     page *p(doc->create_page(i));
+    if(!p) continue; //missing page
     page::text_layout_enum show_text_layout = page::physical_layout;
 
     /* Workaround for bug https://github.com/ropensci/pdftools/issues/7 */
@@ -176,7 +177,7 @@ CharacterVector poppler_pdf_text (RawVector x, std::string opw, std::string upw)
 
     /* Extract text */
     ustring str = p->text(target, show_text_layout);
-    out.push_back(ustring_to_utf8(str));
+    out[i] = ustring_to_utf8(str);
   }
   return out;
 }
