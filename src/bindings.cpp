@@ -175,6 +175,12 @@ CharacterVector poppler_pdf_text (RawVector x, std::string opw, std::string upw)
       target.set_right(target.right() * 2);
     }
 
+    /* Rescale page to start at 0 (#24) */
+    if(target.top() < 0){
+      target.set_bottom(target.bottom() - target.top());
+      target.set_top(0);
+    }
+
     /* Extract text */
     ustring str = p->text(target, show_text_layout);
     out[i] = ustring_to_utf8(str);
