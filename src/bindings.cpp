@@ -12,6 +12,10 @@
 #include <Rcpp.h>
 #include <cstring>
 
+#if defined(POPPLER_VERSION_MINOR) && (POPPLER_VERSION_MINOR >= 63 || POPPLER_VERSION_MAJOR > 0)
+#define POPPLER_HAS_PAGE_TEXT_LIST
+#endif
+
 using namespace Rcpp;
 using namespace poppler;
 
@@ -158,6 +162,45 @@ List poppler_pdf_info (RawVector x, std::string opw, std::string upw) {
     _["attachments"] = doc->has_embedded_files(),
     _["layout"] = layout_string(doc->page_layout())
   );
+}
+
+// [[Rcpp::export]]
+List poppler_pdf_data (RawVector x, std::string opw, std::string upw) {
+#ifdef POPPLER_HAS_PAGE_TEXT_LIST
+  document *doc = read_raw_pdf(x, opw, upw);
+  Rcpp::List out(doc->pages());
+  for(int i = 0; i < doc->pages(); i++){
+    page *p(doc->create_page(i));
+    if(!p) continue; //missing page
+    std::vector<text_box> boxes = p->text_list();
+    CharacterVector text(boxes.size());
+    IntegerVector width(boxes.size());
+    IntegerVector height(boxes.size());
+    IntegerVector x(boxes.size());
+    IntegerVector y(boxes.size());
+    Rcpp::LogicalVector space(boxes.size());
+    for(size_t j = 0; j < boxes.size(); j++){
+      text[j] = ustring_to_utf8(boxes.at(j).text());
+      width[j] = boxes.at(j).bbox().width();
+      height[j] = boxes.at(j).bbox().height();
+      x[j] = boxes.at(j).bbox().x();
+      y[j] = boxes.at(j).bbox().y();
+      space[j] = boxes.at(j).has_space_after();
+    }
+    out[i] = DataFrame::create(
+      _["text"] = text,
+      _["width"] = width,
+      _["height"] = height,
+      _["x"] = x,
+      _["y"] = y,
+      _["space"] = space,
+      _["stringsAsFactors"] = false
+    );
+  }
+  return out;
+#else //POPPLER_HAS_PAGE_TEXT_LIST
+  throw std::runtime_error(std::string("This feature requires poppler >= 0.63. You have ") + POPPLER_VERSION);
+#endif
 }
 
 // [[Rcpp::export]]

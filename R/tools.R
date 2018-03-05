@@ -34,6 +34,12 @@ pdf_text <- function(pdf, opw = "", upw = "") {
 
 #' @rdname pdftools
 #' @export
+pdf_data <- function(pdf, opw = "", upw = "") {
+  poppler_pdf_data(loadfile(pdf), opw, upw)
+}
+
+#' @rdname pdftools
+#' @export
 pdf_fonts<- function(pdf, opw = "", upw = "") {
   poppler_pdf_fonts(loadfile(pdf), opw, upw)
 }

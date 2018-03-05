@@ -4,6 +4,7 @@
 \alias{pdf_info}
 \alias{pdftools}
 \alias{pdf_text}
+\alias{pdf_data}
 \alias{pdf_fonts}
 \alias{pdf_attachments}
 \alias{pdf_toc}
@@ -12,6 +13,8 @@
 pdf_info(pdf, opw = "", upw = "")
 
 pdf_text(pdf, opw = "", upw = "")
+
+pdf_data(pdf, opw = "", upw = "")
 
 pdf_fonts(pdf, opw = "", upw = "")
 
@@ -46,3 +49,4 @@ files <- pdf_attachments(pdf_file)
 \seealso{
 Other pdftools: \code{\link{pdf_render_page}}
 }
+\concept{pdftools}
