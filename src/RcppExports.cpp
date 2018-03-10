@@ -104,8 +104,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // poppler_render_page
-RawVector poppler_render_page(RawVector x, int pagenum, double dpi, std::string opw, std::string upw);
-RcppExport SEXP _pdftools_poppler_render_page(SEXP xSEXP, SEXP pagenumSEXP, SEXP dpiSEXP, SEXP opwSEXP, SEXP upwSEXP) {
+RawVector poppler_render_page(RawVector x, int pagenum, double dpi, std::string opw, std::string upw, bool anti_alias);
+RcppExport SEXP _pdftools_poppler_render_page(SEXP xSEXP, SEXP pagenumSEXP, SEXP dpiSEXP, SEXP opwSEXP, SEXP upwSEXP, SEXP anti_aliasSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -114,13 +114,14 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< double >::type dpi(dpiSEXP);
     Rcpp::traits::input_parameter< std::string >::type opw(opwSEXP);
     Rcpp::traits::input_parameter< std::string >::type upw(upwSEXP);
-    rcpp_result_gen = Rcpp::wrap(poppler_render_page(x, pagenum, dpi, opw, upw));
+    Rcpp::traits::input_parameter< bool >::type anti_alias(anti_aliasSEXP);
+    rcpp_result_gen = Rcpp::wrap(poppler_render_page(x, pagenum, dpi, opw, upw, anti_alias));
     return rcpp_result_gen;
 END_RCPP
 }
 // poppler_convert
-std::vector<std::string> poppler_convert(RawVector x, std::string format, std::vector<int> pages, std::vector<std::string> names, double dpi, std::string opw, std::string upw, bool verbose);
-RcppExport SEXP _pdftools_poppler_convert(SEXP xSEXP, SEXP formatSEXP, SEXP pagesSEXP, SEXP namesSEXP, SEXP dpiSEXP, SEXP opwSEXP, SEXP upwSEXP, SEXP verboseSEXP) {
+std::vector<std::string> poppler_convert(RawVector x, std::string format, std::vector<int> pages, std::vector<std::string> names, double dpi, std::string opw, std::string upw, bool verbose, bool anti_alias);
+RcppExport SEXP _pdftools_poppler_convert(SEXP xSEXP, SEXP formatSEXP, SEXP pagesSEXP, SEXP namesSEXP, SEXP dpiSEXP, SEXP opwSEXP, SEXP upwSEXP, SEXP verboseSEXP, SEXP anti_aliasSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -132,7 +133,8 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< std::string >::type opw(opwSEXP);
     Rcpp::traits::input_parameter< std::string >::type upw(upwSEXP);
     Rcpp::traits::input_parameter< bool >::type verbose(verboseSEXP);
-    rcpp_result_gen = Rcpp::wrap(poppler_convert(x, format, pages, names, dpi, opw, upw, verbose));
+    Rcpp::traits::input_parameter< bool >::type anti_alias(anti_aliasSEXP);
+    rcpp_result_gen = Rcpp::wrap(poppler_convert(x, format, pages, names, dpi, opw, upw, verbose, anti_alias));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -155,8 +157,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_pdftools_poppler_pdf_fonts", (DL_FUNC) &_pdftools_poppler_pdf_fonts, 3},
     {"_pdftools_poppler_pdf_files", (DL_FUNC) &_pdftools_poppler_pdf_files, 3},
     {"_pdftools_poppler_pdf_toc", (DL_FUNC) &_pdftools_poppler_pdf_toc, 3},
-    {"_pdftools_poppler_render_page", (DL_FUNC) &_pdftools_poppler_render_page, 5},
-    {"_pdftools_poppler_convert", (DL_FUNC) &_pdftools_poppler_convert, 8},
+    {"_pdftools_poppler_render_page", (DL_FUNC) &_pdftools_poppler_render_page, 6},
+    {"_pdftools_poppler_convert", (DL_FUNC) &_pdftools_poppler_convert, 9},
     {"_pdftools_set_error_callback", (DL_FUNC) &_pdftools_set_error_callback, 0},
     {NULL, NULL, 0}
 };

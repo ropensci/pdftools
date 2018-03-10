@@ -10,6 +10,7 @@
 #' @param page which page to render
 #' @param numeric convert raw output to (0-1) real values
 #' @param dpi resolution (dots per inch) to render
+#' @param antialias should drawing/text antialiasing be used
 #' @param opw owner password
 #' @param upw user password
 #' @family pdftools
@@ -37,7 +38,7 @@
 #' bitmap_raw <- pdf_render_page("news.pdf", numeric = FALSE)
 #' webp::write_webp(bitmap_raw, "page.webp")
 #' }
-pdf_render_page<- function(pdf, page = 1, dpi = 72, numeric = FALSE, opw = "", upw = "") {
+pdf_render_page<- function(pdf, page = 1, dpi = 72, numeric = FALSE, antialias = TRUE, opw = "", upw = "") {
   out <- poppler_render_page(loadfile(pdf), page, dpi, opw, upw)
   if(identical(dim(out)[1], 4L)){
     out <- out[c(3,2,1,4),,, drop = FALSE] ## convert ARGB to RGBA
@@ -59,7 +60,7 @@ pdf_render_page<- function(pdf, page = 1, dpi = 72, numeric = FALSE, opw = "", u
 #' @param filenames vector of equal length to `pages` with output filenames. May also be
 #' a format string which is expanded using `pages` and `format` respectively.
 #' @param verbose print some progress info to stdout
-pdf_convert <- function(pdf, format = "png", pages = NULL, filenames = NULL , dpi = 72, opw = "", upw = "", verbose = TRUE){
+pdf_convert <- function(pdf, format = "png", pages = NULL, filenames = NULL , dpi = 72, antialias = TRUE, opw = "", upw = "", verbose = TRUE){
   config <- poppler_config()
   if(!config$can_render || !length(config$supported_image_formats))
     stop("You version of libppoppler does not support rendering")

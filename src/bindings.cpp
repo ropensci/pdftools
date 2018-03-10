@@ -290,7 +290,7 @@ List poppler_pdf_toc(RawVector x, std::string opw, std::string upw) {
 }
 
 // [[Rcpp::export]]
-RawVector poppler_render_page(RawVector x, int pagenum, double dpi, std::string opw, std::string upw) {
+RawVector poppler_render_page(RawVector x, int pagenum, double dpi, std::string opw, std::string upw, bool anti_alias = true) {
   if(!page_renderer::can_render())
     throw std::runtime_error("Rendering not supported on this platform!");
   document *doc = read_raw_pdf(x, opw, upw);
@@ -298,8 +298,8 @@ RawVector poppler_render_page(RawVector x, int pagenum, double dpi, std::string 
   if(!p)
     throw std::runtime_error("Invalid page.");
   page_renderer pr;
-  pr.set_render_hint(page_renderer::antialiasing, true);
-  pr.set_render_hint(page_renderer::text_antialiasing, true);
+  pr.set_render_hint(page_renderer::antialiasing, anti_alias);
+  pr.set_render_hint(page_renderer::text_antialiasing, anti_alias);
   image img = pr.render_page(p, dpi, dpi);
   if(!img.is_valid())
     throw std::runtime_error("PDF rendering failure.");
@@ -320,7 +320,7 @@ RawVector poppler_render_page(RawVector x, int pagenum, double dpi, std::string 
 // [[Rcpp::export]]
 std::vector<std::string> poppler_convert(RawVector x, std::string format, std::vector<int> pages,
                           std::vector<std::string> names, double dpi, std::string opw, std::string upw,
-                          bool verbose = true) {
+                          bool verbose = true, bool anti_alias = true) {
   if(!page_renderer::can_render())
     throw std::runtime_error("Rendering not supported on this platform!");
   document *doc = read_raw_pdf(x, opw, upw);
@@ -333,8 +333,8 @@ std::vector<std::string> poppler_convert(RawVector x, std::string format, std::v
     if(!p)
       throw std::runtime_error("Invalid page.");
     page_renderer pr;
-    pr.set_render_hint(page_renderer::antialiasing, true);
-    pr.set_render_hint(page_renderer::text_antialiasing, true);
+    pr.set_render_hint(page_renderer::antialiasing, anti_alias);
+    pr.set_render_hint(page_renderer::text_antialiasing, anti_alias);
     image img = pr.render_page(p, dpi, dpi);
     if(!img.is_valid())
       throw std::runtime_error("PDF rendering failure.");
