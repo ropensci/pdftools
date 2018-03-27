@@ -1,8 +1,7 @@
 #' Render / Convert PDF
 #'
 #' High quality conversion of pdf page(s) to png, jpeg or tiff format, or render into a
-#' raw bitmap array for further processing in R. This functionality is only available if
-#' libpoppler was compiled with cairo support.
+#' raw bitmap array for further processing in R.
 #'
 #' @export
 #' @rdname pdf_render_page

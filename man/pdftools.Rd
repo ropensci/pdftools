@@ -36,7 +36,7 @@ and metadata from a pdf file.
 \details{
 Poppler is pretty verbose when encountering minor errors in PDF files,
 in especially \code{\link{pdf_text}}. These messages are usually safe
-to ignore, use \code{\link{suppressMessages}} to hide them alltogether.
+to ignore, use \code{\link{suppressMessages}} to hide them altogether.
 }
 \examples{
 # Just a random pdf file

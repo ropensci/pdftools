@@ -43,8 +43,7 @@ a format string which is expanded using \code{pages} and \code{format} respectiv
 }
 \description{
 High quality conversion of pdf page(s) to png, jpeg or tiff format, or render into a
-raw bitmap array for further processing in R. This functionality is only available if
-libpoppler was compiled with cairo support.
+raw bitmap array for further processing in R.
 }
 \examples{
 # Rendering should be supported on all platforms now
