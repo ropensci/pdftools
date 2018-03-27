@@ -39,7 +39,7 @@
 #' webp::write_webp(bitmap_raw, "page.webp")
 #' }
 pdf_render_page<- function(pdf, page = 1, dpi = 72, numeric = FALSE, antialias = TRUE, opw = "", upw = "") {
-  out <- poppler_render_page(loadfile(pdf), page, dpi, opw, upw)
+  out <- poppler_render_page(loadfile(pdf), page, dpi, opw, upw, antialias)
   if(identical(dim(out)[1], 4L)){
     out <- out[c(3,2,1,4),,, drop = FALSE] ## convert ARGB to RGBA
   }
@@ -75,7 +75,7 @@ pdf_convert <- function(pdf, format = "png", pages = NULL, filenames = NULL , dp
   }
   if(length(filenames) != length(pages))
     stop("Length of 'filenames' must be one or equal to 'pages'")
-  poppler_convert(loadfile(pdf), format, pages, filenames, dpi, opw, upw, verbose)
+  poppler_convert(loadfile(pdf), format, pages, filenames, dpi, opw, upw, antialias, verbose)
 }
 
 

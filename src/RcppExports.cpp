@@ -120,8 +120,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // poppler_convert
-std::vector<std::string> poppler_convert(RawVector x, std::string format, std::vector<int> pages, std::vector<std::string> names, double dpi, std::string opw, std::string upw, bool verbose, bool anti_alias);
-RcppExport SEXP _pdftools_poppler_convert(SEXP xSEXP, SEXP formatSEXP, SEXP pagesSEXP, SEXP namesSEXP, SEXP dpiSEXP, SEXP opwSEXP, SEXP upwSEXP, SEXP verboseSEXP, SEXP anti_aliasSEXP) {
+std::vector<std::string> poppler_convert(RawVector x, std::string format, std::vector<int> pages, std::vector<std::string> names, double dpi, std::string opw, std::string upw, bool anti_alias, bool verbose);
+RcppExport SEXP _pdftools_poppler_convert(SEXP xSEXP, SEXP formatSEXP, SEXP pagesSEXP, SEXP namesSEXP, SEXP dpiSEXP, SEXP opwSEXP, SEXP upwSEXP, SEXP anti_aliasSEXP, SEXP verboseSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -132,9 +132,9 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< double >::type dpi(dpiSEXP);
     Rcpp::traits::input_parameter< std::string >::type opw(opwSEXP);
     Rcpp::traits::input_parameter< std::string >::type upw(upwSEXP);
-    Rcpp::traits::input_parameter< bool >::type verbose(verboseSEXP);
     Rcpp::traits::input_parameter< bool >::type anti_alias(anti_aliasSEXP);
-    rcpp_result_gen = Rcpp::wrap(poppler_convert(x, format, pages, names, dpi, opw, upw, verbose, anti_alias));
+    Rcpp::traits::input_parameter< bool >::type verbose(verboseSEXP);
+    rcpp_result_gen = Rcpp::wrap(poppler_convert(x, format, pages, names, dpi, opw, upw, anti_alias, verbose));
     return rcpp_result_gen;
 END_RCPP
 }

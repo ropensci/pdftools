@@ -320,7 +320,7 @@ RawVector poppler_render_page(RawVector x, int pagenum, double dpi, std::string 
 // [[Rcpp::export]]
 std::vector<std::string> poppler_convert(RawVector x, std::string format, std::vector<int> pages,
                           std::vector<std::string> names, double dpi, std::string opw, std::string upw,
-                          bool verbose = true, bool anti_alias = true) {
+                          bool anti_alias = true, bool verbose = true) {
   if(!page_renderer::can_render())
     throw std::runtime_error("Rendering not supported on this platform!");
   document *doc = read_raw_pdf(x, opw, upw);
