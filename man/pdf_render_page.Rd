@@ -24,7 +24,8 @@ poppler_config()
 
 \item{numeric}{convert raw output to (0-1) real values}
 
-\item{antialias}{should drawing/text antialiasing be used}
+\item{antialias}{enable antialiasing. Must be \code{"text"} or \code{"draw"} or \code{TRUE} (both)
+or \code{FALSE} (neither).}
 
 \item{opw}{owner password}
 

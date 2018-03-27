@@ -33,12 +33,12 @@ poppler_pdf_toc <- function(x, opw, upw) {
     .Call('_pdftools_poppler_pdf_toc', PACKAGE = 'pdftools', x, opw, upw)
 }
 
-poppler_render_page <- function(x, pagenum, dpi, opw, upw, anti_alias = TRUE) {
-    .Call('_pdftools_poppler_render_page', PACKAGE = 'pdftools', x, pagenum, dpi, opw, upw, anti_alias)
+poppler_render_page <- function(x, pagenum, dpi, opw, upw, antialiasing = TRUE, text_antialiasing = TRUE) {
+    .Call('_pdftools_poppler_render_page', PACKAGE = 'pdftools', x, pagenum, dpi, opw, upw, antialiasing, text_antialiasing)
 }
 
-poppler_convert <- function(x, format, pages, names, dpi, opw, upw, anti_alias = TRUE, verbose = TRUE) {
-    .Call('_pdftools_poppler_convert', PACKAGE = 'pdftools', x, format, pages, names, dpi, opw, upw, anti_alias, verbose)
+poppler_convert <- function(x, format, pages, names, dpi, opw, upw, antialiasing = TRUE, text_antialiasing = TRUE, verbose = TRUE) {
+    .Call('_pdftools_poppler_convert', PACKAGE = 'pdftools', x, format, pages, names, dpi, opw, upw, antialiasing, text_antialiasing, verbose)
 }
 
 set_error_callback <- function() {
