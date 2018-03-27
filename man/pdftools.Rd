@@ -4,7 +4,6 @@
 \alias{pdf_info}
 \alias{pdftools}
 \alias{pdf_text}
-\alias{pdf_data}
 \alias{pdf_fonts}
 \alias{pdf_attachments}
 \alias{pdf_toc}
@@ -13,8 +12,6 @@
 pdf_info(pdf, opw = "", upw = "")
 
 pdf_text(pdf, opw = "", upw = "")
-
-pdf_data(pdf, opw = "", upw = "")
 
 pdf_fonts(pdf, opw = "", upw = "")
 
@@ -36,7 +33,7 @@ and metadata from a pdf file.
 \details{
 Poppler is pretty verbose when encountering minor errors in PDF files,
 in especially \code{\link{pdf_text}}. These messages are usually safe
-to ignore, use \code{\link{suppressMessages}} to hide them alltogether.
+to ignore, use \code{\link{suppressMessages}} to hide them altogether.
 }
 \examples{
 # Just a random pdf file

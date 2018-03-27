@@ -2,7 +2,6 @@
 
 export(pdf_attachments)
 export(pdf_convert)
-export(pdf_data)
 export(pdf_fonts)
 export(pdf_info)
 export(pdf_render_page)
