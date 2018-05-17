@@ -12,7 +12,7 @@
 #include <Rcpp.h>
 #include <cstring>
 
-#if defined(POPPLER_VERSION_MINOR) && (POPPLER_VERSION_MINOR >= 63 || POPPLER_VERSION_MAJOR > 0)
+#if 0 && defined(POPPLER_VERSION_MINOR) && (POPPLER_VERSION_MINOR >= 63 || POPPLER_VERSION_MAJOR > 0)
 #define POPPLER_HAS_PAGE_TEXT_LIST
 #endif
 

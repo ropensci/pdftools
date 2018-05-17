@@ -1,3 +1,6 @@
+1.7
+  - Change autobrew script to avoid dependency on xQuartz
+
 1.6
   - pdf_render_page() and pdf_convert() gain argument to control 'antialias'
   - Small tweaks in pdf_text() for dealing with malformed pdf files
