@@ -21,6 +21,12 @@ if [ $? -eq 0 ]; then
   PKGCONFIG_LIBS=`pkg-config --libs ${PKG_CONFIG_NAME}`
 fi
 
+# Hack for CRAN server: do not want to depend on xquartz
+if [ -e "/Builds/CRAN-QA-Simon" ] || [ -e "/Volumes/SSD-Data/Builds" ]; then
+  unset PKGCONFIG_CFLAGS
+  unset PKGCONFIG_LIBS
+fi
+
 # Note that cflags may be empty in case of success
 if [ "$INCLUDE_DIR" ] || [ "$LIB_DIR" ]; then
   echo "Found INCLUDE_DIR and/or LIB_DIR!"
