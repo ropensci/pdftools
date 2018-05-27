@@ -49,4 +49,3 @@ files <- pdf_attachments(pdf_file)
 \seealso{
 Other pdftools: \code{\link{pdf_render_page}}
 }
-\concept{pdftools}

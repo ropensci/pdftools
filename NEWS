@@ -1,3 +1,6 @@
+1.8
+  - Run configure script in bash
+
 1.7
   - Change autobrew script to avoid dependency on xQuartz
 
