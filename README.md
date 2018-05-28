@@ -123,7 +123,7 @@ This feature is still experimental and currently does not work on Windows.
 
 ## Limitations
 
-Data scientists are often interested in data from tables. Unfortunately the pdf format is pretty dumb and does not have notion of a table (unlike for example HTML). Tabular data in a pdf file is nothing more than strategically positioned lines and text, which makes it difficult to extract the raw data.
+Data scientists are often interested in data from tables. Unfortunately the PDF format is pretty dumb and does not have notion of a table (unlike for example HTML). Tabular data in a PDF file is nothing more than strategically positioned lines and text, which makes it difficult to extract the raw data.
 
 ```r
 txt <- pdf_text("http://arxiv.org/pdf/1406.4806.pdf")
@@ -133,7 +133,8 @@ cat(txt[18])
 cat(txt[19])
 ```
 
-Pdftools usually does a decent job in retaining the positioning of table elements when converting from pdf to text. But the output is still very dependent on the formatting of the original pdf table, which makes it very difficult to write a generic table extractor. But with a little creativity you might be able to parse the table data from the text output of a given paper.
-
+[Tabula](https://tabula.technology/) and [tabulizer](https://github.com/ropensci/tabulizer) are PDF tools specialized
+for extracting tabular data. Tabula provides an easy-to-use GUI to extract tables from a single PDF document. Tabulizer 
+is an R wrapper around Tabula which allows programmatically extracting tables directly to R.
 
 [![](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)
