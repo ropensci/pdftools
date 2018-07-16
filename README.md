@@ -121,7 +121,9 @@ webp::write_webp(bitmap, "page.webp")
 
 This feature is still experimental and currently does not work on Windows.
 
-## Limitations
+## Limitations and related packages
+
+### Tables
 
 Data scientists are often interested in data from tables. Unfortunately the pdf format is pretty dumb and does not have notion of a table (unlike for example HTML). Tabular data in a pdf file is nothing more than strategically positioned lines and text, which makes it difficult to extract the raw data.
 
@@ -134,6 +136,10 @@ cat(txt[19])
 ```
 
 Pdftools usually does a decent job in retaining the positioning of table elements when converting from pdf to text. But the output is still very dependent on the formatting of the original pdf table, which makes it very difficult to write a generic table extractor. But with a little creativity you might be able to parse the table data from the text output of a given paper.
+
+### Scanned text
+
+If you want to extract text from scanned text present in a pdf, you'll need to use OCR (optical character recognition). Please refer to the [rOpenSci `tesseract` package](https://github.com/ropensci/tesseract) that provides bindings to the Tesseract OCR engine. In particular read [the section of its vignette about reading from PDF files using `pdftools` and `tesseract`](https://cran.r-project.org/web/packages/tesseract/vignettes/intro.html#read_from_pdf_files).
 
 
 [![](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)
