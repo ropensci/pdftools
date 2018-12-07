@@ -16,3 +16,18 @@ test_that("text encoding english", {
   expect_length(data[[1]]$text, 15)
   expect_equal(data[[1]]$text[1:3], c("Hello", "World", "Jeroen"))
 })
+
+test_that("text encoding korean", {
+
+  info <- pdf_info("gangnam.pdf")
+  psy <- "\uC2F8\uC774"
+  gangnam <- "\uAC15\uB0A8\uC2A4\uD0C0\uC77C"
+  expect_equal(info$keys$Author, psy)
+  expect_equal(info$keys$Title, gangnam)
+
+  text <- pdf_text('gangnam.pdf')
+  expect_match(text, gangnam)
+
+  data <- pdf_data('gangnam.pdf')
+  expect_equal(data[[1]]$text[1:3], c(gangnam, psy, "12/4/2018"))
+})
