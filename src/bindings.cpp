@@ -17,6 +17,13 @@
 #define POPPLER_HAS_PAGE_TEXT_LIST
 #endif
 
+/* Note: Before poppler 0.73, UTF8 conversion was completely broken */
+#ifdef POPPLER_HAS_PAGE_TEXT_LIST
+#define ustring_to_r ustring_to_utf8
+#else
+#define ustring_to_r ustring_to_latin1
+#endif
+
 using namespace Rcpp;
 using namespace poppler;
 
@@ -59,7 +66,7 @@ List item_to_list(toc_item *item){
     out.push_back(item_to_list(children[i]));
   }
   return List::create(
-    _["title"] = ustring_to_latin1(item->title()),
+    _["title"] = ustring_to_r(item->title()),
     _["children"] = out
   );
 }
@@ -147,7 +154,7 @@ List poppler_pdf_info (RawVector x, std::string opw, std::string upw) {
     std::string keystr = keystrings[i];
     if(keystr.compare("CreationDate") == 0) continue;
     if(keystr.compare("ModDate") == 0) continue;
-    keys.push_back(ustring_to_latin1(doc->info_key(keystr)), keystr);
+    keys.push_back(ustring_to_r(doc->info_key(keystr)), keystr);
   }
 
   return List::create(
@@ -158,7 +165,7 @@ List poppler_pdf_info (RawVector x, std::string opw, std::string upw) {
     _["keys"] = keys,
     _["created"] = Datetime(doc->info_date("CreationDate")),
     _["modified"] = Datetime(doc->info_date("ModDate")),
-    _["metadata"] = ustring_to_latin1(doc->metadata()),
+    _["metadata"] = ustring_to_r(doc->metadata()),
     _["locked"] = doc->is_locked(),
     _["attachments"] = doc->has_embedded_files(),
     _["layout"] = layout_string(doc->page_layout())
@@ -181,7 +188,7 @@ List poppler_pdf_data (RawVector x, std::string opw, std::string upw) {
     IntegerVector y(boxes.size());
     Rcpp::LogicalVector space(boxes.size());
     for(size_t j = 0; j < boxes.size(); j++){
-      text[j] = ustring_to_utf8(boxes.at(j).text());
+      text[j] = ustring_to_r(boxes.at(j).text());
       width[j] = boxes.at(j).bbox().width();
       height[j] = boxes.at(j).bbox().height();
       x[j] = boxes.at(j).bbox().x();
@@ -272,7 +279,7 @@ List poppler_pdf_files (RawVector x, std::string opw, std::string upw) {
         _["mime"] = file->mime_type(),
         _["created"] = Datetime(file->creation_date()),
         _["modified"] = Datetime(file->modification_date()),
-        _["description"] = ustring_to_latin1(file->description()),
+        _["description"] = ustring_to_r(file->description()),
         _["data"] = res
       ));
     }
