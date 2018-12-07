@@ -12,7 +12,8 @@
 #include <Rcpp.h>
 #include <cstring>
 
-#if 0 && defined(POPPLER_VERSION_MINOR) && (POPPLER_VERSION_MINOR >= 63 || POPPLER_VERSION_MAJOR > 0)
+/* TODO: bump to 73 when new poppler is released */
+#if defined(POPPLER_VERSION_MINOR) && (POPPLER_VERSION_MINOR >= 72 || POPPLER_VERSION_MAJOR > 0)
 #define POPPLER_HAS_PAGE_TEXT_LIST
 #endif
 
@@ -188,12 +189,12 @@ List poppler_pdf_data (RawVector x, std::string opw, std::string upw) {
       space[j] = boxes.at(j).has_space_after();
     }
     out[i] = DataFrame::create(
-      _["text"] = text,
       _["width"] = width,
       _["height"] = height,
       _["x"] = x,
       _["y"] = y,
       _["space"] = space,
+      _["text"] = text,
       _["stringsAsFactors"] = false
     );
   }
