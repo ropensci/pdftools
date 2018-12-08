@@ -1,6 +1,7 @@
 context("encoding")
 
 test_that("text encoding english", {
+  skip_if_not(pdftools::poppler_config()$version >= "0.72")
 
   toc <-pdf_toc("hello.pdf")
   expect_equal(toc$children[[1]]$title, "Chapter 1")
@@ -18,6 +19,7 @@ test_that("text encoding english", {
 })
 
 test_that("text encoding korean", {
+  skip_if_not(pdftools::poppler_config()$version >= "0.72")
 
   info <- pdf_info("gangnam.pdf")
   psy <- "\uC2F8\uC774"
