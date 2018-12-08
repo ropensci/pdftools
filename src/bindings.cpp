@@ -207,7 +207,7 @@ List poppler_pdf_data (RawVector x, std::string opw, std::string upw) {
   }
   return out;
 #else //POPPLER_HAS_PAGE_TEXT_LIST
-  throw std::runtime_error(std::string("This feature requires poppler >= 0.63. You have ") + POPPLER_VERSION);
+  throw std::runtime_error(std::string("This feature requires poppler >= 0.73. You have ") + POPPLER_VERSION);
 #endif
 }
 
