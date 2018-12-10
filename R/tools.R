@@ -42,7 +42,8 @@ pdf_data <- function(pdf, opw = "", upw = "") {
 #' @rdname pdftools
 #' @export
 pdf_fonts<- function(pdf, opw = "", upw = "") {
-  poppler_pdf_fonts(loadfile(pdf), opw, upw)
+  out <- poppler_pdf_fonts(loadfile(pdf), opw, upw)
+  df_as_tibble(out)
 }
 
 #' @rdname pdftools
