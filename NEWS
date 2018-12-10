@@ -1,3 +1,8 @@
+2.0
+  - Windows, MacOS: update poppler to 0.72.1 (backported UTF-8 fix)
+  - Enable pdf_data() on systems with 0.72.1 or newer
+  - Several encoding related fixes in text/metadata extraction
+
 1.8
   - Run configure script in bash
 

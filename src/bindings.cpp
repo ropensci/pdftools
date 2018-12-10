@@ -12,8 +12,9 @@
 #include <Rcpp.h>
 #include <cstring>
 
-/* TODO: bump to 73 when new poppler is released */
-#if defined(POPPLER_VERSION_MINOR) && (POPPLER_VERSION_MINOR >= 72 || POPPLER_VERSION_MAJOR > 0)
+/* Note: 0.72.1 is my internal build of 0.72.0 + backported UTF-8 patches */
+#if defined(POPPLER_VERSION_MINOR) && (POPPLER_VERSION_MINOR >= 73 || POPPLER_VERSION_MAJOR > 0 || \
+  (POPPLER_VERSION_MINOR == 72 && POPPLER_VERSION_MICRO == 1))
 #define POPPLER_HAS_PAGE_TEXT_LIST
 #endif
 
@@ -209,7 +210,7 @@ List poppler_pdf_data (RawVector x, std::string opw, std::string upw) {
   }
   return out;
 #else //POPPLER_HAS_PAGE_TEXT_LIST
-  throw std::runtime_error(std::string("This feature requires poppler >= 0.73. You have ") + POPPLER_VERSION);
+  throw std::runtime_error(std::string("pdf_data() requires poppler >= 0.73. You have ") + POPPLER_VERSION);
 #endif
 }
 
