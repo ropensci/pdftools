@@ -17,8 +17,8 @@
 #define POPPLER_HAS_PAGE_TEXT_LIST
 #endif
 
-/* Note: Before poppler 0.73, UTF8 conversion was completely broken */
-#ifdef POPPLER_HAS_PAGE_TEXT_LIST
+/* Note: Before poppler 0.73, UTF8 conversion was completely broken on MacOS */
+#if defined(POPPLER_HAS_PAGE_TEXT_LIST) || !defined(__APPLE__)
 #define ustring_to_r ustring_to_utf8
 #else
 #define ustring_to_r ustring_to_latin1
