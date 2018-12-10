@@ -47,14 +47,16 @@ void find_poppler_data(){
 #endif
 
 String ustring_to_utf8(ustring x){
-  byte_array str = x.to_utf8();
-  String y(std::string(str.begin(), str.end()));
+  byte_array buf = x.to_utf8();
+  std::string str(buf.begin(), buf.end());
+  String y(str.c_str());
   y.set_encoding(CE_UTF8);
   return y;
 }
 
 String ustring_to_latin1(ustring x){
-  String y(x.to_latin1());
+  std::string str(x.to_latin1());
+  String y(str.c_str());
   y.set_encoding(CE_LATIN1);
   return y;
 }
