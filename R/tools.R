@@ -35,7 +35,8 @@ pdf_text <- function(pdf, opw = "", upw = "") {
 #' @rdname pdftools
 #' @export
 pdf_data <- function(pdf, opw = "", upw = "") {
-  poppler_pdf_data(loadfile(pdf), opw, upw)
+  out <- poppler_pdf_data(loadfile(pdf), opw, upw)
+  lapply(out, df_as_tibble)
 }
 
 #' @rdname pdftools
@@ -79,4 +80,10 @@ loadfile <- function(pdf){
   if(!is.raw(pdf))
     stop("Argument pdf must be a path or raw vector with PDF data")
   pdf
+}
+
+df_as_tibble <- function(df){
+  stopifnot(is.data.frame(df))
+  class(df) <- c("tbl_df", "tbl", "data.frame")
+  df
 }
