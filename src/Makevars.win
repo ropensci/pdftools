@@ -1,4 +1,4 @@
-VERSION=0.61.0
+VERSION=0.72.1
 
 CXX_STD=CXX11
 RWINLIB=../windows/poppler-$(VERSION)
@@ -10,7 +10,7 @@ PKG_LIBS= \
 	-L$(RWINLIB)/lib${subst gcc,,${COMPILED_BY}}${R_ARCH} \
 	-L$(RWINLIB)/lib${R_ARCH} \
 	-lpoppler-cpp -lpoppler -llcms2 -ljpeg -lpng16 -ltiff -lopenjp2 \
-	-lfreetype -lharfbuzz -lfreetype  -lbz2 -llzma -liconv -lz
+	-lfreetype -lharfbuzz -lfreetype -lbz2 -liconv -lz
 
 all: clean winlibs
 
@@ -20,9 +20,9 @@ clean:
 winlibs:
 	"${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe" "../tools/winlibs.R" $(VERSION)
 	mkdir -p ../inst/share/poppler
-	cp -Rf $(RWINLIB)/poppler-data-0.4.8/cidToUnicode ../inst/share/poppler/
-	cp -Rf $(RWINLIB)/poppler-data-0.4.8/cMap ../inst/share/poppler/
-	cp -Rf $(RWINLIB)/poppler-data-0.4.8/nameToUnicode ../inst/share/poppler/
-	cp -Rf $(RWINLIB)/poppler-data-0.4.8/unicodeMap ../inst/share/poppler/
+	cp -Rf $(RWINLIB)/poppler-data-0.4.9/cidToUnicode ../inst/share/poppler/
+	cp -Rf $(RWINLIB)/poppler-data-0.4.9/cMap ../inst/share/poppler/
+	cp -Rf $(RWINLIB)/poppler-data-0.4.9/nameToUnicode ../inst/share/poppler/
+	cp -Rf $(RWINLIB)/poppler-data-0.4.9/unicodeMap ../inst/share/poppler/
 
 .PHONY: all winlibs clean

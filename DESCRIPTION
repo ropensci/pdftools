@@ -19,5 +19,5 @@ Imports: Rcpp (>= 0.12.12)
 LinkingTo: Rcpp
 Suggests: jpeg, png, webp,
     testthat
-RoxygenNote: 6.0.1.9000
+RoxygenNote: 6.1.1
 Roxygen: list(markdown = TRUE)
