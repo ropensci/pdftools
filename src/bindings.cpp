@@ -235,6 +235,8 @@ CharacterVector poppler_pdf_text (RawVector x, std::string opw, std::string upw)
       target.set_top(0);
     }
 
+    //Rprintf("Target: %f-%f x %f-%f\n", target.left(), target.right(), target.bottom(), target.top());
+
     /* Extract text */
     ustring str = p->text(target, show_text_layout);
     out[i] = ustring_to_utf8(str);
