@@ -21,7 +21,7 @@ test_that("text encoding english", {
 })
 
 test_that("text encoding korean", {
-
+  skip_on_os("solaris")
   info <- pdf_info("gangnam.pdf")
   psy <- "\uC2F8\uC774"
   gangnam <- "\uAC15\uB0A8\uC2A4\uD0C0\uC77C"
