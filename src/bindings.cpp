@@ -19,7 +19,7 @@
 #endif
 
 /* Note: Before poppler 0.73, UTF8 conversion was completely broken on MacOS */
-#if defined(POPPLER_HAS_PAGE_TEXT_LIST) || !defined(__APPLE__)
+#if defined(POPPLER_HAS_PAGE_TEXT_LIST) || defined(__linux__)
 #define ustring_to_r ustring_to_utf8
 #else
 #define ustring_to_r ustring_to_latin1
