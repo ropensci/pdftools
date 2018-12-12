@@ -18,7 +18,9 @@
 #define POPPLER_HAS_PAGE_TEXT_LIST
 #endif
 
-/* Note: Before poppler 0.73, UTF8 conversion was completely broken on MacOS */
+/* Note: Before poppler 0.73, ustring to UTF8 conversion was unusable on non-linux
+ * due to an UTF-16 BE/LE bug. Therefore we better use to_latin1() on those systems,
+ * which works at least for ascii text */
 #if defined(POPPLER_HAS_PAGE_TEXT_LIST) || defined(__linux__)
 #define ustring_to_r ustring_to_utf8
 #else
