@@ -200,7 +200,7 @@ List poppler_pdf_data (RawVector x, std::string opw, std::string upw) {
       y[j] = boxes.at(j).bbox().y();
       space[j] = boxes.at(j).has_space_after();
     }
-    out[i] = DataFrame::create(
+    DataFrame df = DataFrame::create(
       _["width"] = width,
       _["height"] = height,
       _["x"] = x,
@@ -209,6 +209,14 @@ List poppler_pdf_data (RawVector x, std::string opw, std::string upw) {
       _["text"] = text,
       _["stringsAsFactors"] = false
     );
+    //metadata
+    rectf rect(p->page_rect());
+    df.attr("page") = List::create(
+      _["top"] = rect.top(),
+      _["right"] = rect.right(),
+      _["bottom"] = rect.bottom(),
+      _["left"] = rect.left());
+    out[i] = df;
   }
   return out;
 #else //POPPLER_HAS_PAGE_TEXT_LIST
