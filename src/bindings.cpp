@@ -331,7 +331,7 @@ List poppler_pdf_files (RawVector x, std::string opw, std::string upw) {
 List poppler_pdf_toc(RawVector x, std::string opw, std::string upw) {
   document *doc = read_raw_pdf(x, opw, upw);
   List out = List();
-  toc *contents = doc->create_toc();
+  std::unique_ptr<poppler::toc> contents(doc->create_toc());
   if(!contents)
     return List();
   return item_to_list(contents->root());
