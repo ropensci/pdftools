@@ -1,8 +1,7 @@
 context("encoding")
 
 test_that("text encoding english", {
-
-
+  skip_if(poppler_config()$version < "0.41")
   toc <-pdf_toc("hello.pdf")
   expect_equal(toc$children[[1]]$title, "Chapter 1")
 
