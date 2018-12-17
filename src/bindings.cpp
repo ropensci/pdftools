@@ -11,6 +11,7 @@
 #include <poppler-page-renderer.h>
 #include <Rcpp.h>
 #include <cstring>
+#include <memory> //For std::unqiue_ptr in older gcc
 
 /* Note: 0.72.1 is my internal build of 0.72.0 + backported UTF-8 patches */
 #if defined(POPPLER_VERSION_MINOR) && (POPPLER_VERSION_MINOR >= 73 || POPPLER_VERSION_MAJOR > 0 || \
