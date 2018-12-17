@@ -247,6 +247,38 @@ CharacterVector poppler_pdf_text (RawVector x, std::string opw, std::string upw)
 }
 
 // [[Rcpp::export]]
+DataFrame poppler_pdf_pagesize (RawVector x, std::string opw, std::string upw) {
+  std::unique_ptr<poppler::document> doc(read_raw_pdf(x, opw, upw));
+  int len = doc->pages();
+  Rcpp::NumericVector top(len);
+  Rcpp::NumericVector right(len);
+  Rcpp::NumericVector bottom(len);
+  Rcpp::NumericVector left(len);
+  Rcpp::NumericVector width(len);
+  Rcpp::NumericVector height(len);
+
+  for(int i = 0; i < len; i++){
+    std::unique_ptr<poppler::page> p(doc->create_page(i));
+    if(!p) continue; //missing page
+    rectf rect(p->page_rect());
+    top[i] = rect.top();
+    bottom[i] = rect.bottom();
+    left[i] = rect.left();
+    right[i] = rect.right();
+    width[i] = rect.width();
+    height[i] = rect.height();
+  }
+  return DataFrame::create(
+    _["top"] = top,
+    _["right"] = right,
+    _["bottom"] = bottom,
+    _["left"] = left,
+    _["width"] = width,
+    _["height"] = height
+  );
+}
+
+// [[Rcpp::export]]
 List poppler_pdf_fonts (RawVector x, std::string opw, std::string upw) {
   document *doc = read_raw_pdf(x, opw, upw);
   std::vector<font_info> fonts = doc->fonts();

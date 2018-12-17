@@ -8,6 +8,7 @@
 \alias{pdf_fonts}
 \alias{pdf_attachments}
 \alias{pdf_toc}
+\alias{pdf_pagesize}
 \title{PDF utilities}
 \usage{
 pdf_info(pdf, opw = "", upw = "")
@@ -21,6 +22,8 @@ pdf_fonts(pdf, opw = "", upw = "")
 pdf_attachments(pdf, opw = "", upw = "")
 
 pdf_toc(pdf, opw = "", upw = "")
+
+pdf_pagesize(pdf, opw = "", upw = "")
 }
 \arguments{
 \item{pdf}{file path or raw vector with pdf data}

@@ -58,6 +58,12 @@ pdf_toc<- function(pdf, opw = "", upw = "") {
   poppler_pdf_toc(loadfile(pdf), opw, upw)
 }
 
+#' @rdname pdftools
+#' @export
+pdf_pagesize <- function(pdf, opw = "", upw = "") {
+  poppler_pdf_pagesize(loadfile(pdf), opw, upw)
+}
+
 loadfile <- function(pdf){
   if(is.character(pdf)){
     if(grepl("^https?://", pdf[1])){

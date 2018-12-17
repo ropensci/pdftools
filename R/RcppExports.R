@@ -21,6 +21,10 @@ poppler_pdf_text <- function(x, opw, upw) {
     .Call('_pdftools_poppler_pdf_text', PACKAGE = 'pdftools', x, opw, upw)
 }
 
+poppler_pdf_pagesize <- function(x, opw, upw) {
+    .Call('_pdftools_poppler_pdf_pagesize', PACKAGE = 'pdftools', x, opw, upw)
+}
+
 poppler_pdf_fonts <- function(x, opw, upw) {
     .Call('_pdftools_poppler_pdf_fonts', PACKAGE = 'pdftools', x, opw, upw)
 }
