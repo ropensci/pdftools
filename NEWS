@@ -1,3 +1,7 @@
+2.1
+  - Add pdf_pagesize() to get dimensions of individual pages
+  - Switch to std::unique_ptr() to prevent memory leaks
+
 2.0
   - Windows, MacOS: update poppler to 0.72.1 (backported UTF-8 fix)
   - Enable pdf_data() on systems with 0.72.1 or newer
