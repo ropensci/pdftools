@@ -126,9 +126,9 @@ List get_poppler_config(){
     _["version"] = poppler::version_string(),
     _["can_render"] = page_renderer::can_render(),
 #ifdef POPPLER_HAS_PAGE_TEXT_LIST
-    _["pdf_data"] = true,
+    _["has_pdf_data"] = true,
 #else
-    _["pdf_data"] = false,
+    _["has_pdf_data"] = false,
 #endif
     _["supported_image_formats"] = image::supported_image_formats()
   );
