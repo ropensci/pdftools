@@ -37,6 +37,17 @@ Utilities based on libpoppler for extracting text, fonts, attachments
 and metadata from a pdf file.
 }
 \details{
+The \code{\link{pdf_text}} function renders all textboxes on a text canvas
+and returns a character vector of equal length to the number of pages in the
+PDF file. On the other hand, \code{\link{pdf_data}} is more low level and
+returns one data frame per page, containing one row for each texbox in the PDF.
+
+Note that \code{\link{pdf_data}} requires a recent version of libpoppler
+which might not be available on all Linux systems.
+When using \code{\link{pdf_data}} in R packages, condition use on
+\code{poppler_config()$has_pdf_data} which shows if this function can be
+used on the current system.
+
 Poppler is pretty verbose when encountering minor errors in PDF files,
 in especially \code{\link{pdf_text}}. These messages are usually safe
 to ignore, use \code{\link{suppressMessages}} to hide them altogether.
