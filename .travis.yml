@@ -5,8 +5,9 @@ fortran: false
 
 matrix:
   include:
-    - os: linux
-      dist: trusty
+    - dist: precise
+    - dist: trusty
+    - dist: xenial
       env: R_CODECOV=true
     - os: osx # TODO: Back to stable when 0.73 is released
       brew_packages: poppler --HEAD
