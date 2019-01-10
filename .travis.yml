@@ -9,8 +9,8 @@ matrix:
     - dist: trusty
     - dist: xenial
       env: R_CODECOV=true
-    - os: osx # TODO: Back to stable when 0.73 is released
-      brew_packages: poppler --HEAD
+    - os: osx
+      brew_packages: poppler
     - os: osx
       osx_image: xcode7.3
       disable_homebrew: true
