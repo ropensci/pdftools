@@ -2,13 +2,15 @@ language: r
 cache: packages
 latex: false
 fortran: false
+pandoc: false
 
 matrix:
   include:
     - dist: precise
     - dist: trusty
     - dist: xenial
-      env: R_CODECOV=true
+      r_packages: covr
+      after_success: R -e 'covr::codecov()';
     - os: osx
       brew_packages: poppler
     - os: osx
@@ -23,19 +25,10 @@ addons:
       - poppler-data
       - valgrind
 
-r_github_packages:
-  - jimhester/covr
-
-warnings_are_errors: true
-#r_check_revdep: true
-
 notifications:
   email:
     on_success: change
     on_failure: change
-
-after_success:
-  - if [[ "${R_CODECOV}" ]]; then R -e 'covr::codecov()'; fi
 
 # Prevents Travis timeout for building libpoppler
 before_install:
