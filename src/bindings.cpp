@@ -31,24 +31,14 @@
 using namespace Rcpp;
 using namespace poppler;
 
-static char poppler_data[4000] = "";
-
 // [[Rcpp::export]]
-void set_poppler_data(std::string path){
-  strcpy(poppler_data, path.c_str());
-}
-
-// Call this after initiating document but before page
+bool set_poppler_data(std::string path){
 #ifdef BUNDLE_POPPLER_DATA
-#include <GlobalParams.h>
-static void find_poppler_data(){
-  static bool initiated = false;
-  if (!initiated && strlen(poppler_data)){
-    globalParams = new GlobalParams(poppler_data);
-    initiated = true;
-  }
-}
+  return poppler::set_data_dir(path);
+#else
+  return false;
 #endif
+}
 
 String ustring_to_utf8(ustring x){
   byte_array buf = x.to_utf8();
@@ -110,10 +100,6 @@ static std::string font_string(font_info::type_enum x){
 
 static document *read_raw_pdf(RawVector x, std::string opw, std::string upw, bool info_only = 0){
   document *doc = document::load_from_raw_data(	(const char*) x.begin(), x.length(), opw, upw);
-#ifdef BUNDLE_POPPLER_DATA
-  if(!info_only)
-    find_poppler_data();
-#endif
   if(!doc)
     throw std::runtime_error("PDF parsing failure.");
   if(!info_only && doc->is_locked())
