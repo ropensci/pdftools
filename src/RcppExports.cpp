@@ -6,13 +6,14 @@
 using namespace Rcpp;
 
 // set_poppler_data
-void set_poppler_data(std::string path);
+bool set_poppler_data(std::string path);
 RcppExport SEXP _pdftools_set_poppler_data(SEXP pathSEXP) {
 BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< std::string >::type path(pathSEXP);
-    set_poppler_data(path);
-    return R_NilValue;
+    rcpp_result_gen = Rcpp::wrap(set_poppler_data(path));
+    return rcpp_result_gen;
 END_RCPP
 }
 // get_poppler_config
