@@ -42,6 +42,12 @@ sudo yum install poppler-cpp-devel
 
 ### Building from source
 
+#### On Ubuntu 
+
+If you want to use `libpoppler-cpp` latest version, that is not available in Linux package managers yet, follow the instructions [of this askubuntu.com answer](https://askubuntu.com/a/1112947).
+
+#### On CentOS
+
 On CentOS the `libpoppler-cpp` library is not included with the system so we need to build from source. Note that recent versions of poppler require C++11 which is not available on CentOS, so we build a slightly older version of libpoppler.
 
 ```sh
