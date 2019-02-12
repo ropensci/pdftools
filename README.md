@@ -135,7 +135,9 @@ cat(txt[18])
 cat(txt[19])
 ```
 
-The [`tabulizer`](https://github.com/ropensci/tabulizer) package is dedicated to extracting tables from PDF, and includes interactive tools for selecting tables. While `pdftools` is not designed for processing tables, with a little creativity you will be able to parse output into tables.
+The [`tabulizer`](https://github.com/ropensci/tabulizer) package is dedicated to extracting tables from PDF, and includes interactive tools for selecting tables. However, `tabulizer` depends on `rJava` and therefore requires additional setup steps or may be impossible to use on systems where Java cannot be installed.
+
+It is possible to use `pdftools` with some creativity to parse tables from PDF documents, which does not require Java to be installed.
 
 ### Scanned text
 
