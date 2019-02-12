@@ -131,7 +131,7 @@ This feature is still experimental and currently does not work on Windows.
 
 ### Tables
 
-Data scientists are often interested in data from tables. Unfortunately the pdf format is pretty dumb and does not have notion of a table (unlike for example HTML). Tabular data in a pdf file is nothing more than strategically positioned lines and text, which makes it difficult to extract the raw data.
+Data scientists are often interested in data from tables. Unfortunately the pdf format is pretty dumb and does not have notion of a table (unlike for example HTML). Tabular data in a pdf file is nothing more than strategically positioned lines and text, which makes it difficult to extract the raw data with `pdftools`.
 
 ```r
 txt <- pdf_text("http://arxiv.org/pdf/1406.4806.pdf")
@@ -141,7 +141,9 @@ cat(txt[18])
 cat(txt[19])
 ```
 
-Pdftools usually does a decent job in retaining the positioning of table elements when converting from pdf to text. But the output is still very dependent on the formatting of the original pdf table, which makes it very difficult to write a generic table extractor. But with a little creativity you might be able to parse the table data from the text output of a given paper.
+The [`tabulizer`](https://github.com/ropensci/tabulizer) package is dedicated to extracting tables from PDF, and includes interactive tools for selecting tables. However, `tabulizer` depends on `rJava` and therefore requires additional setup steps or may be impossible to use on systems where Java cannot be installed.
+
+It is possible to use `pdftools` with some creativity to parse tables from PDF documents, which does not require Java to be installed.
 
 ### Scanned text
 
