@@ -13,8 +13,8 @@
 #include <cstring>
 #include <memory> //For std::unqiue_ptr in older gcc
 
-/* Note: 0.72.1 is my internal build of 0.72.0 + backported UTF-8 patches */
-#if defined(POPPLER_VERSION_MINOR) && (POPPLER_VERSION_MINOR >= 73 || POPPLER_VERSION_MAJOR > 0)
+/* Note: the encoding bug was fixed in 0.73 but Debian backported to 0.71 */
+#if defined(POPPLER_VERSION_MINOR) && (POPPLER_VERSION_MINOR >= 71 || POPPLER_VERSION_MAJOR > 0)
 #define POPPLER_HAS_PAGE_TEXT_LIST
 #endif
 
@@ -202,7 +202,7 @@ List poppler_pdf_data (RawVector x, std::string opw, std::string upw) {
   }
   return out;
 #else //POPPLER_HAS_PAGE_TEXT_LIST
-  throw std::runtime_error(std::string("pdf_data() requires poppler >= 0.73. You have ") + POPPLER_VERSION);
+  throw std::runtime_error(std::string("pdf_data() requires poppler >= 0.71. You have ") + POPPLER_VERSION);
 #endif
 }
 
