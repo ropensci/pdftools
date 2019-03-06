@@ -1,4 +1,5 @@
 2.2
+  - Import tools from new qpdf package
   - Enable pdf_data() in poppler 0.71 because Debian has backported
     the encoding fixes
 

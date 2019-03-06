@@ -15,7 +15,9 @@ BugReports: https://github.com/ropensci/pdftools/issues
 SystemRequirements: Poppler C++ API: libpoppler-cpp-dev (deb) or poppler-cpp-devel (rpm).
     The unit tests also require the 'poppler-data' package (rpm/deb)
 Encoding: UTF-8
-Imports: Rcpp (>= 0.12.12)
+Imports: 
+    Rcpp (>= 0.12.12),
+    qpdf
 LinkingTo: Rcpp
 Suggests: jpeg, png, webp,
     testthat

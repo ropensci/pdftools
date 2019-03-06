@@ -4,6 +4,7 @@
 #' raw bitmap array for further processing in R.
 #'
 #' @export
+#' @name rendering
 #' @rdname pdf_render_page
 #' @param pdf file path or raw vector with pdf data
 #' @param page which page to render

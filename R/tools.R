@@ -23,6 +23,7 @@
 #' @param opw string with owner password to open pdf
 #' @param upw string with user password to open pdf
 #' @useDynLib pdftools
+#' @name pdftools
 #' @rdname pdftools
 #' @aliases pdftools
 #' @importFrom Rcpp sourceCpp
