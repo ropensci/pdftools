@@ -14,6 +14,10 @@ matrix:
         apt:
           sources:
             - sourceline: 'ppa:opencpu/poppler'
+          packages:
+            - libwebp-dev
+            - libpoppler-cpp-dev
+            - poppler-data
     - os: osx
       brew_packages: poppler
     - os: osx
@@ -26,7 +30,6 @@ addons:
       - libwebp-dev
       - libpoppler-cpp-dev
       - poppler-data
-      - valgrind
 
 notifications:
   email:
