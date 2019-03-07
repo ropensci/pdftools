@@ -9,8 +9,11 @@ matrix:
     - dist: precise
     - dist: trusty
     - dist: xenial
-      r_packages: covr
-      after_success: R -e 'covr::codecov()';
+    - dist: xenial
+      addons:
+        apt:
+          sources:
+            - sourceline: 'ppa:opencpu/poppler'
     - os: osx
       brew_packages: poppler
     - os: osx

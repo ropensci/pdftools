@@ -22,13 +22,21 @@ On Windows and Mac the binary packages can be installed directly from CRAN:
 install.packages("pdftools")
 ```
 
-Installation on Linux requires the poppler development library. On Debian/Ubuntu:
+Installation on Linux requires the poppler development library. On __Ubuntu 16.04 (Xenial)__ and __Ubuntu 18.04 (Bionic)__ we have backports that support the latest `pdf_data()` functionality:
+
+```
+sudo add-apt-repository -y ppa:opencpu/poppler
+sudo apt-get update
+sudo apt-get install -y libpoppler-cpp-dev
+```
+
+On other versions of __Debian__ or __Ubuntu__ simply use::
 
 ```
 sudo apt-get install libpoppler-cpp-dev
 ```
 
-If you want to install the package from source on Mac OS-X you need brew:
+If you want to install the package from source on __MacOS__ you need brew:
 
 ```
 brew install poppler
@@ -44,7 +52,7 @@ sudo yum install poppler-cpp-devel
 
 #### On Ubuntu 
 
-If you want to use `libpoppler-cpp` latest version, that is not available in Linux package managers yet, follow the instructions [of this askubuntu.com answer](https://askubuntu.com/a/1112947).
+__Update__: Itt is now recommended to use the backport PPA mentioned above. If you really want to build from source, follow the instructions [of this askubuntu.com answer](https://askubuntu.com/a/1112947).
 
 #### On CentOS
 
