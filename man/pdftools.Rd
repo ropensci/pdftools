@@ -46,7 +46,9 @@ Note that \code{\link{pdf_data}} requires a recent version of libpoppler
 which might not be available on all Linux systems.
 When using \code{\link{pdf_data}} in R packages, condition use on
 \code{poppler_config()$has_pdf_data} which shows if this function can be
-used on the current system.
+used on the current system. For Ubuntu 16.04 (Xenial) and 18.04 (Bionic)
+you can use \href{https://github.com/ropensci/pdftools#installation}{the PPA}
+with backports of Poppler 0.74.0.
 
 Poppler is pretty verbose when encountering minor errors in PDF files,
 in especially \code{\link{pdf_text}}. These messages are usually safe
