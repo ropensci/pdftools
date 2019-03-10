@@ -1,7 +1,7 @@
 2.2
-  - Import new qpdf package
-  - Document new PPA for Ubuntu 16.04 and 18.04 with poppler 0.74
+  - Import new qpdf package with pdf transformation tools
   - Enable pdf_data() in poppler 0.71 now Debian has backported the encoding patch.
+  - Document new PPA for Ubuntu 16.04 and 18.04 with poppler 0.74
 
 2.1
   - Windows / MacOS: update poppler to 0.73.0
