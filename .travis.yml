@@ -14,7 +14,7 @@ matrix:
       addons:
         apt:
           sources:
-            - sourceline: 'ppa:jeroen/poppler'
+            - sourceline: 'ppa:cran/poppler'
           packages:
             - libwebp-dev
             - libpoppler-cpp-dev
