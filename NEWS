@@ -1,3 +1,6 @@
+2.3
+  - pdf_text() now tries better to get all text in the page media-box.
+
 2.2
   - Import new qpdf package with pdf transformation tools
   - Enable pdf_data() in poppler 0.71 now Debian has backported the encoding patch.
