@@ -25,7 +25,7 @@ install.packages("pdftools")
 Installation on Linux requires the poppler development library. On __Ubuntu 16.04 (Xenial)__ and __Ubuntu 18.04 (Bionic)__ we have backports that support the latest `pdf_data()` functionality:
 
 ```
-sudo add-apt-repository -y ppa:jeroen/poppler
+sudo add-apt-repository -y ppa:cran/poppler
 sudo apt-get update
 sudo apt-get install -y libpoppler-cpp-dev
 ```
