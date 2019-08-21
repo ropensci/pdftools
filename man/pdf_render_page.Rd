@@ -72,6 +72,7 @@ webp::write_webp(bitmap_raw, "page.webp")
 }
 }
 \seealso{
-Other pdftools: \code{\link{pdftools}}, \code{\link{qpdf}}
+Other pdftools: \code{\link{pdf_ocr_text}},
+  \code{\link{pdftools}}, \code{\link{qpdf}}
 }
 \concept{pdftools}
