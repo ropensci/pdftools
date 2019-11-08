@@ -21,6 +21,7 @@ matrix:
             - poppler-data
             - libtesseract-dev
             - libleptonica-dev
+            - tesseract-ocr-eng
     - os: osx
       brew_packages: poppler
     - os: osx
@@ -36,6 +37,7 @@ addons:
       - poppler-data
       - libtesseract-dev
       - libleptonica-dev
+      - tesseract-ocr-eng
 
 notifications:
   email:
