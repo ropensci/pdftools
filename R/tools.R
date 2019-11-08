@@ -6,7 +6,7 @@
 #' The \code{\link{pdf_text}} function renders all textboxes on a text canvas
 #' and returns a character vector of equal length to the number of pages in the
 #' PDF file. On the other hand, \code{\link{pdf_data}} is more low level and
-#' returns one data frame per page, containing one row for each texbox in the PDF.
+#' returns one data frame per page, containing one row for each textbox in the PDF.
 #'
 #' Note that \code{\link{pdf_data}} requires a recent version of libpoppler
 #' which might not be available on all Linux systems.
