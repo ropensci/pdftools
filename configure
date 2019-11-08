@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Anticonf (tm) script by Jeroen Ooms (2017)
+# Anticonf (tm) script by Jeroen Ooms (2019)
 # This script will query 'pkg-config' for the required cflags and ldflags.
 # If pkg-config is unavailable or does not find the library, try setting
 # INCLUDE_DIR and LIB_DIR manually via e.g:
@@ -57,12 +57,11 @@ echo "Using PKG_CFLAGS=$PKG_CFLAGS"
 echo "Using PKG_LIBS=$PKG_LIBS"
 
 # Find compiler
-CXXCPP=`${R_HOME}/bin/R CMD config CXXCPP`
-CXXFLAGS=`${R_HOME}/bin/R CMD config CXXFLAGS`
+CXX=`${R_HOME}/bin/R CMD config CXX`
 CPPFLAGS=`${R_HOME}/bin/R CMD config CPPFLAGS`
 
 # Test configuration
-echo "#include $PKG_TEST_HEADER" | ${CXXCPP} ${CPPFLAGS} ${PKG_CFLAGS} ${CXXFLAGS} -xc++ - >/dev/null 2>&1
+echo "#include $PKG_TEST_HEADER" | ${CXX} -E ${CPPFLAGS} ${PKG_CFLAGS} -xc++ - >/dev/null 2>&1
 
 # Customize the error
 if [ $? -ne 0 ]; then
