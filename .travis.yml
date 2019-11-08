@@ -19,6 +19,8 @@ matrix:
             - libwebp-dev
             - libpoppler-cpp-dev
             - poppler-data
+            - libtesseract-dev
+            - libleptonica-dev
     - os: osx
       brew_packages: poppler
     - os: osx
@@ -32,6 +34,8 @@ addons:
       - libwebp-dev
       - libpoppler-cpp-dev
       - poppler-data
+      - libtesseract-dev
+      - libleptonica-dev
 
 notifications:
   email:
