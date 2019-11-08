@@ -6,8 +6,6 @@ pandoc: false
 
 matrix:
   include:
-    - dist: precise
-      r: 3.4
     - dist: trusty
     - dist: xenial
     - dist: xenial
@@ -38,12 +36,3 @@ addons:
       - libtesseract-dev
       - libleptonica-dev
       - tesseract-ocr-eng
-
-notifications:
-  email:
-    on_success: change
-    on_failure: change
-
-# Prevents Travis timeout for building libpoppler
-before_install:
-  - (while true; do echo 'Ping? Pong!'; sleep 500; done) &
