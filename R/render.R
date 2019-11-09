@@ -17,8 +17,6 @@
 #' @family pdftools
 #' @aliases render
 #' @examples # Rendering should be supported on all platforms now
-#' if(poppler_config()$can_render){
-#'
 #' # convert few pages to png
 #' file.copy(file.path(Sys.getenv("R_DOC_DIR"), "NEWS.pdf"), "news.pdf")
 #' pdf_convert("news.pdf", pages = 1:3)
@@ -38,7 +36,10 @@
 #' # slightly more efficient
 #' bitmap_raw <- pdf_render_page("news.pdf", numeric = FALSE)
 #' webp::write_webp(bitmap_raw, "page.webp")
-#' }
+#'
+#' # Cleanup
+#' unlink(c('news.pdf', 'news_1.png', 'news_2.png', 'news_3.png',
+#'  'page.jpeg', 'page.png', 'page.webp'))
 pdf_render_page<- function(pdf, page = 1, dpi = 72, numeric = FALSE, antialias = TRUE, opw = "", upw = "") {
   antialiasing <- isTRUE(antialias) || isTRUE(antialias == "draw")
   text_antialiasing <- isTRUE(antialias) || isTRUE(antialias == "text")
