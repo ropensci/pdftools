@@ -1,4 +1,4 @@
-# Experimental Package: {pdftools} <img src="labs.png" align="right" height="134.5" />
+# pdftools
 
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 [![Build Status](https://travis-ci.org/ropensci/pdftools.svg?branch=master)](https://travis-ci.org/ropensci/pdftools)
