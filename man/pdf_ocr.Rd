@@ -5,11 +5,23 @@
 \alias{pdf_ocr_data}
 \title{OCR text extraction}
 \usage{
-pdf_ocr_text(pdf, pages = NULL, opw = "", upw = "",
-  language = "eng", dpi = 600)
+pdf_ocr_text(
+  pdf,
+  pages = NULL,
+  opw = "",
+  upw = "",
+  language = "eng",
+  dpi = 600
+)
 
-pdf_ocr_data(pdf, pages = NULL, opw = "", upw = "",
-  language = "eng", dpi = 600)
+pdf_ocr_data(
+  pdf,
+  pages = NULL,
+  opw = "",
+  upw = "",
+  language = "eng",
+  dpi = 600
+)
 }
 \arguments{
 \item{pdf}{file path or raw vector with pdf data}
@@ -29,7 +41,9 @@ languge of the engine.}
 Perform OCR text extraction. This requires you have the \code{tesseract} package.
 }
 \seealso{
-Other pdftools: \code{\link{pdftools}}, \code{\link{qpdf}},
-  \code{\link{rendering}}
+Other pdftools: 
+\code{\link{pdftools}},
+\code{\link{qpdf}},
+\code{\link{rendering}}
 }
 \concept{pdftools}

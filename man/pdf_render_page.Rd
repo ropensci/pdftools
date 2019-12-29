@@ -8,11 +8,27 @@
 \alias{poppler_config}
 \title{Render / Convert PDF}
 \usage{
-pdf_render_page(pdf, page = 1, dpi = 72, numeric = FALSE,
-  antialias = TRUE, opw = "", upw = "")
+pdf_render_page(
+  pdf,
+  page = 1,
+  dpi = 72,
+  numeric = FALSE,
+  antialias = TRUE,
+  opw = "",
+  upw = ""
+)
 
-pdf_convert(pdf, format = "png", pages = NULL, filenames = NULL,
-  dpi = 72, antialias = TRUE, opw = "", upw = "", verbose = TRUE)
+pdf_convert(
+  pdf,
+  format = "png",
+  pages = NULL,
+  filenames = NULL,
+  dpi = 72,
+  antialias = TRUE,
+  opw = "",
+  upw = "",
+  verbose = TRUE
+)
 
 poppler_config()
 }
@@ -38,7 +54,8 @@ to one of \code{poppler_config()$supported_image_formats}.}
 \item{pages}{vector with one-based page numbers to render. \code{NULL} means all pages.}
 
 \item{filenames}{vector of equal length to \code{pages} with output filenames. May also be
-a format string which is expanded using \code{pages} and \code{format} respectively.}
+a format string which is expanded using \code{pages} and \code{format} respectively, i.e. \code{sprintf}-type
+string containing \verb{\%d} and \verb{\%s} (in this order).}
 
 \item{verbose}{print some progress info to stdout}
 }
@@ -51,6 +68,8 @@ raw bitmap array for further processing in R.
 # convert few pages to png
 file.copy(file.path(Sys.getenv("R_DOC_DIR"), "NEWS.pdf"), "news.pdf")
 pdf_convert("news.pdf", pages = 1:3)
+# specify format string for output filenames
+pdf_convert("news.pdf", filenames="news_page_\%d.\%s")
 
 # render into raw bitmap
 bitmap <- pdf_render_page("news.pdf")
@@ -73,7 +92,9 @@ unlink(c('news.pdf', 'news_1.png', 'news_2.png', 'news_3.png',
  'page.jpeg', 'page.png', 'page.webp'))
 }
 \seealso{
-Other pdftools: \code{\link{pdf_ocr_text}},
-  \code{\link{pdftools}}, \code{\link{qpdf}}
+Other pdftools: 
+\code{\link{pdf_ocr_text}()},
+\code{\link{pdftools}},
+\code{\link{qpdf}}
 }
 \concept{pdftools}
