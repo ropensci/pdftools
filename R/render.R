@@ -20,6 +20,8 @@
 #' # convert few pages to png
 #' file.copy(file.path(Sys.getenv("R_DOC_DIR"), "NEWS.pdf"), "news.pdf")
 #' pdf_convert("news.pdf", pages = 1:3)
+#' # specify format string for output filenames
+#' pdf_convert("news.pdf", filenames="news_page_%d.%s")
 #'
 #' # render into raw bitmap
 #' bitmap <- pdf_render_page("news.pdf")
@@ -62,7 +64,8 @@ pdf_render_page<- function(pdf, page = 1, dpi = 72, numeric = FALSE, antialias =
 #' to one of `poppler_config()$supported_image_formats`.
 #' @param pages vector with one-based page numbers to render. `NULL` means all pages.
 #' @param filenames vector of equal length to `pages` with output filenames. May also be
-#' a format string which is expanded using `pages` and `format` respectively.
+#' a format string which is expanded using `pages` and `format` respectively, i.e. `sprintf`-type
+#' string containing `%d` and `%s` (in this order).
 #' @param verbose print some progress info to stdout
 pdf_convert <- function(pdf, format = "png", pages = NULL, filenames = NULL , dpi = 72,
                         antialias = TRUE, opw = "", upw = "", verbose = TRUE){

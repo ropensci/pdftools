@@ -11,8 +11,10 @@
 \alias{pdf_subset}
 \title{qpdf utilities}
 \seealso{
-Other pdftools: \code{\link{pdf_ocr_text}},
-  \code{\link{pdftools}}, \code{\link{rendering}}
+Other pdftools: 
+\code{\link{pdf_ocr_text}()},
+\code{\link{pdftools}},
+\code{\link{rendering}}
 }
 \concept{pdftools}
 \keyword{internal}
