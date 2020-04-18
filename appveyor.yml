@@ -4,11 +4,20 @@
 init:
   ps: |
         $ErrorActionPreference = "Stop"
-        Invoke-WebRequest http://raw.github.com/krlmlr/r-appveyor/master/scripts/appveyor-tool.ps1 -OutFile "..\appveyor-tool.ps1"
+        Invoke-WebRequest http://raw.github.com/jeroen/r-appveyor/master/scripts/appveyor-tool.ps1 -OutFile "..\appveyor-tool.ps1"
         Import-Module '..\appveyor-tool.ps1'
 
 install:
   ps: Bootstrap
+
+environment:
+  matrix:
+    - R_VERSION: devel
+    - R_VERSION: 4.0.0
+    - R_VERSION: stable
+    - R_VERSION: patched
+    - R_VERSION: 3.6.3
+
 
 # Adapt as necessary starting from here
 
