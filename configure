@@ -66,15 +66,15 @@ echo "#include $PKG_TEST_HEADER" | ${CXX} -E ${CPPFLAGS} ${PKG_CFLAGS} -xc++ - >
 # Customize the error
 if [ $? -ne 0 ]; then
   echo "--------------------------- [ANTICONF] --------------------------------"
-  echo "Configuration failed because $PKG_CONFIG_NAME was not found. Try installing:"
+  echo "Configuration failed to find '$PKG_CONFIG_NAME' system library. Try installing:"
   echo " * deb: $PKG_DEB_NAME (Debian, Ubuntu, etc)"
   echo " * On Ubuntu 16.04 or 18.04 use this PPA:"
   echo "    sudo add-apt-repository -y ppa:cran/poppler"
   echo "    sudo apt-get update"
   echo "    sudo apt-get install -y libpoppler-cpp-dev"
   echo " * rpm: $PKG_RPM_NAME (Fedora, CentOS, RHEL)"
+  echo " * brew: $PKG_BREW_NAME (MacOS)"
   echo " * csw: $PKG_CSW_NAME (Solaris)"
-  echo " * brew: $PKG_BREW_NAME (Mac OSX)"
   echo "If $PKG_CONFIG_NAME is already installed, check that 'pkg-config' is in your"
   echo "PATH and PKG_CONFIG_PATH contains a $PKG_CONFIG_NAME.pc file. If pkg-config"
   echo "is unavailable you can set INCLUDE_DIR and LIB_DIR manually via:"
