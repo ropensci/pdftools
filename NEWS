@@ -1,3 +1,6 @@
+2.3.1
+  - Minor tweaks for configure script
+
 2.3
   - pdf_text() now tries better to get all text in the page media-box.
   - New functions pdf_ocr_text and pdf_ocr_data (wrappers for tesseract)
