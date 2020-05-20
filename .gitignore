@@ -12,3 +12,4 @@ inst
 windows
 src/Makevars
 inst
+configure.log

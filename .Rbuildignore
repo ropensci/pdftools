@@ -9,3 +9,4 @@ README.md$
 ^\.travis\.yml$
 ^appveyor\.yml$
 ^inst$
+^configure.log$
