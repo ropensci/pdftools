@@ -12,7 +12,7 @@ err_cb <- function(str){
 
 # Load tibble (if available) for pretty printing
 .onAttach <- function(lib, pkg){
-  packageStartupMessage(sprintf('Linking to poppler %s', poppler_config()$version))
+  packageStartupMessage(sprintf('Using poppler version %s', poppler_config()$version))
   if(interactive() && is.null(.getNamespace('tibble'))){
     tryCatch({
       getNamespace('tibble')
