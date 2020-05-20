@@ -63,7 +63,9 @@ fonts <- pdf_fonts(pdf_file)
 files <- pdf_attachments(pdf_file)
 }
 \seealso{
-Other pdftools: \code{\link{pdf_ocr_text}},
-  \code{\link{qpdf}}, \code{\link{rendering}}
+Other pdftools: 
+\code{\link{pdf_ocr_text}()},
+\code{\link{qpdf}},
+\code{\link{rendering}}
 }
 \concept{pdftools}

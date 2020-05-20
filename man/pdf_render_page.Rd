@@ -8,11 +8,27 @@
 \alias{poppler_config}
 \title{Render / Convert PDF}
 \usage{
-pdf_render_page(pdf, page = 1, dpi = 72, numeric = FALSE,
-  antialias = TRUE, opw = "", upw = "")
+pdf_render_page(
+  pdf,
+  page = 1,
+  dpi = 72,
+  numeric = FALSE,
+  antialias = TRUE,
+  opw = "",
+  upw = ""
+)
 
-pdf_convert(pdf, format = "png", pages = NULL, filenames = NULL,
-  dpi = 72, antialias = TRUE, opw = "", upw = "", verbose = TRUE)
+pdf_convert(
+  pdf,
+  format = "png",
+  pages = NULL,
+  filenames = NULL,
+  dpi = 72,
+  antialias = TRUE,
+  opw = "",
+  upw = "",
+  verbose = TRUE
+)
 
 poppler_config()
 }
@@ -73,7 +89,9 @@ unlink(c('news.pdf', 'news_1.png', 'news_2.png', 'news_3.png',
  'page.jpeg', 'page.png', 'page.webp'))
 }
 \seealso{
-Other pdftools: \code{\link{pdf_ocr_text}},
-  \code{\link{pdftools}}, \code{\link{qpdf}}
+Other pdftools: 
+\code{\link{pdf_ocr_text}()},
+\code{\link{pdftools}},
+\code{\link{qpdf}}
 }
 \concept{pdftools}
