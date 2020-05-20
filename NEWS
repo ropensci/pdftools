@@ -1,5 +1,6 @@
 2.3.1
   - Minor tweaks for configure script
+  - Show poppler version during CMD check
 
 2.3
   - pdf_text() now tries better to get all text in the page media-box.
