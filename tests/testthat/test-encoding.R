@@ -20,7 +20,8 @@ test_that("text encoding english", {
 })
 
 test_that("text encoding korean", {
-  skip_on_os("solaris")
+  #skip_on_os("solaris")
+  skip_on_cran()
   skip_if(poppler_config()$version < "0.41")
   info <- pdf_info("gangnam.pdf")
   psy <- "\uC2F8\uC774"
