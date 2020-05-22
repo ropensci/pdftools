@@ -21,7 +21,7 @@ matrix:
             - libleptonica-dev
             - tesseract-ocr-eng
     - os: osx
-      brew_packages: poppler
+      brew_packages: poppler || brew upgrade poppler
     - os: osx
       osx_image: 11.4
       disable_homebrew: true
