@@ -183,7 +183,6 @@ List poppler_pdf_data (RawVector x, std::string opw, std::string upw) {
     IntegerVector y(boxes.size());
     CharacterVector font(boxes.size());
     IntegerVector size(boxes.size());
-
     Rcpp::LogicalVector space(boxes.size());
     for(size_t j = 0; j < boxes.size(); j++){
       text[j] = ustring_to_r(boxes.at(j).text());
@@ -191,9 +190,9 @@ List poppler_pdf_data (RawVector x, std::string opw, std::string upw) {
       height[j] = boxes.at(j).bbox().height();
       x[j] = boxes.at(j).bbox().x();
       y[j] = boxes.at(j).bbox().y();
+      font[j] = boxes.at(j).get_font_name();
+      size[j] = boxes.at(j).get_font_size();
       space[j] = boxes.at(j).has_space_after();
-      font[j] ustring_to_r(get_font_name());
-      size[j] boxes.at(j).get_font_size();
     }
     out[i] = DataFrame::create(
       _["width"] = width,
@@ -202,9 +201,9 @@ List poppler_pdf_data (RawVector x, std::string opw, std::string upw) {
       _["y"] = y,
       _["space"] = space,
       _["text"] = text,
-      _["stringsAsFactors"] = false,
       _["font"] = font,
-      _["size"] = size
+      _["size"] = size,
+      _["stringsAsFactors"] = false
     );
   }
   return out;
