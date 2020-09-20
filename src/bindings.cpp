@@ -18,6 +18,10 @@
 #define POPPLER_HAS_PAGE_TEXT_LIST
 #endif
 
+#if defined(POPPLER_VERSION_MINOR) && (POPPLER_VERSION_MINOR >= 89 || POPPLER_VERSION_MAJOR > 0)
+#define POPPLER_HAS_FONT_INFO
+#endif
+
 /* Note: Before poppler 0.73, ustring to UTF8 conversion was unusable on non-linux
  * due to an UTF-16 BE/LE bug. Therefore we better use to_latin1() on those systems,
  * which works at least for ascii text */
@@ -181,8 +185,10 @@ List poppler_pdf_data (RawVector x, std::string opw, std::string upw) {
     IntegerVector height(boxes.size());
     IntegerVector x(boxes.size());
     IntegerVector y(boxes.size());
-    CharacterVector font(boxes.size());
-    IntegerVector size(boxes.size());
+    #ifdef POPPLER_HAS_FONT_INFO
+      CharacterVector font(boxes.size());
+      IntegerVector font_size(boxes.size());
+    #endif
     Rcpp::LogicalVector space(boxes.size());
     for(size_t j = 0; j < boxes.size(); j++){
       text[j] = ustring_to_r(boxes.at(j).text());
@@ -190,8 +196,10 @@ List poppler_pdf_data (RawVector x, std::string opw, std::string upw) {
       height[j] = boxes.at(j).bbox().height();
       x[j] = boxes.at(j).bbox().x();
       y[j] = boxes.at(j).bbox().y();
-      font[j] = boxes.at(j).get_font_name();
-      size[j] = boxes.at(j).get_font_size();
+      #ifdef POPPLER_HAS_FONT_INFO
+        font[j] = boxes.at(j).get_font_name();
+        font_size[j] = boxes.at(j).get_font_size();
+      #endif
       space[j] = boxes.at(j).has_space_after();
     }
     out[i] = DataFrame::create(
@@ -201,8 +209,10 @@ List poppler_pdf_data (RawVector x, std::string opw, std::string upw) {
       _["y"] = y,
       _["space"] = space,
       _["text"] = text,
-      _["font"] = font,
-      _["size"] = size,
+      #ifdef POPPLER_HAS_FONT_INFO
+        _["font"] = font,
+        _["font size"] = font_size,
+      #endif 	
       _["stringsAsFactors"] = false
     );
   }
