@@ -11,7 +11,7 @@
 #include <poppler-page-renderer.h>
 #include <Rcpp.h>
 #include <cstring>
-#include <memory> //For std::unqiue_ptr in older gcc
+#include <memory> //For std::unique_ptr in older gcc
 
 /* Note: the encoding bug was fixed in 0.73 but Debian backported to 0.71 */
 #if defined(POPPLER_VERSION_MINOR) && (POPPLER_VERSION_MINOR >= 71 || POPPLER_VERSION_MAJOR > 0)
@@ -119,6 +119,11 @@ List get_poppler_config(){
     _["has_pdf_data"] = true,
 #else
     _["has_pdf_data"] = false,
+#endif
+#ifdef POPPLER_HAS_FONT_INFO
+    _["has_local_font_info"] = true,
+#else
+    _["has_local_font_info"] = false,
 #endif
     _["supported_image_formats"] = image::supported_image_formats()
   );
