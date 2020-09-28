@@ -19,7 +19,7 @@
 #endif
 
 #if defined(POPPLER_VERSION_MINOR) && (POPPLER_VERSION_MINOR >= 89 || POPPLER_VERSION_MAJOR > 0)
-#define POPPLER_HAS_FONT_INFO
+#define POPPLER_HAS_LOCAL_FONT_INFO
 #endif
 
 /* Note: Before poppler 0.73, ustring to UTF8 conversion was unusable on non-linux
@@ -120,7 +120,7 @@ List get_poppler_config(){
 #else
     _["has_pdf_data"] = false,
 #endif
-#ifdef POPPLER_HAS_FONT_INFO
+#ifdef POPPLER_HAS_LOCAL_FONT_INFO
     _["has_local_font_info"] = true,
 #else
     _["has_local_font_info"] = false,
@@ -190,7 +190,7 @@ List poppler_pdf_data (RawVector x, std::string opw, std::string upw) {
     IntegerVector height(boxes.size());
     IntegerVector x(boxes.size());
     IntegerVector y(boxes.size());
-    #ifdef POPPLER_HAS_FONT_INFO
+    #ifdef POPPLER_HAS_LOCAL_FONT_INFO
       CharacterVector font(boxes.size());
       IntegerVector font_size(boxes.size());
     #endif
@@ -201,7 +201,7 @@ List poppler_pdf_data (RawVector x, std::string opw, std::string upw) {
       height[j] = boxes.at(j).bbox().height();
       x[j] = boxes.at(j).bbox().x();
       y[j] = boxes.at(j).bbox().y();
-      #ifdef POPPLER_HAS_FONT_INFO
+      #ifdef POPPLER_HAS_LOCAL_FONT_INFO
         font[j] = boxes.at(j).get_font_name();
         font_size[j] = boxes.at(j).get_font_size();
       #endif
@@ -214,7 +214,7 @@ List poppler_pdf_data (RawVector x, std::string opw, std::string upw) {
       _["y"] = y,
       _["space"] = space,
       _["text"] = text,
-      #ifdef POPPLER_HAS_FONT_INFO
+      #ifdef POPPLER_HAS_LOCAL_FONT_INFO
         _["font"] = font,
         _["font size"] = font_size,
       #endif 	
