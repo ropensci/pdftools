@@ -192,7 +192,7 @@ List poppler_pdf_data (RawVector x, std::string opw, std::string upw) {
     IntegerVector y(boxes.size());
     #ifdef POPPLER_HAS_LOCAL_FONT_INFO
       CharacterVector font(boxes.size());
-      IntegerVector font_size(boxes.size());
+      NumericVector font_size(boxes.size());
     #endif
     Rcpp::LogicalVector space(boxes.size());
     for(size_t j = 0; j < boxes.size(); j++){
