@@ -193,6 +193,7 @@ List poppler_pdf_data (RawVector x, std::string opw, std::string upw) {
     #ifdef POPPLER_HAS_LOCAL_FONT_INFO
       Rcpp::CharacterVector font(boxes.size());
       Rcpp::NumericVector font_size(boxes.size());
+      Rcpp::LogicalVector font_info(boxes.size());
     #endif
     Rcpp::LogicalVector space(boxes.size());
     for(size_t j = 0; j < boxes.size(); j++){
@@ -204,6 +205,7 @@ List poppler_pdf_data (RawVector x, std::string opw, std::string upw) {
       #ifdef POPPLER_HAS_LOCAL_FONT_INFO
         font[j] = boxes.at(j).get_font_name();
         font_size[j] = boxes.at(j).get_font_size();
+      	font_info[j] = boxes.at(j).has_font_info();
       #endif
       space[j] = boxes.at(j).has_space_after();
     }
@@ -214,11 +216,12 @@ List poppler_pdf_data (RawVector x, std::string opw, std::string upw) {
       _["y"] = y,
       _["space"] = space,
       _["text"] = text,
+      _["stringsAsFactors"] = false,
       #ifdef POPPLER_HAS_LOCAL_FONT_INFO
         _["font"] = font,
         _["font size"] = font_size,
+        _["font info"] = font_info
       #endif 	
-      _["stringsAsFactors"] = false
     );
   }
   return out;
