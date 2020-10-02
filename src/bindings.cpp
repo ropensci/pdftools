@@ -191,7 +191,14 @@ List poppler_pdf_data (RawVector x, std::string opw, std::string upw) {
   for(int i = 0; i < doc->pages(); i++){
     std::unique_ptr<poppler::page> p(doc->create_page(i));
     if(!p) continue; //missing page
-    std::vector<text_box> boxes = p->text_list(opt_flag);
+    #ifdef POPPLER_HAS_LOCAL_FONT_INFO
+      //poppler::page::text_list() does not resolve the font information. To got it,
+      //text_list() must be called with opt_flag = 1, cf popper::page class reference 
+      int opt_flag  = 1;
+      std::vector<text_box> boxes = p->text_list(opt_flag);
+    #else 
+      std::vector<text_box> boxes = p->text_list();
+    #endif
     CharacterVector text(boxes.size());
     IntegerVector width(boxes.size());
     IntegerVector height(boxes.size());
