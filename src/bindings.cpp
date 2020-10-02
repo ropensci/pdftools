@@ -179,13 +179,6 @@ List poppler_pdf_info (RawVector x, std::string opw, std::string upw) {
 // [[Rcpp::export]]
 List poppler_pdf_data (RawVector x, std::string opw, std::string upw) {
 #ifdef POPPLER_HAS_PAGE_TEXT_LIST
-  #ifdef POPPLER_HAS_LOCAL_FONT_INFO
-  //poppler::page::text_list() does not resolve the font information. To got it,
-  //text_list() must be called with opt_flag = 1, cf popper::page class reference 
-    int opt_flag  = 1;
-  #else 
-    int opt_flag = 0;
-  #endif
   std::unique_ptr<poppler::document> doc(read_raw_pdf(x, opw, upw));
   Rcpp::List out(doc->pages());
   for(int i = 0; i < doc->pages(); i++){
