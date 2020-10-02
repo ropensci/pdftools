@@ -223,12 +223,12 @@ List poppler_pdf_data (RawVector x, std::string opw, std::string upw) {
       _["y"] = y,
       _["space"] = space,
       _["text"] = text,
-      _["stringsAsFactors"] = false,
       #ifdef POPPLER_HAS_LOCAL_FONT_INFO
         _["font"] = font,
         _["font size"] = font_size,
-        _["font info"] = font_info
-      #endif 	
+        _["font info"] = font_info,
+      #endif
+      _["stringsAsFactors"] = false
     );
   }
   return out;
