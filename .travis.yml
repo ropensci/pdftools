@@ -6,7 +6,6 @@ pandoc: false
 
 matrix:
   include:
-    - dist: trusty
     - dist: xenial
     - dist: xenial
       addons:
@@ -20,21 +19,13 @@ matrix:
             - libtesseract-dev
             - libleptonica-dev
             - tesseract-ocr-eng
+    - dist: bionic
     - os: osx
       brew_packages: poppler || brew upgrade poppler
-    - os: osx
-      osx_image: 11.4
-      disable_homebrew: true
-      r_check_args: ""
     - os: osx
       osx_image: 10.1
       disable_homebrew: true
       r_check_args: ""
-    - r: 3.6
-      os: osx
-      osx_image: xcode7.3
-      disable_homebrew: true
-      before_install: sed -i.bak 's/-isysroot /-I/g' $(R RHOME)/etc/Makeconf
 
 addons:
   apt:
