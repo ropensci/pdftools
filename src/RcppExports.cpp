@@ -40,15 +40,16 @@ BEGIN_RCPP
 END_RCPP
 }
 // poppler_pdf_data
-List poppler_pdf_data(RawVector x, std::string opw, std::string upw);
-RcppExport SEXP _pdftools_poppler_pdf_data(SEXP xSEXP, SEXP opwSEXP, SEXP upwSEXP) {
+List poppler_pdf_data(RawVector x, bool get_font_info, std::string opw, std::string upw);
+RcppExport SEXP _pdftools_poppler_pdf_data(SEXP xSEXP, SEXP get_font_infoSEXP, SEXP opwSEXP, SEXP upwSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< RawVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< bool >::type get_font_info(get_font_infoSEXP);
     Rcpp::traits::input_parameter< std::string >::type opw(opwSEXP);
     Rcpp::traits::input_parameter< std::string >::type upw(upwSEXP);
-    rcpp_result_gen = Rcpp::wrap(poppler_pdf_data(x, opw, upw));
+    rcpp_result_gen = Rcpp::wrap(poppler_pdf_data(x, get_font_info, opw, upw));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -168,7 +169,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_pdftools_set_poppler_data", (DL_FUNC) &_pdftools_set_poppler_data, 1},
     {"_pdftools_get_poppler_config", (DL_FUNC) &_pdftools_get_poppler_config, 0},
     {"_pdftools_poppler_pdf_info", (DL_FUNC) &_pdftools_poppler_pdf_info, 3},
-    {"_pdftools_poppler_pdf_data", (DL_FUNC) &_pdftools_poppler_pdf_data, 3},
+    {"_pdftools_poppler_pdf_data", (DL_FUNC) &_pdftools_poppler_pdf_data, 4},
     {"_pdftools_poppler_pdf_text", (DL_FUNC) &_pdftools_poppler_pdf_text, 3},
     {"_pdftools_poppler_pdf_pagesize", (DL_FUNC) &_pdftools_poppler_pdf_pagesize, 3},
     {"_pdftools_poppler_pdf_fonts", (DL_FUNC) &_pdftools_poppler_pdf_fonts, 3},

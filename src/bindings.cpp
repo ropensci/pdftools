@@ -177,20 +177,21 @@ List poppler_pdf_info (RawVector x, std::string opw, std::string upw) {
 }
 
 // [[Rcpp::export]]
-List poppler_pdf_data (RawVector x, std::string opw, std::string upw) {
+List poppler_pdf_data (RawVector x, bool get_font_info, std::string opw, std::string upw) {
 #ifdef POPPLER_HAS_PAGE_TEXT_LIST
   std::unique_ptr<poppler::document> doc(read_raw_pdf(x, opw, upw));
   Rcpp::List out(doc->pages());
   for(int i = 0; i < doc->pages(); i++){
     std::unique_ptr<poppler::page> p(doc->create_page(i));
     if(!p) continue; //missing page
-#ifdef POPPLER_HAS_LOCAL_FONT_INFO
     //poppler::page::text_list() does not resolve the font information. To got it,
-    //text_list() must be called with opt_flag = 1, cf popper::page class reference 
-    int opt_flag  = 1;
-    std::vector<text_box> boxes = p->text_list(opt_flag);
-#else 
-    std::vector<text_box> boxes = p->text_list();
+    //text_list() must be called with opt_flag = 1, cf popper::page class reference
+#ifdef POPPLER_HAS_LOCAL_FONT_INFO
+    std::vector<text_box> boxes = p->text_list(get_font_info ? poppler::page::text_list_include_font : 0);
+#else
+    if(get_font_data)
+      throw std::runtime_error(std::string("Getting font data requires poppler >= 0.89. You have ") + POPPLER_VERSION);
+    std::vector<text_box> boxes();
 #endif
     CharacterVector text(boxes.size());
     IntegerVector width(boxes.size());
@@ -200,7 +201,6 @@ List poppler_pdf_data (RawVector x, std::string opw, std::string upw) {
 #ifdef POPPLER_HAS_LOCAL_FONT_INFO
     Rcpp::CharacterVector font(boxes.size());
     Rcpp::NumericVector font_size(boxes.size());
-    Rcpp::LogicalVector font_info(boxes.size());
 #endif
     Rcpp::LogicalVector space(boxes.size());
     for(size_t j = 0; j < boxes.size(); j++){
@@ -210,26 +210,32 @@ List poppler_pdf_data (RawVector x, std::string opw, std::string upw) {
       x[j] = boxes.at(j).bbox().x();
       y[j] = boxes.at(j).bbox().y();
 #ifdef POPPLER_HAS_LOCAL_FONT_INFO
-      font[j] = boxes.at(j).get_font_name();
-      font_size[j] = boxes.at(j).get_font_size();
-      font_info[j] = boxes.at(j).has_font_info();
+      if(get_font_info && boxes.at(j).has_font_info()){
+        font[j] = boxes.at(j).get_font_name();
+        font_size[j] = boxes.at(j).get_font_size();
+      } else {
+        font[j] = NA_STRING;
+        font_size[j] = NA_REAL;
+      }
 #endif
       space[j] = boxes.at(j).has_space_after();
     }
-    out[i] = DataFrame::create(
+    Rcpp::DataFrame df = DataFrame::create(
       _["width"] = width,
       _["height"] = height,
       _["x"] = x,
       _["y"] = y,
       _["space"] = space,
       _["text"] = text,
-#ifdef POPPLER_HAS_LOCAL_FONT_INFO
-      _["font"] = font,
-      _["font size"] = font_size,
-      _["font info"] = font_info,
-#endif
       _["stringsAsFactors"] = false
     );
+#ifdef POPPLER_HAS_LOCAL_FONT_INFO
+    if(get_font_info){
+      df.push_back(font, "font");
+      df.push_back(font_size, "font_size");
+    }
+#endif
+    out[i] = df;
   }
   return out;
 #else //POPPLER_HAS_PAGE_TEXT_LIST

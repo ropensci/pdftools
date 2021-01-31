@@ -23,6 +23,6 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{qpdf}{\code{\link[qpdf]{pdf_combine}}, \code{\link[qpdf]{pdf_compress}}, \code{\link[qpdf]{pdf_length}}, \code{\link[qpdf]{pdf_split}}, \code{\link[qpdf]{pdf_subset}}}
+  \item{qpdf}{\code{\link[qpdf:qpdf]{pdf_combine}}, \code{\link[qpdf:qpdf]{pdf_compress}}, \code{\link[qpdf:qpdf]{pdf_length}}, \code{\link[qpdf:qpdf]{pdf_split}}, \code{\link[qpdf:qpdf]{pdf_subset}}}
 }}
 
