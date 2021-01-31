@@ -210,12 +210,14 @@ List poppler_pdf_data (RawVector x, bool get_font_info, std::string opw, std::st
       x[j] = boxes.at(j).bbox().x();
       y[j] = boxes.at(j).bbox().y();
 #ifdef POPPLER_HAS_LOCAL_FONT_INFO
-      if(get_font_info && boxes.at(j).has_font_info()){
-        font_name[j] = boxes.at(j).get_font_name();
-        font_size[j] = boxes.at(j).get_font_size();
-      } else {
-        font_name[j] = NA_STRING;
-        font_size[j] = NA_REAL;
+      if(get_font_info){
+        if(boxes.at(j).has_font_info()){
+          font_name[j] = boxes.at(j).get_font_name();
+          font_size[j] = boxes.at(j).get_font_size();
+        } else {
+          font_name[j] = NA_STRING;
+          font_size[j] = NA_REAL;
+        }
       }
 #endif
       space[j] = boxes.at(j).has_space_after();
