@@ -189,7 +189,7 @@ List poppler_pdf_data (RawVector x, bool get_font_info, std::string opw, std::st
 #ifdef POPPLER_HAS_LOCAL_FONT_INFO
     std::vector<text_box> boxes = p->text_list(get_font_info ? poppler::page::text_list_include_font : 0);
 #else
-    if(get_font_data)
+    if(get_font_info)
       throw std::runtime_error(std::string("Getting font data requires poppler >= 0.89. You have ") + POPPLER_VERSION);
     std::vector<text_box> boxes();
 #endif
