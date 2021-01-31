@@ -48,11 +48,11 @@ pdf_text <- function(pdf, opw = "", upw = "") {
 
 #' @rdname pdftools
 #' @export
-#' @param font_data if TRUE, extract font-data for each box. Be careful, this
+#' @param font_info if TRUE, extract font-data for each box. Be careful, this
 #' requires a very recent version of poppler and will error otherwise.
-pdf_data <- function(pdf, font_data = FALSE, opw = "", upw = "") {
-  font_data <- as.logical(font_data)
-  out <- poppler_pdf_data(loadfile(pdf), font_data, opw, upw)
+pdf_data <- function(pdf, font_info = FALSE, opw = "", upw = "") {
+  font_info <- as.logical(font_info)
+  out <- poppler_pdf_data(loadfile(pdf), font_info, opw, upw)
   lapply(out, df_as_tibble)
 }
 
