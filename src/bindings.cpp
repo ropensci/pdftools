@@ -199,7 +199,7 @@ List poppler_pdf_data (RawVector x, bool get_font_info, std::string opw, std::st
     IntegerVector x(boxes.size());
     IntegerVector y(boxes.size());
 #ifdef POPPLER_HAS_LOCAL_FONT_INFO
-    Rcpp::CharacterVector font(boxes.size());
+    Rcpp::CharacterVector font_name(boxes.size());
     Rcpp::NumericVector font_size(boxes.size());
 #endif
     Rcpp::LogicalVector space(boxes.size());
@@ -211,10 +211,10 @@ List poppler_pdf_data (RawVector x, bool get_font_info, std::string opw, std::st
       y[j] = boxes.at(j).bbox().y();
 #ifdef POPPLER_HAS_LOCAL_FONT_INFO
       if(get_font_info && boxes.at(j).has_font_info()){
-        font[j] = boxes.at(j).get_font_name();
+        font_name[j] = boxes.at(j).get_font_name();
         font_size[j] = boxes.at(j).get_font_size();
       } else {
-        font[j] = NA_STRING;
+        font_name[j] = NA_STRING;
         font_size[j] = NA_REAL;
       }
 #endif
@@ -231,7 +231,7 @@ List poppler_pdf_data (RawVector x, bool get_font_info, std::string opw, std::st
     );
 #ifdef POPPLER_HAS_LOCAL_FONT_INFO
     if(get_font_info){
-      df.push_back(font, "font");
+      df.push_back(font_name, "font_name");
       df.push_back(font_size, "font_size");
     }
 #endif
