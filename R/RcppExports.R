@@ -13,8 +13,8 @@ poppler_pdf_info <- function(x, opw, upw) {
     .Call('_pdftools_poppler_pdf_info', PACKAGE = 'pdftools', x, opw, upw)
 }
 
-poppler_pdf_data <- function(x, opw, upw) {
-    .Call('_pdftools_poppler_pdf_data', PACKAGE = 'pdftools', x, opw, upw)
+poppler_pdf_data <- function(x, get_font_info, opw, upw) {
+    .Call('_pdftools_poppler_pdf_data', PACKAGE = 'pdftools', x, get_font_info, opw, upw)
 }
 
 poppler_pdf_text <- function(x, opw, upw) {

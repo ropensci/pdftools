@@ -15,7 +15,7 @@ pdf_info(pdf, opw = "", upw = "")
 
 pdf_text(pdf, opw = "", upw = "")
 
-pdf_data(pdf, opw = "", upw = "")
+pdf_data(pdf, font_info = FALSE, opw = "", upw = "")
 
 pdf_fonts(pdf, opw = "", upw = "")
 
@@ -31,6 +31,9 @@ pdf_pagesize(pdf, opw = "", upw = "")
 \item{opw}{string with owner password to open pdf}
 
 \item{upw}{string with user password to open pdf}
+
+\item{font_info}{if TRUE, extract font-data for each box. Be careful, this
+requires a very recent version of poppler and will error otherwise.}
 }
 \description{
 Utilities based on libpoppler for extracting text, fonts, attachments

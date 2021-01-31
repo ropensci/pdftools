@@ -11,11 +11,15 @@
 #include <poppler-page-renderer.h>
 #include <Rcpp.h>
 #include <cstring>
-#include <memory> //For std::unqiue_ptr in older gcc
+#include <memory> //For std::unique_ptr in older gcc
 
 /* Note: the encoding bug was fixed in 0.73 but Debian backported to 0.71 */
 #if defined(POPPLER_VERSION_MINOR) && (POPPLER_VERSION_MINOR >= 71 || POPPLER_VERSION_MAJOR > 0)
 #define POPPLER_HAS_PAGE_TEXT_LIST
+#endif
+
+#if defined(POPPLER_VERSION_MINOR) && (POPPLER_VERSION_MINOR >= 89 || POPPLER_VERSION_MAJOR > 0)
+#define POPPLER_HAS_LOCAL_FONT_INFO
 #endif
 
 /* Note: Before poppler 0.73, ustring to UTF8 conversion was unusable on non-linux
@@ -116,6 +120,11 @@ List get_poppler_config(){
 #else
     _["has_pdf_data"] = false,
 #endif
+#ifdef POPPLER_HAS_LOCAL_FONT_INFO
+    _["has_local_font_info"] = true,
+#else
+    _["has_local_font_info"] = false,
+#endif
     _["supported_image_formats"] = image::supported_image_formats()
   );
 }
@@ -168,19 +177,31 @@ List poppler_pdf_info (RawVector x, std::string opw, std::string upw) {
 }
 
 // [[Rcpp::export]]
-List poppler_pdf_data (RawVector x, std::string opw, std::string upw) {
+List poppler_pdf_data (RawVector x, bool get_font_info, std::string opw, std::string upw) {
 #ifdef POPPLER_HAS_PAGE_TEXT_LIST
   std::unique_ptr<poppler::document> doc(read_raw_pdf(x, opw, upw));
   Rcpp::List out(doc->pages());
   for(int i = 0; i < doc->pages(); i++){
     std::unique_ptr<poppler::page> p(doc->create_page(i));
     if(!p) continue; //missing page
-    std::vector<text_box> boxes = p->text_list();
+    //poppler::page::text_list() does not resolve the font information. To got it,
+    //text_list() must be called with opt_flag = 1, cf popper::page class reference
+#ifdef POPPLER_HAS_LOCAL_FONT_INFO
+    std::vector<text_box> boxes(p->text_list(get_font_info ? poppler::page::text_list_include_font : 0));
+#else
+    if(get_font_info)
+      throw std::runtime_error(std::string("Getting font data requires poppler >= 0.89. You have ") + POPPLER_VERSION);
+    std::vector<text_box> boxes(p->text_list());
+#endif
     CharacterVector text(boxes.size());
     IntegerVector width(boxes.size());
     IntegerVector height(boxes.size());
     IntegerVector x(boxes.size());
     IntegerVector y(boxes.size());
+#ifdef POPPLER_HAS_LOCAL_FONT_INFO
+    Rcpp::CharacterVector font_name(boxes.size());
+    Rcpp::NumericVector font_size(boxes.size());
+#endif
     Rcpp::LogicalVector space(boxes.size());
     for(size_t j = 0; j < boxes.size(); j++){
       text[j] = ustring_to_r(boxes.at(j).text());
@@ -188,9 +209,18 @@ List poppler_pdf_data (RawVector x, std::string opw, std::string upw) {
       height[j] = boxes.at(j).bbox().height();
       x[j] = boxes.at(j).bbox().x();
       y[j] = boxes.at(j).bbox().y();
+#ifdef POPPLER_HAS_LOCAL_FONT_INFO
+      if(get_font_info && boxes.at(j).has_font_info()){
+        font_name[j] = boxes.at(j).get_font_name();
+        font_size[j] = boxes.at(j).get_font_size();
+      } else {
+        font_name[j] = NA_STRING;
+        font_size[j] = NA_REAL;
+      }
+#endif
       space[j] = boxes.at(j).has_space_after();
     }
-    out[i] = DataFrame::create(
+    Rcpp::DataFrame df = DataFrame::create(
       _["width"] = width,
       _["height"] = height,
       _["x"] = x,
@@ -199,6 +229,13 @@ List poppler_pdf_data (RawVector x, std::string opw, std::string upw) {
       _["text"] = text,
       _["stringsAsFactors"] = false
     );
+#ifdef POPPLER_HAS_LOCAL_FONT_INFO
+    if(get_font_info){
+      df.push_back(font_name, "font_name");
+      df.push_back(font_size, "font_size");
+    }
+#endif
+    out[i] = df;
   }
   return out;
 #else //POPPLER_HAS_PAGE_TEXT_LIST
