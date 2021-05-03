@@ -1,3 +1,6 @@
+2.4.0
+  - Windows: update to poppler 21.04.0 and add UCRT support
+
 2.3.1
   - Minor tweaks for configure script
   - Show poppler version during CMD check
