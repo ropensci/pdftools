@@ -10,3 +10,4 @@ README.md$
 ^appveyor\.yml$
 ^inst$
 ^configure.log$
+^\.github$
