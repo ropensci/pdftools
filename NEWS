@@ -1,6 +1,9 @@
-2.4.0
-  - Windows: update to poppler 21.04.0 and add UCRT support
-  - MacOS: update poppler to 20.12.1
+3.0.0
+  - Note: the poppler library 0.88 introduced changes in whitespace rendering for
+    pdf_text(). This can result in extra linebreaks or spaces in text output.
+  - Windows: update to poppler 21.04.0 and add UCRT support.
+  - MacOS: update poppler to 20.12.1.
+  - Trim \r and \f characters from pdf_text()
 
 2.3.1
   - Minor tweaks for configure script
