@@ -46,6 +46,8 @@ bool set_poppler_data(std::string path){
 String ustring_to_utf8(ustring x){
   byte_array buf = x.to_utf8();
   std::string str(buf.begin(), buf.end());
+  if(str.back() == '\f')
+    str.erase (str.length()-1);
   String y(str.c_str());
   y.set_encoding(CE_UTF8);
   return y;
