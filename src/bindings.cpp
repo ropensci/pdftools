@@ -48,6 +48,9 @@ String ustring_to_utf8(ustring x){
   std::string str(buf.begin(), buf.end());
   if(str.back() == '\f')
     str.erase (str.length()-1);
+#ifdef _WIN32
+  str.erase(std::remove(str.begin(), str.end(), '\r'), str.end());
+#endif
   String y(str.c_str());
   y.set_encoding(CE_UTF8);
   return y;
