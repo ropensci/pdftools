@@ -75,7 +75,7 @@ pdf_convert <- function(pdf, format = "png", pages = NULL, filenames = NULL , dp
   if(!is.numeric(pages) || !length(pages))
     stop("Argument 'pages' must be a one-indexed vector of page numbers")
   if(length(filenames) < 2){
-    input <- sub(".pdf", "", basename(pdf), fixed = TRUE)
+    input <- ifelse(is.raw(pdf), 'output', sub(".pdf", "", basename(pdf), fixed = TRUE))
     filenames <- if (length(filenames)) {
       sprintf(filenames, pages, format)
     } else {
