@@ -1,3 +1,6 @@
+3.0.1
+  - Fix configure script to run under Solaris
+
 3.0.0
   - Note: the poppler library 0.88 introduced changes in whitespace rendering for
     pdf_text(). This can result in extra linebreaks or spaces in text output.
