@@ -33,6 +33,10 @@ jobs:
         with:
           r-version: ${{ matrix.config.r }}
 
+      - name: Update Rtools40 libraries
+        run: pacman -Syu --noconfirm
+        shell: c:\rtools40\usr\bin\bash.exe --login {0}
+
       - uses: r-lib/actions/setup-pandoc@v1
 
       - name: Query dependencies
