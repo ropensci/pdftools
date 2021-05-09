@@ -29,7 +29,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - uses: jeroen/actions/setup-r@v1
+      - uses: jeroen/actions/setup-r@master
         with:
           r-version: ${{ matrix.config.r }}
           update-rtools: true
