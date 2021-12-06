@@ -11,7 +11,8 @@ pdf_ocr_text(
   opw = "",
   upw = "",
   language = "eng",
-  dpi = 600
+  dpi = 600,
+  verbose = FALSE
 )
 
 pdf_ocr_data(
@@ -20,7 +21,8 @@ pdf_ocr_data(
   opw = "",
   upw = "",
   language = "eng",
-  dpi = 600
+  dpi = 600,
+  verbose = FALSE
 )
 }
 \arguments{
