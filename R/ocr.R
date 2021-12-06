@@ -10,6 +10,7 @@
 #' languge of the engine.
 #' @param pages which pages of the pdf file to extract
 #' @param dpi resolution to render image that is passed to [tesseract::ocr].
+#' @param verbose passed to [pdftools][pdftools::pdf_convert]
 pdf_ocr_text <- function(pdf, pages = NULL, opw = "", upw = "", language = "eng", dpi = 600, verbose = FALSE){
   engine <- tesseract::tesseract(language)
   images <- pdf_convert(pdf = pdf, pages = pages, opw = opw, upw = upw, dpi = dpi, verbose = verbose)
