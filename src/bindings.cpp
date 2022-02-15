@@ -137,18 +137,10 @@ List get_poppler_config(){
 // [[Rcpp::export]]
 List poppler_pdf_info (RawVector x, std::string opw, std::string upw) {
   std::unique_ptr<poppler::document> doc(read_raw_pdf(x, opw, upw, true));
-  int major = 0, minor = 0;
-  doc->get_pdf_version(&major, &minor);
-  std::string version_str;
-  std::ostringstream convert;
-  convert << major;
-  convert << ".";
-  convert << minor;
 
   /* can't read the doc */
   if(doc->is_locked()){
     return List::create(
-      _["version"] = convert.str(),
       _["encrypted"] = doc->is_encrypted(),
       _["linearized"] = doc->is_linearized(),
       _["created"] = Datetime(doc->info_date("CreationDate")),
@@ -165,6 +157,14 @@ List poppler_pdf_info (RawVector x, std::string opw, std::string upw) {
     if(keystr.compare("ModDate") == 0) continue;
     keys.push_back(ustring_to_r(doc->info_key(keystr)), keystr);
   }
+
+  int major = 0, minor = 0;
+  doc->get_pdf_version(&major, &minor);
+  std::string version_str;
+  std::ostringstream convert;
+  convert << major;
+  convert << ".";
+  convert << minor;
 
   return List::create(
     _["version"] = convert.str(),
