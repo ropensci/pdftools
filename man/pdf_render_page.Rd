@@ -73,7 +73,6 @@ bitmap <- pdf_render_page("news.pdf")
 
 # save to bitmap formats
 png::writePNG(bitmap, "page.png")
-jpeg::writeJPEG(bitmap, "page.jpeg")
 webp::write_webp(bitmap, "page.webp")
 
 # Higher quality

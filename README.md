@@ -127,7 +127,6 @@ bitmap <- pdf_render_page("1403.2805.pdf", page = 1)
 
 # save bitmap image
 png::writePNG(bitmap, "page.png")
-jpeg::writeJPEG(bitmap, "page.jpeg")
 webp::write_webp(bitmap, "page.webp")
 ```
 
