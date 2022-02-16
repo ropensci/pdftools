@@ -1,6 +1,6 @@
 3.1.0
   - Fix a test that could segfault with recent versions of poppler
-  - MacOS: update to poppler 21.12.0
+  - Windows / MacOS: update to poppler 22.02.0
 
 3.0.1
   - Fix configure script to run under Solaris
