@@ -46,7 +46,7 @@ bool set_poppler_data(std::string path){
 String ustring_to_utf8(ustring x){
   byte_array buf = x.to_utf8();
   std::string str(buf.begin(), buf.end());
-  if(str.back() == '\f')
+  if(str.length() && str.back() == '\f')
     str.erase (str.length()-1);
 #ifdef _WIN32
   str.erase(std::remove(str.begin(), str.end(), '\r'), str.end());
