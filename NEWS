@@ -1,3 +1,6 @@
+3.1.1
+  - Fix bug when pkg is compiled with -D_GLIBCXX_ASSERTIONS, e.g. Fedora.
+
 3.1.0
   - Fix a test that could segfault with recent versions of poppler
   - Windows / MacOS: update to poppler 22.02.0
