@@ -73,6 +73,15 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
+# On CRAN macbuilder copy poppler-data manually (autobrew does this automatically)
+if [ "$PKGCONFIG_LIBS" ] && [ `uname` = "Darwin" ]; then
+  popplerdata=$(pkg-config --variable=poppler_datadir poppler-data) || exit 1
+  mkdir -p inst/share
+  cp -Rf "$popplerdata" inst/share/
+  echo "Found poppler-data in $popplerdata"
+  PKG_CFLAGS="$PKG_CFLAGS -DBUNDLE_POPPLER_DATA"
+fi
+
 # Write to Makevars
 sed -e "s|@cflags@|$PKG_CFLAGS|" -e "s|@libs@|$PKG_LIBS|" src/Makevars.in > src/Makevars
 

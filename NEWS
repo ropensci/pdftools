@@ -1,3 +1,6 @@
+3.1.2
+  - CRAN macbuilder: copy poppler-data from local location instead of downloading
+
 3.1.1
   - Fix bug when pkg is compiled with -D_GLIBCXX_ASSERTIONS, e.g. Fedora.
 
