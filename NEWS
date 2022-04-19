@@ -1,5 +1,6 @@
 3.1.2
   - CRAN macbuilder: copy poppler-data from local location instead of downloading
+  - Windows: update to poppler 22.04.0
 
 3.1.1
   - Fix bug when pkg is compiled with -D_GLIBCXX_ASSERTIONS, e.g. Fedora.

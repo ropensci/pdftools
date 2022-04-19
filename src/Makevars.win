@@ -1,10 +1,10 @@
-VERSION=22.02.0
-DATA=0.4.11
+VERSION=22.04.0
+POPPLERDATA=share/poppler
 
 # Need older poppler for R < 4.0
 ifeq ($(R_COMPILED_BY),gcc 4.9.3)
 VERSION=0.73.0
-DATA=0.4.9
+POPPLERDATA=poppler-data-0.4.9
 LIBHARFBUZZ=-lharfbuzz
 endif
 
@@ -16,7 +16,7 @@ PKG_CPPFLAGS=-I$(RWINLIB)/include/poppler/cpp \
 
 PKG_LIBS= \
 	-L$(RWINLIB)/lib${subst gcc,,${COMPILED_BY}}${R_ARCH} \
-	-L$(RWINLIB)/lib${R_ARCH}${CRT} \
+	-L$(RWINLIB)/lib${R_ARCH} \
 	-lpoppler-cpp -lpoppler -llcms2 -ljpeg -lpng16 -ltiff -lopenjp2 \
 	-lfreetype $(LIBHARFBUZZ) -lfreetype -lbz2 -liconv -lz
 
@@ -27,10 +27,7 @@ clean:
 
 winlibs:
 	"${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe" "../tools/winlibs.R" $(VERSION)
-	mkdir -p ../inst/share/poppler
-	cp -Rf $(RWINLIB)/poppler-data-$(DATA)/cidToUnicode ../inst/share/poppler/
-	cp -Rf $(RWINLIB)/poppler-data-$(DATA)/cMap ../inst/share/poppler/
-	cp -Rf $(RWINLIB)/poppler-data-$(DATA)/nameToUnicode ../inst/share/poppler/
-	cp -Rf $(RWINLIB)/poppler-data-$(DATA)/unicodeMap ../inst/share/poppler/
+	mkdir -p ../inst/share
+	cp -Rf $(RWINLIB)/$(POPPLERDATA) ../inst/share/poppler
 
 .PHONY: all winlibs clean
