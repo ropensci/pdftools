@@ -12,8 +12,8 @@ URL: https://docs.ropensci.org/pdftools/ (website)
     https://github.com/ropensci/pdftools#readme (devel)
     https://poppler.freedesktop.org (upstream)
 BugReports: https://github.com/ropensci/pdftools/issues
-SystemRequirements: Poppler C++ API: libpoppler-cpp-dev (deb) or poppler-cpp-devel (rpm).
-    The unit tests also require the 'poppler-data' package (rpm/deb)
+SystemRequirements: Poppler C++ API: libpoppler-cpp-dev (deb) or poppler-cpp-devel (rpm),
+    and poppler-data (rpm/deb) package.
 Encoding: UTF-8
 Imports: 
     Rcpp (>= 0.12.12),
