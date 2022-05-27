@@ -1,3 +1,7 @@
+3.2.1
+  - CRAN macbuilder: avoid linking to poppler builds which depend on
+    3rd party shared libraries from xQuartz.
+
 3.2.0
   - CRAN macbuilder: try to find local poppler-data via pkg-config
   - Windows: update to poppler 22.04.0
