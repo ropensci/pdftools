@@ -1,7 +1,6 @@
 # pdftools
 
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/ropensci/pdftools?branch=master&svg=true)](https://ci.appveyor.com/project/jeroen/pdftools)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/pdftools)](http://cran.r-project.org/package=pdftools)
 [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/pdftools)](http://cran.r-project.org/web/packages/pdftools/index.html)
 
@@ -20,7 +19,7 @@ On Windows and Mac the binary packages can be installed directly from CRAN:
 install.packages("pdftools")
 ```
 
-Installation on Linux requires the poppler development library. On __Ubuntu 16.04 (Xenial)__ and __Ubuntu 18.04 (Bionic)__ we have backports that support the latest `pdf_data()` functionality:
+Installation on Linux requires the poppler development library. For __Ubuntu 18.04 (Bionic)__ and __Ubuntu 20.04 (Focal)__ we provide backports of poppler version 22.02 to support the latest functionality:
 
 ```
 sudo add-apt-repository -y ppa:cran/poppler
