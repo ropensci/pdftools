@@ -13,6 +13,13 @@
 #include <cstring>
 #include <memory> //For std::unique_ptr in older gcc
 
+/* See: https://github.com/freedesktop/poppler/commit/2656d986d01da5aea4f51c75e4deee569ca88064 */
+#if defined(POPPLER_VERSION_MINOR) && (POPPLER_VERSION_MINOR >= 5 && POPPLER_VERSION_MAJOR >= 22)
+#define info_date info_date_t
+#define creation_date creation_date_t
+#define modification_date modification_date_t
+#endif
+
 /* Note: the encoding bug was fixed in 0.73 but Debian backported to 0.71 */
 #if defined(POPPLER_VERSION_MINOR) && (POPPLER_VERSION_MINOR >= 71 || POPPLER_VERSION_MAJOR > 0)
 #define POPPLER_HAS_PAGE_TEXT_LIST

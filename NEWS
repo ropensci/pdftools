@@ -1,3 +1,6 @@
+3.3.0
+  - Fix some deprecated poppler APIs
+
 3.2.1
   - MacOS: avoid linking to poppler builds which depend on 3rd party shared
     libraries from xQuartz.
