@@ -1,3 +1,6 @@
+3.3.1
+  - Workaround for a bug in Rcpp
+
 3.3.0
   - Fix some deprecated poppler APIs
 
