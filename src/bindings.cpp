@@ -234,14 +234,13 @@ List poppler_pdf_data (RawVector x, bool get_font_info, std::string opw, std::st
 #endif
       space[j] = boxes.at(j).has_space_after();
     }
-    Rcpp::DataFrame df = DataFrame::create(
+    Rcpp::List df = List::create(
       _["width"] = width,
       _["height"] = height,
       _["x"] = x,
       _["y"] = y,
       _["space"] = space,
-      _["text"] = text,
-      _["stringsAsFactors"] = false
+      _["text"] = text
     );
 #ifdef POPPLER_HAS_LOCAL_FONT_INFO
     if(get_font_info){
@@ -249,7 +248,7 @@ List poppler_pdf_data (RawVector x, bool get_font_info, std::string opw, std::st
       df.push_back(font_size, "font_size");
     }
 #endif
-    out[i] = df;
+    out[i] = Rcpp::DataFrame::create(df, _["stringsAsFactors"] = false);
   }
   return out;
 #else //POPPLER_HAS_PAGE_TEXT_LIST
