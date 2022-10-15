@@ -1,3 +1,6 @@
+3.3.2
+  - Compile with the default CXX standard (i.e. C++14 for current R)
+
 3.3.1
   - Workaround for a bug in Rcpp
 
