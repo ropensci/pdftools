@@ -13,19 +13,25 @@
 #include <cstring>
 #include <memory> //For std::unique_ptr in older gcc
 
+#if defined(POPPLER_VERSION_MINOR)
+#define VERSION_AT_LEAST(x,y) (POPPLER_VERSION_MAJOR > x || (POPPLER_VERSION_MAJOR == x && POPPLER_VERSION_MINOR >= y))
+#else
+#define VERSION_AT_LEAST(x,y) 0
+#endif
+
 /* See: https://github.com/freedesktop/poppler/commit/2656d986d01da5aea4f51c75e4deee569ca88064 */
-#if defined(POPPLER_VERSION_MINOR) && (POPPLER_VERSION_MINOR >= 5 && POPPLER_VERSION_MAJOR >= 22)
+#if VERSION_AT_LEAST(22, 5)
 #define info_date info_date_t
 #define creation_date creation_date_t
 #define modification_date modification_date_t
 #endif
 
 /* Note: the encoding bug was fixed in 0.73 but Debian backported to 0.71 */
-#if defined(POPPLER_VERSION_MINOR) && (POPPLER_VERSION_MINOR >= 71 || POPPLER_VERSION_MAJOR > 0)
+#if VERSION_AT_LEAST(0, 71)
 #define POPPLER_HAS_PAGE_TEXT_LIST
 #endif
 
-#if defined(POPPLER_VERSION_MINOR) && (POPPLER_VERSION_MINOR >= 89 || POPPLER_VERSION_MAJOR > 0)
+#if VERSION_AT_LEAST(0, 89)
 #define POPPLER_HAS_LOCAL_FONT_INFO
 #endif
 
@@ -443,7 +449,7 @@ static void error_callback(const std::string &msg, void *context){
 
 // [[Rcpp::export]]
 void set_error_callback() {
-#if defined(POPPLER_VERSION_MINOR) && (POPPLER_VERSION_MINOR >= 30 || POPPLER_VERSION_MAJOR > 0)
+#if VERSION_AT_LEAST(0, 30)
   poppler::set_debug_error_function(error_callback, NULL);
 #endif
 }
