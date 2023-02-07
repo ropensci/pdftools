@@ -1,3 +1,7 @@
+3.3.3
+  - Fix a bug in the version checking macro
+  - Remove CXX11 from Makevars.win
+
 3.3.2
   - Compile with the default CXX standard (i.e. C++14 for current R)
 
