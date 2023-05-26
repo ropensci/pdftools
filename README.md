@@ -82,9 +82,9 @@ info <- pdf_info("1403.2805.pdf")
 fonts <- pdf_fonts("1403.2805.pdf")
 ```
 
-## Bonus feature: rendering pdf
+## Rendering pdf files
 
-A bonus feature on most platforms is rendering of PDF files to bitmap arrays. The poppler library provides all functionality to implement a complete PDF reader, including graphical display of the content. In R we can use `pdf_render_page` to render a page of the PDF into a bitmap, which can be stored as e.g. png or jpeg.
+Another feature of pdftools is rendering of PDF files to bitmap arrays (images). The poppler library provides all functionality to implement a complete PDF reader, including graphical display of the content. In R we can use `pdf_render_page` to render a page of the PDF into a bitmap, which can be stored as e.g. png or jpeg.
 
 ```r
 # renders pdf to bitmap array
@@ -94,8 +94,6 @@ bitmap <- pdf_render_page("1403.2805.pdf", page = 1)
 png::writePNG(bitmap, "page.png")
 webp::write_webp(bitmap, "page.webp")
 ```
-
-This feature is still experimental and currently does not work on Windows.
 
 ## Limitations and related packages
 
@@ -120,4 +118,3 @@ It is possible to use `pdftools` with some creativity to parse tables from PDF d
 If you want to extract text from scanned text present in a pdf, you'll need to use OCR (optical character recognition). Please refer to the [rOpenSci `tesseract` package](https://github.com/ropensci/tesseract) that provides bindings to the Tesseract OCR engine. In particular read [the section of its vignette about reading from PDF files using `pdftools` and `tesseract`](https://cran.r-project.org/web/packages/tesseract/vignettes/intro.html#read_from_pdf_files).
 
 
-[![](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)
