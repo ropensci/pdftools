@@ -10,8 +10,9 @@ pdf_ocr_text(
   pages = NULL,
   opw = "",
   upw = "",
+  dpi = 600,
   language = "eng",
-  dpi = 600
+  options = NULL
 )
 
 pdf_ocr_data(
@@ -19,8 +20,9 @@ pdf_ocr_data(
   pages = NULL,
   opw = "",
   upw = "",
+  dpi = 600,
   language = "eng",
-  dpi = 600
+  options = NULL
 )
 }
 \arguments{
@@ -32,10 +34,12 @@ pdf_ocr_data(
 
 \item{upw}{string with user password to open pdf}
 
+\item{dpi}{resolution to render image that is passed to \link{pdf_convert}.}
+
 \item{language}{passed to \link[tesseract:tesseract]{tesseract} to specify the
 languge of the engine.}
 
-\item{dpi}{resolution to render image that is passed to \link[tesseract:ocr]{tesseract::ocr}.}
+\item{options}{passed to \link[tesseract:tesseract]{tesseract} to specify OCR parameters}
 }
 \description{
 Perform OCR text extraction. This requires you have the \code{tesseract} package.
