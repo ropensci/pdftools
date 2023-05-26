@@ -45,40 +45,6 @@ On Fedora:
 sudo yum install poppler-cpp-devel
 ```
 
-### Building from source
-
-#### On Ubuntu 
-
-__Update__: Itt is now recommended to use the backport PPA mentioned above. If you really want to build from source, follow the instructions [of this askubuntu.com answer](https://askubuntu.com/a/1112947).
-
-#### On CentOS
-
-On CentOS the `libpoppler-cpp` library is not included with the system so we need to build from source. Note that recent versions of poppler require C++11 which is not available on CentOS, so we build a slightly older version of libpoppler.
-
-```sh
-# Build dependencies
-yum install wget xz libjpeg-devel openjpeg2-devel
-
-# Download and extract
-wget https://poppler.freedesktop.org/poppler-0.47.0.tar.xz
-tar -Jxvf poppler-0.47.0.tar.xz
-cd poppler-0.47.0
-
-# Build and install
-./configure
-make
-sudo make install
-```
-
-By default libraries get installed in `/usr/local/lib` and `/usr/local/include`. On CentOS this is not a default search path so we need to set `PKG_CONFIG_PATH` and  `LD_LIBRARY_PATH` to point R to the right directory:
-
-```sh
-export LD_LIBRARY_PATH="/usr/local/lib"
-export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig"
-```
-
-We can then start R and install `pdftools`.
-
 ## Getting started
 
 The `?pdftools` manual page shows a brief overview of the main utilities. The most important function is `pdf_text` which returns a character vector of length equal to the number of pages in the pdf. Each string in the vector contains a plain text version of the text on that page.
