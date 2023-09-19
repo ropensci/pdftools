@@ -1,3 +1,6 @@
+3.4.0
+  - Windows: update to poppler 23.08.0 + deps
+
 3.3.3
   - Fix a bug in the version checking macro
   - Remove CXX11 from Makevars.win

@@ -1,17 +1,16 @@
-# Build against mingw-w64 build of poppler 0.57.0
-VERSION <- commandArgs(TRUE)
-if(!file.exists(sprintf("../windows/poppler-%s/include/poppler/cpp/poppler-document.h", VERSION))){
-  if(getRversion() < "3.3.0") setInternet2()
-  download.file(sprintf("https://github.com/rwinlib/poppler/archive/v%s.zip", VERSION),
-                "lib.zip", quiet = TRUE)
+if(!file.exists("../windows/poppler/include/poppler/cpp/poppler-document.h")){
+  unlink("../windows", recursive = TRUE)
+  url <- if(grepl("aarch", R.version$platform)){
+    "https://github.com/r-windows/bundles/releases/download/poppler-23.08.0/poppler-23.08.0-clang-aarch64.tar.xz"
+  } else if(getRversion() >= "4.3") {
+    "https://github.com/r-windows/bundles/releases/download/poppler-23.08.0/poppler-23.08.0-ucrt-x86_64.tar.xz"
+  } else {
+    "https://github.com/rwinlib/poppler/archive/v22.04.0-2.tar.gz"
+  }
+  download.file(url, basename(url), quiet = TRUE)
   dir.create("../windows", showWarnings = FALSE)
-  unzip("lib.zip", exdir = "../windows")
-  unlink("lib.zip")
+  untar(basename(url), exdir = "../windows", tar = 'internal')
+  unlink(basename(url))
+  setwd("../windows")
+  file.rename(list.files(), 'poppler')
 }
-
-# Download extra poppler data
-#if(!file.exists("../windows/poppler-data-0.4.8")){
-#  download.file("https://poppler.freedesktop.org/poppler-data-0.4.8.tar.gz", "data.tar.gz", quiet = TRUE)
-#  untar("data.tar.gz", exdir = "../windows")
-#  unlink("data.tar.gz")
-#}
