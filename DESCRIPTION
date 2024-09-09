@@ -2,7 +2,7 @@ Package: pdftools
 Type: Package
 Title: Text Extraction, Rendering and Converting of PDF Documents
 Version: 3.4.0
-Authors@R: person("Jeroen", "Ooms", role = c("aut", "cre"), email = "jeroen@berkeley.edu",
+Authors@R: person("Jeroen", "Ooms", role = c("aut", "cre"), email = "jeroenooms@gmail.com",
       comment = c(ORCID = "0000-0002-4035-0289"))
 Description: Utilities based on 'libpoppler' for extracting text, fonts, attachments and 
     metadata from a PDF file. Also supports high quality rendering of PDF documents into
