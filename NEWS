@@ -1,3 +1,7 @@
+3.4.1
+  - Remove some test verbosity as per CRAN requeset
+  - Update maintainer email address
+
 3.4.0
   - Windows: update to poppler 23.08.0 + deps
 
