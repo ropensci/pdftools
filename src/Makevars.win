@@ -2,7 +2,8 @@ POPPLERDATA=share/poppler
 RWINLIB=../windows/poppler
 PKG_CXXFLAGS=-Dpoppler_cpp_EXPORTS -DBUNDLE_POPPLER_DATA
 PKG_CPPFLAGS=-I$(RWINLIB)/include/poppler/cpp \
-	-I$(RWINLIB)/include/poppler
+	-I$(RWINLIB)/include/poppler \
+	-DSTRICT_R_HEADERS -DR_NO_REMAP
 
 PKG_LIBS= \
 	-L$(RWINLIB)/lib${subst gcc,,${COMPILED_BY}}${R_ARCH} \
