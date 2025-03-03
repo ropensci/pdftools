@@ -1,3 +1,6 @@
+3.5.0
+  - Windows: use poppler from Rtools if found
+
 3.4.1
   - Remove some test verbosity as per CRAN requeset
   - Update maintainer email address
