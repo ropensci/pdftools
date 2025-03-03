@@ -1,4 +1,4 @@
-PKG_CONFIG_NAME = poppler-cpp
+PKG_CONFIG_NAME = poppler-cpp poppler-data
 PKG_CONFIG ?= $(BINPREF)pkg-config
 PKG_CXXFLAGS = -Dpoppler_cpp_EXPORTS -DBUNDLE_POPPLER_DATA -DSTRICT_R_HEADERS -DR_NO_REMAP
 PKG_LIBS := $(shell $(PKG_CONFIG) --libs $(PKG_CONFIG_NAME))
@@ -6,7 +6,7 @@ PKG_LIBS := $(shell $(PKG_CONFIG) --libs $(PKG_CONFIG_NAME))
 ifneq ($(PKG_LIBS),)
 $(info using $(PKG_CONFIG_NAME) from Rtools)
 PKG_CPPFLAGS := $(shell $(PKG_CONFIG) --cflags $(PKG_CONFIG_NAME))
-POPPLERDATA := $(shell pkg-config --variable=poppler_datadir poppler-data)
+POPPLERDATA := $(shell pkg-config --variable=poppler_datadir $(PKG_CONFIG_NAME))
 else
 RWINLIB = ../windows/poppler
 PKG_CPPFLAGS = -I$(RWINLIB)/include/poppler/cpp -I$(RWINLIB)/include/poppler
@@ -28,5 +28,3 @@ copydata:
 
 clean:
 	rm -f $(SHLIB) $(OBJECTS)
-
-
