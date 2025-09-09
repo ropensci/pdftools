@@ -12,6 +12,7 @@ test_that("reading password protected pdf", {
 
   # Get text with password
   expect_equal(4, length(pdf_text("pdf-example-password.original.pdf", upw = "test")))
+  expect_equal(4, length(pdf_text("pdf-example-password.original.pdf", upw = "test", raw = TRUE)))
   expect_false(pdf_info("pdf-example-password.original.pdf", upw = "test")$locked)
 
   # Reading 'encrypted' file

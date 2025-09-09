@@ -260,13 +260,13 @@ List poppler_pdf_data (RawVector x, bool get_font_info, std::string opw, std::st
 }
 
 // [[Rcpp::export]]
-CharacterVector poppler_pdf_text (RawVector x, std::string opw, std::string upw) {
+CharacterVector poppler_pdf_text (RawVector x, std::string opw, std::string upw, bool raw = false) {
   std::unique_ptr<poppler::document> doc(read_raw_pdf(x, opw, upw));
   CharacterVector out(doc->pages());
   for(int i = 0; i < doc->pages(); i++){
     std::unique_ptr<poppler::page> p(doc->create_page(i));
     if(!p) continue; //missing page
-    page::text_layout_enum show_text_layout = page::physical_layout;
+    page::text_layout_enum show_text_layout = raw ? page::raw_order_layout : page::physical_layout;
 
     /* media_box includes text in margins: https://github.com/ropensci/pdftools/issues/67 */
     rectf target(p->page_rect(media_box));
