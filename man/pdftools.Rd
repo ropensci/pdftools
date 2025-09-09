@@ -32,7 +32,7 @@ pdf_pagesize(pdf, opw = "", upw = "")
 
 \item{upw}{string with user password to open pdf}
 
-\item{raw}{if TRUE text is kept in content stream order. Default: FALSE.}
+\item{raw}{return text in raw stream order. Default is to use physical layout order.}
 
 \item{font_info}{if TRUE, extract font-data for each box. Be careful, this
 requires a very recent version of poppler and will error otherwise.}
