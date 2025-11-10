@@ -1,3 +1,6 @@
+3.7.0
+  - Switch some deprecated fields to new ones
+
 3.6.0
   - pdf_text() gains an argument 'raw' (#138)
   - MacOS: update fallback library to poppler 25.09.1

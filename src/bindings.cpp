@@ -359,10 +359,17 @@ List poppler_pdf_files (RawVector x, std::string opw, std::string upw) {
       RawVector res(data.size());
       std::copy(data.begin(), data.end(), res.begin());
       out.push_back(List::create(
+#if VERSION_AT_LEAST(25, 10)
+        _["name"] = ustring_to_r(file->unicodeName()),
+        _["mime"] = file->mime_type(),
+        _["created"] = Datetime(file->creation_date_t()),
+        _["modified"] = Datetime(file->modification_date_t()),
+#else
         _["name"] = file->name(),
         _["mime"] = file->mime_type(),
         _["created"] = Datetime(file->creation_date()),
         _["modified"] = Datetime(file->modification_date()),
+#endif
         _["description"] = ustring_to_r(file->description()),
         _["data"] = res
       ));
