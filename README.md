@@ -19,15 +19,7 @@ On Windows and Mac the binary packages can be installed directly from CRAN:
 install.packages("pdftools")
 ```
 
-Installation on Linux requires the poppler development library. For __Ubuntu 18.04 (Bionic)__ and __Ubuntu 20.04 (Focal)__ we provide backports of poppler version 22.02 to support the latest functionality:
-
-```
-sudo add-apt-repository -y ppa:cran/poppler
-sudo apt-get update
-sudo apt-get install -y libpoppler-cpp-dev
-```
-
-On other versions of __Debian__ or __Ubuntu__ simply use::
+Installation on Linux requires the poppler development library. On __Debian__ or __Ubuntu__ use:
 
 ```
 sudo apt-get install libpoppler-cpp-dev
