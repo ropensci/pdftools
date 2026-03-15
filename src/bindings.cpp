@@ -81,6 +81,7 @@ static List item_to_list(toc_item *item){
   }
   return List::create(
     _["title"] = ustring_to_r(item->title()),
+    _["is_open"] = item->is_open(),
     _["children"] = out
   );
 }
