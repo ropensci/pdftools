@@ -1,5 +1,6 @@
-development
+3.8.0
   - pdf_toc() now also returns if bookmarks are open (#117)
+  - MacOS: update to poppler 26.04
 
 3.7.0
   - Switch some deprecated fields to new ones
