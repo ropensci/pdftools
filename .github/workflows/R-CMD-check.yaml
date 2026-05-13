@@ -18,11 +18,11 @@ jobs:
         config:
           - {os: macOS-latest,    r: 'release'}
           - {os: windows-latest,  r: 'devel'}
+          - {os: windows-latest,  r: '4.6'}
           - {os: windows-latest,  r: '4.5'}
           - {os: windows-latest,  r: '4.4'}
           - {os: windows-latest,  r: '4.3'}
           - {os: windows-latest,  r: '4.2'}
-          - {os: windows-latest,  r: '4.1'}
           - {os: ubuntu-latest,   r: 'devel', http-user-agent: 'release'}
           - {os: ubuntu-latest,   r: 'release'}
           - {os: ubuntu-latest,   r: 'oldrel-1'}
@@ -32,7 +32,7 @@ jobs:
       R_KEEP_PKG_SOURCE: yes
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v6
 
       - uses: r-lib/actions/setup-pandoc@v2
 

@@ -1,3 +1,6 @@
+3.9.0
+  - Windows: update poppler fallback lib (mostly for msys2)
+
 3.8.0
   - pdf_toc() now also returns if bookmarks are open (#117)
   - MacOS: update to poppler 26.04

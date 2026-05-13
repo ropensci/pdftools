@@ -12,3 +12,5 @@ README.md$
 ^configure.log$
 ^\.github$
 ^LICENSE\.md$
+^\.positai$
+^\.claude$
