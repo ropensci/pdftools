@@ -32,6 +32,13 @@
 #define POPPLER_HAS_LOCAL_FONT_INFO
 #endif
 
+/* https://gitlab.freedesktop.org/poppler/poppler/-/merge_requests/2149 */
+#if VERSION_AT_LEAST(26, 7)
+#define POPPLER_CAN_RENDER_TRANSPARENT_BG true
+#else
+#define POPPLER_CAN_RENDER_TRANSPARENT_BG false
+#endif
+
 /* Note: Before poppler 0.73, ustring to UTF8 conversion was unusable on non-linux
  * due to an UTF-16 BE/LE bug. Therefore we better use to_latin1() on those systems,
  * which works at least for ascii text */
@@ -131,6 +138,7 @@ List get_poppler_config(){
   return List::create(
     _["version"] = poppler::version_string(),
     _["can_render"] = page_renderer::can_render(),
+    _["can_render_transparent_bg"] = POPPLER_CAN_RENDER_TRANSPARENT_BG,
 #ifdef POPPLER_HAS_PAGE_TEXT_LIST
     _["has_pdf_data"] = true,
 #else
@@ -389,9 +397,23 @@ List poppler_pdf_toc(RawVector x, std::string opw, std::string upw) {
   return item_to_list(contents->root());
 }
 
+static void set_paper_color(page_renderer &pr, int bg_color, bool bg_transparent) {
+  if(bg_transparent){
+#if POPPLER_CAN_RENDER_TRANSPARENT_BG
+    pr.set_render_hint(page_renderer::ignore_paper_color, true);
+#else
+    throw std::runtime_error(std::string("Rendering a transparent background requires poppler >= 26.7. You have ") + POPPLER_VERSION);
+#endif
+  } else {
+    poppler::argb color = 0xff000000u | (unsigned int) bg_color;
+    pr.set_paper_color(color);
+  }
+}
+
 // [[Rcpp::export]]
 RawVector poppler_render_page(RawVector x, int pagenum, double dpi, std::string opw, std::string upw,
-                              bool antialiasing = true, bool text_antialiasing = true) {
+                              bool antialiasing = true, bool text_antialiasing = true,
+                              int bg_color = 0xffffff, bool bg_transparent = false) {
   if(!page_renderer::can_render())
     throw std::runtime_error("Rendering not supported on this platform!");
   std::unique_ptr<poppler::document> doc(read_raw_pdf(x, opw, upw));
@@ -401,6 +423,7 @@ RawVector poppler_render_page(RawVector x, int pagenum, double dpi, std::string 
   page_renderer pr;
   pr.set_render_hint(page_renderer::antialiasing, antialiasing);
   pr.set_render_hint(page_renderer::text_antialiasing, text_antialiasing);
+  set_paper_color(pr, bg_color, bg_transparent);
   image img = pr.render_page(p.get(), dpi, dpi);
   if(!img.is_valid())
     throw std::runtime_error("PDF rendering failure.");

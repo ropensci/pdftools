@@ -37,8 +37,8 @@ poppler_pdf_toc <- function(x, opw, upw) {
     .Call('_pdftools_poppler_pdf_toc', PACKAGE = 'pdftools', x, opw, upw)
 }
 
-poppler_render_page <- function(x, pagenum, dpi, opw, upw, antialiasing = TRUE, text_antialiasing = TRUE) {
-    .Call('_pdftools_poppler_render_page', PACKAGE = 'pdftools', x, pagenum, dpi, opw, upw, antialiasing, text_antialiasing)
+poppler_render_page <- function(x, pagenum, dpi, opw, upw, antialiasing = TRUE, text_antialiasing = TRUE, bg_color = 0xffffffL, bg_transparent = FALSE) {
+    .Call('_pdftools_poppler_render_page', PACKAGE = 'pdftools', x, pagenum, dpi, opw, upw, antialiasing, text_antialiasing, bg_color, bg_transparent)
 }
 
 poppler_convert <- function(x, format, pages, names, dpi, opw, upw, antialiasing = TRUE, text_antialiasing = TRUE, verbose = TRUE) {

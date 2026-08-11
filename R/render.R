@@ -14,6 +14,9 @@
 #' or `FALSE` (neither).
 #' @param opw owner password
 #' @param upw user password
+#' @param bg paper background color to render on.
+#' Must be fully opaque (default `"white"`) or fully transparent (e.g. `"transparent"`).
+#' Rendering a fully transparent background requires poppler >= 26.7 in which case `poppler_config()$can_render_transparent_bg` will be `TRUE`.
 #' @family pdftools
 #' @aliases render
 #' @examples # Rendering should be supported on all platforms now
@@ -39,10 +42,18 @@
 #' # Cleanup
 #' unlink(c('news.pdf', 'news_1.png', 'news_2.png', 'news_3.png',
 #'  'page.jpeg', 'page.png', 'page.webp'))
-pdf_render_page<- function(pdf, page = 1, dpi = 72, numeric = FALSE, antialias = TRUE, opw = "", upw = "") {
+pdf_render_page<- function(pdf, page = 1, dpi = 72, numeric = FALSE, antialias = TRUE, opw = "", upw = "", bg = "white") {
   antialiasing <- isTRUE(antialias) || isTRUE(antialias == "draw")
   text_antialiasing <- isTRUE(antialias) || isTRUE(antialias == "text")
-  out <- poppler_render_page(loadfile(pdf), page, dpi, opw, upw, antialiasing, text_antialiasing)
+  stopifnot(length(bg) == 1L)
+  rgba <- grDevices::col2rgb(bg, alpha = TRUE)[, 1L]
+  alpha <- rgba[["alpha"]]
+  if(!(alpha %in% c(0L, 255L)))
+    stop("Argument 'bg' must be either fully opaque or fully transparent")
+  bg_transparent <- (alpha == 0L)
+  bg_color <- rgba[["red"]] * 65536L + rgba[["green"]] * 256L + rgba[["blue"]]
+  out <- poppler_render_page(loadfile(pdf), page, dpi, opw, upw, antialiasing, text_antialiasing,
+                              bg_color, bg_transparent)
   if(identical(dim(out)[1], 4L)){
     out <- out[c(3,2,1,4),,, drop = FALSE] ## convert ARGB to RGBA
   }

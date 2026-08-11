@@ -15,7 +15,8 @@ pdf_render_page(
   numeric = FALSE,
   antialias = TRUE,
   opw = "",
-  upw = ""
+  upw = "",
+  bg = "white"
 )
 
 pdf_convert(
@@ -47,6 +48,10 @@ or \code{FALSE} (neither).}
 \item{opw}{owner password}
 
 \item{upw}{user password}
+
+\item{bg}{paper background color to render on.
+Must be fully opaque (default \code{"white"}) or fully transparent (e.g. \code{"transparent"}).
+Rendering a fully transparent background requires poppler >= 26.7 in which case \code{poppler_config()$can_render_transparent_bg} will be \code{TRUE}.}
 
 \item{format}{string with output format such as \code{"png"} or \code{"jpeg"}. Must be equal
 to one of \code{poppler_config()$supported_image_formats}.}
@@ -88,8 +93,8 @@ unlink(c('news.pdf', 'news_1.png', 'news_2.png', 'news_3.png',
  'page.jpeg', 'page.png', 'page.webp'))
 }
 \seealso{
-Other pdftools: 
-\code{\link{pdf_ocr_text}()},
+Other pdftools:
+\code{\link[=pdf_ocr_text]{pdf_ocr_text()}},
 \code{\link{pdftools}},
 \code{\link{qpdf}}
 }
