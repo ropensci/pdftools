@@ -1,3 +1,6 @@
+3.9.1
+  - MacOS: update poppler 26.08.0
+
 3.9.0
   - Windows: update poppler fallback lib (mostly for msys2)
 
