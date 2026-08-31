@@ -125,8 +125,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // poppler_render_page
-RawVector poppler_render_page(RawVector x, int pagenum, double dpi, std::string opw, std::string upw, bool antialiasing, bool text_antialiasing);
-RcppExport SEXP _pdftools_poppler_render_page(SEXP xSEXP, SEXP pagenumSEXP, SEXP dpiSEXP, SEXP opwSEXP, SEXP upwSEXP, SEXP antialiasingSEXP, SEXP text_antialiasingSEXP) {
+RawVector poppler_render_page(RawVector x, int pagenum, double dpi, std::string opw, std::string upw, bool antialiasing, bool text_antialiasing, int bg_color, bool bg_transparent);
+RcppExport SEXP _pdftools_poppler_render_page(SEXP xSEXP, SEXP pagenumSEXP, SEXP dpiSEXP, SEXP opwSEXP, SEXP upwSEXP, SEXP antialiasingSEXP, SEXP text_antialiasingSEXP, SEXP bg_colorSEXP, SEXP bg_transparentSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -137,7 +137,9 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< std::string >::type upw(upwSEXP);
     Rcpp::traits::input_parameter< bool >::type antialiasing(antialiasingSEXP);
     Rcpp::traits::input_parameter< bool >::type text_antialiasing(text_antialiasingSEXP);
-    rcpp_result_gen = Rcpp::wrap(poppler_render_page(x, pagenum, dpi, opw, upw, antialiasing, text_antialiasing));
+    Rcpp::traits::input_parameter< int >::type bg_color(bg_colorSEXP);
+    Rcpp::traits::input_parameter< bool >::type bg_transparent(bg_transparentSEXP);
+    rcpp_result_gen = Rcpp::wrap(poppler_render_page(x, pagenum, dpi, opw, upw, antialiasing, text_antialiasing, bg_color, bg_transparent));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -181,7 +183,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_pdftools_poppler_pdf_fonts", (DL_FUNC) &_pdftools_poppler_pdf_fonts, 3},
     {"_pdftools_poppler_pdf_files", (DL_FUNC) &_pdftools_poppler_pdf_files, 3},
     {"_pdftools_poppler_pdf_toc", (DL_FUNC) &_pdftools_poppler_pdf_toc, 3},
-    {"_pdftools_poppler_render_page", (DL_FUNC) &_pdftools_poppler_render_page, 7},
+    {"_pdftools_poppler_render_page", (DL_FUNC) &_pdftools_poppler_render_page, 9},
     {"_pdftools_poppler_convert", (DL_FUNC) &_pdftools_poppler_convert, 10},
     {"_pdftools_set_error_callback", (DL_FUNC) &_pdftools_set_error_callback, 0},
     {NULL, NULL, 0}
