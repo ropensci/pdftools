@@ -1,3 +1,9 @@
+development
+  - pdf_pagesize() gains a 'box' argument to select which page box is reported
+    (crop, media, bleed, trim, or art) and new columns 'rotation' (the page's
+    effective /Rotate value: 0, 90, 180 or 270) plus 'display_width' and
+    'display_height' (the box size after rotation) (#28)
+
 3.9.1
   - MacOS: update poppler 26.08.0
 

@@ -99,6 +99,18 @@ static std::string layout_string(document::page_layout_enum x) {
   }
 }
 
+/* The page's effective /Rotate (inherited and normalized by poppler to
+   0, 90, 180 or 270), i.e. the clockwise rotation applied when displayed.
+   libpoppler-cpp only exposes it as an orientation, so map it back. */
+static int page_rotation(const page *p){
+  switch(p->orientation()){
+  case page::landscape: return 90;
+  case page::upside_down: return 180;
+  case page::seascape: return 270;
+  default: return 0;
+  }
+}
+
 static std::string font_string(font_info::type_enum x){
   switch(x) {
   case font_info::unknown: return "unknown";
@@ -293,7 +305,20 @@ CharacterVector poppler_pdf_text (RawVector x, std::string opw, std::string upw,
 }
 
 // [[Rcpp::export]]
-DataFrame poppler_pdf_pagesize (RawVector x, std::string opw, std::string upw) {
+DataFrame poppler_pdf_pagesize (RawVector x, std::string opw, std::string upw, std::string box = "crop") {
+  page_box_enum box_type;
+  if(box == "crop")
+    box_type = crop_box;
+  else if(box == "media")
+    box_type = media_box;
+  else if(box == "bleed")
+    box_type = bleed_box;
+  else if(box == "trim")
+    box_type = trim_box;
+  else if(box == "art")
+    box_type = art_box;
+  else
+    throw std::runtime_error("Invalid page box: " + box);
   std::unique_ptr<poppler::document> doc(read_raw_pdf(x, opw, upw));
   int len = doc->pages();
   Rcpp::NumericVector top(len);
@@ -302,17 +327,26 @@ DataFrame poppler_pdf_pagesize (RawVector x, std::string opw, std::string upw) {
   Rcpp::NumericVector left(len);
   Rcpp::NumericVector width(len);
   Rcpp::NumericVector height(len);
+  Rcpp::IntegerVector rotation(len);
+  Rcpp::NumericVector display_width(len);
+  Rcpp::NumericVector display_height(len);
 
   for(int i = 0; i < len; i++){
     std::unique_ptr<poppler::page> p(doc->create_page(i));
     if(!p) continue; //missing page
-    rectf rect(p->page_rect());
+    rectf rect(p->page_rect(box_type));
     top[i] = rect.top();
     bottom[i] = rect.bottom();
     left[i] = rect.left();
     right[i] = rect.right();
     width[i] = rect.width();
     height[i] = rect.height();
+    int rot = page_rotation(p.get());
+    rotation[i] = rot;
+    // Size of the box as displayed, printed or rendered (i.e. after rotation)
+    bool swap = (rot == 90 || rot == 270);
+    display_width[i] = swap ? rect.height() : rect.width();
+    display_height[i] = swap ? rect.width() : rect.height();
   }
   return DataFrame::create(
     _["top"] = top,
@@ -320,7 +354,10 @@ DataFrame poppler_pdf_pagesize (RawVector x, std::string opw, std::string upw) {
     _["bottom"] = bottom,
     _["left"] = left,
     _["width"] = width,
-    _["height"] = height
+    _["height"] = height,
+    _["rotation"] = rotation,
+    _["display_width"] = display_width,
+    _["display_height"] = display_height
   );
 }
 

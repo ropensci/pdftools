@@ -16,6 +16,27 @@
 #' you can use \href{https://github.com/ropensci/pdftools#installation}{the PPA}
 #' with backports of Poppler 0.74.0.
 #'
+#' The \code{\link{pdf_pagesize}} function returns one row per page with the
+#' position and size of the page box selected by `box`, in PDF points (1/72 inch,
+#' the unit `grid` calls `"bigpts"`).
+#' The default `"crop"` box is what viewers display and what
+#' \code{\link{pdf_render_page}} renders. The `"media"` box is the physical
+#' sheet, and the `"bleed"`, `"trim"` and `"art"` boxes are used in print production.
+#' The `left`, `right`, `top` and `bottom` columns are the edges of the box in
+#' the page's own coordinate system, where `top` is the smaller and `bottom` the
+#' larger y value following poppler's naming.
+#' Boxes are reported as poppler resolves them: inherited from the page tree
+#' where not set on the page itself, a missing crop box defaults to the media
+#' box, missing bleed, trim and art boxes default to the crop box, and every
+#' box is clipped to the media box.
+#' The `rotation` column is the page's effective `/Rotate` value (inherited and
+#' normalized to 0, 90, 180 or 270): the number of degrees the page is rotated
+#' clockwise when displayed, printed or rendered. The box coordinates and
+#' `width` and `height` are given in the unrotated coordinate system, before
+#' this rotation is applied, so pages with `rotation` 90 or 270 are displayed
+#' with width and height swapped. The `display_width` and `display_height`
+#' columns give the size of the box after the rotation.
+#'
 #' Poppler is pretty verbose when encountering minor errors in PDF files,
 #' in especially \code{\link{pdf_text}}. These messages are usually safe
 #' to ignore, use \code{\link{suppressMessages}} to hide them altogether.
@@ -36,6 +57,7 @@
 #' text <- pdf_text(pdf_file)
 #' fonts <- pdf_fonts(pdf_file)
 #' files <- pdf_attachments(pdf_file)
+#' pagesize <- pdf_pagesize(pdf_file)
 pdf_info <- function(pdf, opw = "", upw = "") {
   poppler_pdf_info(loadfile(pdf), opw, upw)
 }
@@ -78,8 +100,11 @@ pdf_toc<- function(pdf, opw = "", upw = "") {
 
 #' @rdname pdftools
 #' @export
-pdf_pagesize <- function(pdf, opw = "", upw = "") {
-  poppler_pdf_pagesize(loadfile(pdf), opw, upw)
+#' @param box which page box to report the position and size of. One of
+#' `"crop"` (default), `"media"`, `"bleed"`, `"trim"` or `"art"`.
+pdf_pagesize <- function(pdf, opw = "", upw = "", box = c("crop", "media", "bleed", "trim", "art")) {
+  box <- match.arg(box)
+  poppler_pdf_pagesize(loadfile(pdf), opw, upw, box)
 }
 
 loadfile <- function(pdf){

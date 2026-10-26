@@ -23,7 +23,12 @@ pdf_attachments(pdf, opw = "", upw = "")
 
 pdf_toc(pdf, opw = "", upw = "")
 
-pdf_pagesize(pdf, opw = "", upw = "")
+pdf_pagesize(
+  pdf,
+  opw = "",
+  upw = "",
+  box = c("crop", "media", "bleed", "trim", "art")
+)
 }
 \arguments{
 \item{pdf}{file path or raw vector with pdf data}
@@ -36,6 +41,9 @@ pdf_pagesize(pdf, opw = "", upw = "")
 
 \item{font_info}{if TRUE, extract font-data for each box. Be careful, this
 requires a very recent version of poppler and will error otherwise.}
+
+\item{box}{which page box to report the position and size of. One of
+\code{"crop"} (default), \code{"media"}, \code{"bleed"}, \code{"trim"} or \code{"art"}.}
 }
 \description{
 Utilities based on libpoppler for extracting text, fonts, attachments
@@ -55,6 +63,27 @@ used on the current system. For Ubuntu 16.04 (Xenial) and 18.04 (Bionic)
 you can use \href{https://github.com/ropensci/pdftools#installation}{the PPA}
 with backports of Poppler 0.74.0.
 
+The \code{\link{pdf_pagesize}} function returns one row per page with the
+position and size of the page box selected by \code{box}, in PDF points (1/72 inch,
+the unit \code{grid} calls \code{"bigpts"}).
+The default \code{"crop"} box is what viewers display and what
+\code{\link{pdf_render_page}} renders. The \code{"media"} box is the physical
+sheet, and the \code{"bleed"}, \code{"trim"} and \code{"art"} boxes are used in print production.
+The \code{left}, \code{right}, \code{top} and \code{bottom} columns are the edges of the box in
+the page's own coordinate system, where \code{top} is the smaller and \code{bottom} the
+larger y value following poppler's naming.
+Boxes are reported as poppler resolves them: inherited from the page tree
+where not set on the page itself, a missing crop box defaults to the media
+box, missing bleed, trim and art boxes default to the crop box, and every
+box is clipped to the media box.
+The \code{rotation} column is the page's effective \verb{/Rotate} value (inherited and
+normalized to 0, 90, 180 or 270): the number of degrees the page is rotated
+clockwise when displayed, printed or rendered. The box coordinates and
+\code{width} and \code{height} are given in the unrotated coordinate system, before
+this rotation is applied, so pages with \code{rotation} 90 or 270 are displayed
+with width and height swapped. The \code{display_width} and \code{display_height}
+columns give the size of the box after the rotation.
+
 Poppler is pretty verbose when encountering minor errors in PDF files,
 in especially \code{\link{pdf_text}}. These messages are usually safe
 to ignore, use \code{\link{suppressMessages}} to hide them altogether.
@@ -66,6 +95,7 @@ info <- pdf_info(pdf_file)
 text <- pdf_text(pdf_file)
 fonts <- pdf_fonts(pdf_file)
 files <- pdf_attachments(pdf_file)
+pagesize <- pdf_pagesize(pdf_file)
 }
 \seealso{
 Other pdftools: 
