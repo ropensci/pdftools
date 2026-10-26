@@ -1,0 +1,33 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R 4 0 R 5 0 R 6 0 R] /Count 4 /MediaBox [0 0 612 792] /Rotate 90 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /CropBox [36 36 576 756] /TrimBox [72 72 540 720] >>
+endobj
+4 0 obj
+<< /Type /Page /Parent 2 0 R /Rotate 0 >>
+endobj
+5 0 obj
+<< /Type /Page /Parent 2 0 R /Rotate -90 /MediaBox [0 0 595 842] >>
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /Rotate 180 >>
+endobj
+xref
+0 7
+0000000000 65535 f
+0000000010 00000 n
+0000000062 00000 n
+0000000175 00000 n
+0000000275 00000 n
+0000000335 00000 n
+0000000421 00000 n
+trailer
+<< /Size 7 /Root 1 0 R >>
+startxref
+483
+%%EOF
